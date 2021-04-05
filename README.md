@@ -7,6 +7,11 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/garchmodels)](https://CRAN.R-project.org/package=garchmodels)
+[![Total
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/garchmodels?color=brightgreen)](https://cran.r-project.org/package=garchmodels)
+\[![Downloads](http://cranlogs.r-pkg.org/badges/garchmodels?color=brightgreen)
 [![Codecov test
 coverage](https://codecov.io/gh/AlbertoAlmuinha/garchmodels/branch/master/graph/badge.svg)](https://codecov.io/gh/AlbertoAlmuinha/garchmodels?branch=master)
 [![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
