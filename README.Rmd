@@ -52,12 +52,12 @@ devtools::install_github("AlbertoAlmuinha/garchmodels")
 > Garchmodels unlocks univariate and multivariate GARCH models in one framework.
 
 ```{r, echo=F, out.width='100%', fig.align='center'}
-knitr::include_graphics("vignettes/univariate_multivariate_garchmodels.png")
+knitr::include_graphics("vignettes/univariate_multivariate.png")
 ```
 
 In a single framework you will be able to find what you need:
 
 - __Univariate Methods__: `garchmodels` connects to the `rugarch` package.
 
-- __Multivariate Methods__: `garchmodels` connects to the `rugarch` and `rmgarch` packages. Available methods include DCC-Garch (Dynamic Conditional Correlation Garch), Copula Garch or GO-Garch models.
+- __Multivariate Methods__: `garchmodels` connects to the `rugarch` and `rmgarch` packages. Available methods include DCC-Garch (Dynamic Conditional Correlation Garch), Copula Garch and GO-Garch models.
 

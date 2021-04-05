@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 
 
 ```{r, echo=F,  out.width="100%", fig.align='center'}
-knitr::include_graphics("univariate_multivariate_garchmodels.PNG")
+knitr::include_graphics("univariate_multivariate.png")
 ```
 <br>
 <img src="logo-garchmodels.png" width="147" height="170" align="right" />

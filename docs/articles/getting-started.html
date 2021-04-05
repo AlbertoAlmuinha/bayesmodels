@@ -85,7 +85,7 @@
 
     
     
-<p><img src="univariate_multivariate_garchmodels.PNG" width="100%" style="display: block; margin: auto;"><br><img src="logo-garchmodels.png" width="147" height="170" align="right"></p>
+<p><img src="univariate_multivariate.png" width="100%" style="display: block; margin: auto;"><br><img src="logo-garchmodels.png" width="147" height="170" align="right"></p>
 <p>This tutorial shows you how you can start using <code>garchmodels</code>. The first thing to be clear about is that the package has two main functions:</p>
 <ul>
 <li><p><strong>garch_reg</strong>: This function implements the univariate models and currently its only engine is <code>rugarch</code>.</p></li>
@@ -330,7 +330,7 @@
 <span class="va">model_fit</span>
 <span class="co">#&gt; parsnip model object</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Fit time:  3.1s </span>
+<span class="co">#&gt; Fit time:  2.9s </span>
 <span class="co">#&gt; Copula GARCH Multivariate Model</span>
 <span class="co">#&gt; $model_1</span>
 <span class="co">#&gt; </span>
@@ -374,7 +374,7 @@
 <span class="co">#&gt; Hannan-Quinn -17.069</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Elapsed time : 1.196349</span></code></pre></div>
+<span class="co">#&gt; Elapsed time : 1.146312</span></code></pre></div>
 </div>
 <div id="go-garch-engine" class="section level2">
 <h2 class="hasAnchor">
@@ -407,11 +407,11 @@
 <code class="sourceCode R"><span class="va">predictions</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">.name</span> <span class="op">==</span> <span class="st">"garchcoef"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">.pred</span><span class="op">)</span>
 <span class="co">#&gt; $garchcoef</span>
 <span class="co">#&gt;              [,1]         [,2]         [,3]</span>
-<span class="co">#&gt; omega  0.02729562 1.131709e-01 1.205644e-01</span>
-<span class="co">#&gt; alpha1 0.04731843 9.915887e-02 2.501556e-01</span>
-<span class="co">#&gt; alpha2 0.09931802 1.088227e-10 6.567545e-13</span>
-<span class="co">#&gt; beta1  0.11165313 3.306775e-01 2.752768e-01</span>
-<span class="co">#&gt; beta2  0.71043056 4.597290e-01 4.002599e-01</span></code></pre></div>
+<span class="co">#&gt; omega  0.02729340 1.132002e-01 1.203987e-01</span>
+<span class="co">#&gt; alpha1 0.04730008 9.907541e-02 2.494326e-01</span>
+<span class="co">#&gt; alpha2 0.09935904 4.263814e-11 4.768499e-14</span>
+<span class="co">#&gt; beta1  0.11190030 3.303323e-01 2.757060e-01</span>
+<span class="co">#&gt; beta2  0.71016300 4.601302e-01 4.004758e-01</span></code></pre></div>
 </div>
 </div>
   </div>
