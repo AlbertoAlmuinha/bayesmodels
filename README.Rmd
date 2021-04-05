@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 
 ## Tutorials
 
-- [__Getting Started with Garchmodels__](https://business-science.github.io/modeltime/articles/getting-started-with-modeltime.html): A walkthrough of the tidy modeling approach with the package.
+- [__Getting Started with Garchmodels__](https://albertoalmuinha.github.io/garchmodels/articles/getting-started.html): A walkthrough of the tidy modeling approach with the package.
 
 ## Installation
 

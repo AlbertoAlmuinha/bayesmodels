@@ -330,7 +330,7 @@
 <span class="va">model_fit</span>
 <span class="co">#&gt; parsnip model object</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Fit time:  2.9s </span>
+<span class="co">#&gt; Fit time:  2.7s </span>
 <span class="co">#&gt; Copula GARCH Multivariate Model</span>
 <span class="co">#&gt; $model_1</span>
 <span class="co">#&gt; </span>
@@ -374,7 +374,7 @@
 <span class="co">#&gt; Hannan-Quinn -17.069</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Elapsed time : 1.181304</span></code></pre></div>
+<span class="co">#&gt; Elapsed time : 1.052782</span></code></pre></div>
 </div>
 <div id="go-garch-engine" class="section level2">
 <h2 class="hasAnchor">
@@ -406,12 +406,12 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">predictions</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">.name</span> <span class="op">==</span> <span class="st">"garchcoef"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">.pred</span><span class="op">)</span>
 <span class="co">#&gt; $garchcoef</span>
-<span class="co">#&gt;                [,1]         [,2]         [,3]</span>
-<span class="co">#&gt; omega  1.189394e-01 2.705821e-02 1.150605e-01</span>
-<span class="co">#&gt; alpha1 2.466379e-01 5.565987e-02 1.011840e-01</span>
-<span class="co">#&gt; alpha2 5.390682e-09 9.298473e-02 4.737841e-12</span>
-<span class="co">#&gt; beta1  2.758250e-01 8.892359e-08 3.388002e-01</span>
-<span class="co">#&gt; beta2  4.036641e-01 8.205174e-01 4.477968e-01</span></code></pre></div>
+<span class="co">#&gt;                [,1]       [,2]         [,3]</span>
+<span class="co">#&gt; omega  1.144104e-01 0.02737399 1.195877e-01</span>
+<span class="co">#&gt; alpha1 1.005409e-01 0.04832468 2.481700e-01</span>
+<span class="co">#&gt; alpha2 1.041426e-10 0.09803081 9.312052e-12</span>
+<span class="co">#&gt; beta1  3.362194e-01 0.09897028 2.754818e-01</span>
+<span class="co">#&gt; beta2  4.516337e-01 0.72334778 4.023469e-01</span></code></pre></div>
 </div>
 </div>
   </div>

@@ -18,7 +18,7 @@ coverage](https://codecov.io/gh/AlbertoAlmuinha/garchmodels/branch/master/graph/
 ## Tutorials
 
 -   [**Getting Started with
-    Garchmodels**](https://business-science.github.io/modeltime/articles/getting-started-with-modeltime.html):
+    Garchmodels**](https://albertoalmuinha.github.io/garchmodels/articles/getting-started.html):
     A walkthrough of the tidy modeling approach with the package.
 
 ## Installation
@@ -41,7 +41,7 @@ devtools::install_github("AlbertoAlmuinha/garchmodels")
 > Garchmodels unlocks univariate and multivariate GARCH models in one
 > framework.
 
-<img src="vignettes/univariate_multivariate_garchmodels.PNG" width="100%" style="display: block; margin: auto;" />
+<img src="vignettes/univariate_multivariate_garchmodels.png" width="100%" style="display: block; margin: auto;" />
 
 In a single framework you will be able to find what you need:
 
