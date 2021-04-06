@@ -451,7 +451,7 @@ rugarch_predict_impl <- function(object, new_data, ...) {
     
     preds_forecast <- rugarch::ugarchforecast(model, n.ahead = nrow(new_data), ...) 
     
-    preds_forecast <- tibble::tibble(cast@forecast) %>% 
+    preds_forecast <- tibble::tibble(preds_forecast@forecast) %>% 
                       tibble::rowid_to_column("rowid") %>% 
                       dplyr::filter(rowid == 5 | rowid == 6) %>%
                       purrr::set_names(c("rowid", ".pred")) %>%
