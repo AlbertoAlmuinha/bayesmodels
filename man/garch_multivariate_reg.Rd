@@ -147,7 +147,7 @@ In the fit section we will see how to pass variables through parsnip::fit (See F
 }
 
 \examples{
-
+\dontrun{
 library(tidymodels)
 library(garchmodels)
 library(modeltime)
@@ -204,7 +204,7 @@ set_engine("gogarch_rmgarch" , gogarch_specs = list(variance.model = list(garchO
     fit(value ~ date + id, data = rX_longer_train)
     
 predict(model_fit_garch, rX_longer_future)
-
+}
 }
 \seealso{
 \code{\link[=fit.model_spec]{fit.model_spec()}}, \code{\link[=set_engine]{set_engine()}}

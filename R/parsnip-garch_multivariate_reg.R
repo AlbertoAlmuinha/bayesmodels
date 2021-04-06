@@ -139,7 +139,7 @@
 #' 
 #' 
 #' @examples 
-#' 
+#' \dontrun{
 #' library(tidymodels)
 #' library(garchmodels)
 #' library(modeltime)
@@ -196,7 +196,7 @@
 #'     fit(value ~ date + id, data = rX_longer_train)
 #'     
 #' predict(model_fit_garch, rX_longer_future)
-#' 
+#' }
 
 
 

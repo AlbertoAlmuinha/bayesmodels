@@ -23,7 +23,7 @@ make_garch_reg_rugarch_rugarch <- function(){
         eng          = engine,
         parsnip      = "arch_order",
         original     = "a",
-        func         = list(pkg = "modelgarch", fun = "arch_order"),
+        func         = list(pkg = "garchmodels", fun = "arch_order"),
         has_submodel = FALSE
     )
     
@@ -32,7 +32,7 @@ make_garch_reg_rugarch_rugarch <- function(){
         eng          = engine,
         parsnip      = "garch_order",
         original     = "g",
-        func         = list(pkg = "modelgarch", fun = "garch_order"),
+        func         = list(pkg = "garchmodels", fun = "garch_order"),
         has_submodel = FALSE
     )
     
@@ -41,7 +41,7 @@ make_garch_reg_rugarch_rugarch <- function(){
         eng          = engine,
         parsnip      = "ar_order",
         original     = "ar",
-        func         = list(pkg = "modelgarch", fun = "ar_order"),
+        func         = list(pkg = "garchmodels", fun = "ar_order"),
         has_submodel = FALSE
     )
     
@@ -50,7 +50,7 @@ make_garch_reg_rugarch_rugarch <- function(){
         eng          = engine,
         parsnip      = "ma_order",
         original     = "ma",
-        func         = list(pkg = "modelgarch", fun = "ma_order"),
+        func         = list(pkg = "garchmodels", fun = "ma_order"),
         has_submodel = FALSE
     )
     
@@ -117,7 +117,7 @@ make_garch_reg_rugarch_rugarch <- function(){
 #         eng          = engine,
 #         parsnip      = "arch_order",
 #         original     = "a",
-#         func         = list(pkg = "modelgarch", fun = "arch_order"),
+#         func         = list(pkg = "garchmodels", fun = "arch_order"),
 #         has_submodel = FALSE
 #     )
 #     
@@ -126,7 +126,7 @@ make_garch_reg_rugarch_rugarch <- function(){
 #         eng          = engine,
 #         parsnip      = "garch_order",
 #         original     = "g",
-#         func         = list(pkg = "modelgarch", fun = "garch_order"),
+#         func         = list(pkg = "garchmodels", fun = "garch_order"),
 #         has_submodel = FALSE
 #     )
 #     
@@ -135,7 +135,7 @@ make_garch_reg_rugarch_rugarch <- function(){
 #         eng          = engine,
 #         parsnip      = "ar_order",
 #         original     = "ar_no_apply",
-#         func         = list(pkg = "modelgarch", fun = "ar_order"),
+#         func         = list(pkg = "garchmodels", fun = "ar_order"),
 #         has_submodel = FALSE
 #     )
 #     
@@ -144,7 +144,7 @@ make_garch_reg_rugarch_rugarch <- function(){
 #         eng          = engine,
 #         parsnip      = "ma_order",
 #         original     = "ma_no_apply",
-#         func         = list(pkg = "modelgarch", fun = "ma_order"),
+#         func         = list(pkg = "garchmodels", fun = "ma_order"),
 #         has_submodel = FALSE
 #     )
 #     

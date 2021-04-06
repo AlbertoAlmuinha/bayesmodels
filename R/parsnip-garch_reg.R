@@ -16,28 +16,9 @@
 #' @details 
 #' 
 #' Available engines:
-#' - __garch__: Connects to `tseries::garch()`
 #' - __rugarch__: Connects to `rugarch::ugarchspec()` first and then to `rugarch::ugarchfit()`.
 #' 
-#' 
-#' 
 #' @section Engine Details:
-#' 
-#' __garch__
-#' 
-#' The engine uses [tseries::garch()].
-#'
-#' Function Parameters:
-#' ```{r echo = FALSE}
-#' str(tseries::garch)
-#' ```
-#' The __ORDER__ argument is provided to
-#' [tseries::garch()] via `garch_reg()` parameters, using `arch_order` and `garch_order`
-#' Other options and arguments can be set using `set_engine()`.
-#'
-#' Parameter Notes:
-#' - `xreg` - This engine does not support xregs, it only works for univariate time series. See Fit Details (below).
-#' 
 #' 
 #' __rugarch (default)__
 #' 
@@ -103,7 +84,7 @@
 #' 
 #' 
 #' @examples 
-#' 
+#' \dontrun{
 #' library(tidymodels)
 #' library(garchmodels)
 #' library(modeltime)
@@ -134,7 +115,7 @@
 #'     fit(daily_returns ~ date, data = rIBM_train)
 #' 
 #' predict(model_garch_fit, rIBM_future)
-#'  
+#' } 
 #' @export
 garch_reg <- function(mode = "regression",
                       arch_order = NULL,
@@ -470,9 +451,13 @@ rugarch_predict_impl <- function(object, new_data, ...) {
     
     preds_forecast <- rugarch::ugarchforecast(model, n.ahead = nrow(new_data), ...) 
     
-    preds_forecast <- preds_forecast@forecast$seriesFor %>% 
-                      tibble::as_tibble() %>%
-                      stats::setNames(., ".pred")
+    preds_forecast <- tibble::tibble(cast@forecast) %>% 
+                      tibble::rowid_to_column("rowid") %>% 
+                      dplyr::filter(rowid == 5 | rowid == 6) %>%
+                      purrr::set_names(c("rowid", ".pred")) %>%
+                      dplyr::mutate(.name = c("sigmaFor", "seriesFor")) %>%
+                      dplyr::relocate(".name", .before = .pred) %>%
+                      dplyr::select(.name, .pred)
     
     return(preds_forecast)
     

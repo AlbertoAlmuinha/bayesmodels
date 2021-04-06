@@ -35,44 +35,20 @@ General Interface for GARCH Models
 \details{
 Available engines:
 \itemize{
-\item \strong{garch}: Connects to \code{tseries::garch()}
 \item \strong{rugarch}: Connects to \code{rugarch::ugarchspec()} first and then to \code{rugarch::ugarchfit()}.
 }
 }
 \section{Engine Details}{
 
 
-\strong{garch}
-
-The engine uses \code{\link[tseries:garch]{tseries::garch()}}.
-
-Function Parameters:\preformatted{## Registered S3 method overwritten by 'quantmod':
-##   method            from
-##   as.zoo.data.frame zoo
-}\preformatted{## function (x, order = c(1, 1), series = NULL, control = garch.control(...), 
-##     ...)
-}
-
-The \strong{ORDER} argument is provided to
-\code{\link[tseries:garch]{tseries::garch()}} via \code{garch_reg()} parameters, using \code{arch_order} and \code{garch_order}
-Other options and arguments can be set using \code{set_engine()}.
-
-Parameter Notes:
-\itemize{
-\item \code{xreg} - This engine does not support xregs, it only works for univariate time series. See Fit Details (below).
-}
-
 \strong{rugarch (default)}
 
 The engine uses \code{\link[rugarch:ugarchspec-methods]{rugarch::ugarchspec()}} and \code{\link[rugarch:ugarchfit-methods]{rugarch::ugarchfit()}}.
 
 Function Parameters:\preformatted{## Formal class 'standardGeneric' [package "methods"] with 8 slots
-##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), 
-##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
-##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, 
-##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), 
-##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), 
-##     ...)  
+##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
+##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, 
+##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  
 ##   ..@ generic   : chr "ugarchspec"
 ##   .. ..- attr(*, "package")= chr "rugarch"
 ##   ..@ package   : chr "rugarch"
@@ -80,12 +56,9 @@ Function Parameters:\preformatted{## Formal class 'standardGeneric' [package "me
 ##   ..@ valueClass: chr(0) 
 ##   ..@ signature : chr [1:5] "variance.model" "mean.model" "distribution.model" "start.pars" ...
 ##   ..@ default   :Formal class 'derivedDefaultMethod' [package "methods"] with 4 slots
-##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), 
-##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
-##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, 
-##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), 
-##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), 
-##     ...)  
+##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
+##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, 
+##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  
 ##   .. .. ..@ target :Formal class 'signature' [package "methods"] with 3 slots
 ##   .. .. .. .. ..@ .Data  : chr "ANY"
 ##   .. .. .. .. ..@ names  : chr "variance.model"
@@ -96,7 +69,7 @@ Function Parameters:\preformatted{## Formal class 'standardGeneric' [package "me
 ##   .. .. .. .. ..@ package: chr "methods"
 ##   .. .. ..@ generic: chr "ugarchspec"
 ##   .. .. .. ..- attr(*, "package")= chr "rugarch"
-##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH",      garchOrder = c(1, 1),| __truncated__ ...
+##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), subm| __truncated__ ...
 }
 
 The Garch order for the variance model is provided using \code{arch_order} and \code{garch_order} parameters..
@@ -159,7 +132,7 @@ Note that date or date-time class values are excluded from \code{xreg}.
 }
 
 \examples{
-
+\dontrun{
 library(tidymodels)
 library(garchmodels)
 library(modeltime)
@@ -190,7 +163,7 @@ model_garch_fit <-garchmodels::garch_reg(mode = "regression",
     fit(daily_returns ~ date, data = rIBM_train)
 
 predict(model_garch_fit, rIBM_future)
- 
+} 
 }
 \seealso{
 \code{\link[=fit.model_spec]{fit.model_spec()}}, \code{\link[=set_engine]{set_engine()}}
