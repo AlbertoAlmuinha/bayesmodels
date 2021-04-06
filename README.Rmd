@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/garchmodels?color=brightgreen)](https://cran.r-project.org/package=garchmodels)
 [![Downloads](http://cranlogs.r-pkg.org/badges/garchmodels?color=brightgreen)
 [![Codecov test coverage](https://codecov.io/gh/AlbertoAlmuinha/garchmodels/branch/master/graph/badge.svg)](https://codecov.io/gh/AlbertoAlmuinha/garchmodels?branch=master)
-[![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![R-CMD-check](https://github.com/AlbertoAlmuinha/garchmodels/workflows/R-CMD-check/badge.svg)](https://github.com/Alberto-Almuinha/garchmodels/actions)
 <!-- badges: end -->
 

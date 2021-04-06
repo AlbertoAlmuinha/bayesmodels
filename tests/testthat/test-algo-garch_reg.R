@@ -35,7 +35,8 @@ test_that("garch_reg: Regression Parsnip Test", {
     
     
     # Structure
-    testthat::expect_identical(nrow(rIBM_future), nrow(predictions))
+    testthat::expect_identical(nrow(rIBM_future), nrow(predictions %>% pull(.pred, 1) %>% .$seriesFor))
+    testthat::expect_identical(nrow(rIBM_future), nrow(predictions %>% pull(.pred, 1) %>% .$sigmaFor))
     testthat::expect_identical(rIBM_train$date, model_fit$fit$data$date)
     
     # Out-of-Sample Accuracy Tests

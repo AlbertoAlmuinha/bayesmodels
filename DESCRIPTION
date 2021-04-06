@@ -22,7 +22,8 @@ Imports:
     dplyr,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    dials
 Suggests: 
     tidymodels,
     tidyverse,
