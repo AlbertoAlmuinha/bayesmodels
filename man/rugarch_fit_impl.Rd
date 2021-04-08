@@ -11,6 +11,7 @@ rugarch_fit_impl(
   g = 1,
   ar = 1,
   ma = 1,
+  tune_by = NULL,
   period = "auto",
   ...
 )
@@ -27,6 +28,8 @@ rugarch_fit_impl(
 \item{ar}{The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.}
 
 \item{ma}{The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.}
+
+\item{tune_by}{Parameter for tuning.}
 
 \item{period}{Period}
 

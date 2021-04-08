@@ -9,7 +9,8 @@ garch_reg(
   arch_order = NULL,
   garch_order = NULL,
   ar_order = NULL,
-  ma_order = NULL
+  ma_order = NULL,
+  tune_by = NULL
 )
 }
 \arguments{
@@ -21,7 +22,10 @@ garch_reg(
 
 \item{ar_order}{An integer giving the order of the AR part for the mean model. Only applies to rugarch engine.}
 
-\item{ma_order}{An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.
+\item{ma_order}{An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.}
+
+\item{tune_by}{Default is set to NULL, when no tuning. If you want to tune, you must choose between "seriesFor" or "sigmaFor" options.
+This will cause the function to not return a nested tibble and be able to tune.
 
 These arguments are converted to their specific names at the
 time that the model is fit.
@@ -49,12 +53,9 @@ Available engines:
 The engine uses \code{\link[rugarch:ugarchspec-methods]{rugarch::ugarchspec()}} and \code{\link[rugarch:ugarchfit-methods]{rugarch::ugarchfit()}}.
 
 Function Parameters:\preformatted{## Formal class 'standardGeneric' [package "methods"] with 8 slots
-##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), 
-##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
-##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, 
-##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), 
-##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), 
-##     ...)  
+##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
+##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, 
+##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  
 ##   ..@ generic   : chr "ugarchspec"
 ##   .. ..- attr(*, "package")= chr "rugarch"
 ##   ..@ package   : chr "rugarch"
@@ -62,12 +63,9 @@ Function Parameters:\preformatted{## Formal class 'standardGeneric' [package "me
 ##   ..@ valueClass: chr(0) 
 ##   ..@ signature : chr [1:5] "variance.model" "mean.model" "distribution.model" "start.pars" ...
 ##   ..@ default   :Formal class 'derivedDefaultMethod' [package "methods"] with 4 slots
-##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), 
-##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
-##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, 
-##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), 
-##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), 
-##     ...)  
+##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
+##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, 
+##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  
 ##   .. .. ..@ target :Formal class 'signature' [package "methods"] with 3 slots
 ##   .. .. .. .. ..@ .Data  : chr "ANY"
 ##   .. .. .. .. ..@ names  : chr "variance.model"
@@ -78,7 +76,7 @@ Function Parameters:\preformatted{## Formal class 'standardGeneric' [package "me
 ##   .. .. .. .. ..@ package: chr "methods"
 ##   .. .. ..@ generic: chr "ugarchspec"
 ##   .. .. .. ..- attr(*, "package")= chr "rugarch"
-##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH",      garchOrder = c(1, 1),| __truncated__ ...
+##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), subm| __truncated__ ...
 }
 
 The Garch order for the variance model is provided using \code{arch_order} and \code{garch_order} parameters..
