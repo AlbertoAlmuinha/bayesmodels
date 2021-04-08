@@ -54,6 +54,14 @@ make_garch_reg_rugarch_rugarch <- function(){
         has_submodel = FALSE
     )
     
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = engine,
+        parsnip      = "tune_by",
+        original     = "tune_by",
+        func         = list(pkg = "garchmodels", fun = "tune_by"),
+        has_submodel = FALSE
+    )
     
     parsnip::set_encoding(
         model = model,

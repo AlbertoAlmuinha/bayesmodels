@@ -25,6 +25,7 @@
 
 
 #' @export
+#' @return A quant param
 #' @rdname garch_params
 arch_order <- function(range = c(0L, 3L), trans = NULL) {
     dials::new_quant_param(
@@ -38,6 +39,7 @@ arch_order <- function(range = c(0L, 3L), trans = NULL) {
 }
 
 #' @export
+#' @return A quant param
 #' @rdname garch_params
 garch_order <- function(range = c(0L, 3L), trans = NULL) {
     dials::new_quant_param(
@@ -51,6 +53,7 @@ garch_order <- function(range = c(0L, 3L), trans = NULL) {
 }
 
 #' @export
+#' @return A quant param
 #' @rdname garch_params
 ar_order <- function(range = c(0L, 5L), trans = NULL) {
     dials::new_quant_param(
@@ -64,6 +67,7 @@ ar_order <- function(range = c(0L, 5L), trans = NULL) {
 }
 
 #' @export
+#' @return A quant param
 #' @rdname garch_params
 ma_order <- function(range = c(0L, 5L), trans = NULL) {
     dials::new_quant_param(

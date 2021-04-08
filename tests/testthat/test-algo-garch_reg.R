@@ -20,7 +20,7 @@ test_that("garch_reg: Regression Parsnip Test", {
     
     testthat::skip_on_cran()
     
-    model_fit <<- model_spec_garch %>%
+    model_fit <- model_spec_garch %>%
         fit(daily_returns ~ date, data = rIBM_train)
     
     predictions <- predict(model_fit, rIBM_future)

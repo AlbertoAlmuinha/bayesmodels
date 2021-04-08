@@ -13,6 +13,9 @@ garch_multivariate_reg(mode = "regression", type = NULL)
 
 Other options and argument can be set using \code{set_engine()} (See Engine Details below).}
 }
+\value{
+A model specfication
+}
 \description{
 \code{garch_multivariate_reg()} allows you to model the volatility of various time series. This can be done with the multivariate equivalent
 of the univariate GARCH model. Estimating multivariate GARCH models turns out to be significantly more difficult than univariate GARCH models,
@@ -147,7 +150,7 @@ In the fit section we will see how to pass variables through parsnip::fit (See F
 }
 
 \examples{
-\dontrun{
+\donttest{
 library(tidymodels)
 library(garchmodels)
 library(modeltime)

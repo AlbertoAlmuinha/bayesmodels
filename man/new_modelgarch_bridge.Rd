@@ -19,6 +19,9 @@ to the predict method.}
 
 \item{desc}{An optional model description to appear when printing your modeltime objects}
 }
+\value{
+A list with the constructor
+}
 \description{
 These functions are used to construct new \code{garchmodels} bridge functions that
 connect the \code{tidymodels} infrastructure to time-series models containing date or date-time features.

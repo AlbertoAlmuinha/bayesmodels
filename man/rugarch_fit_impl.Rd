@@ -32,6 +32,9 @@ rugarch_fit_impl(
 
 \item{...}{Additional arguments passed to \code{forecast::Arima}}
 }
+\value{
+A fitted model
+}
 \description{
 #' Low-Level GARCH function for translating modeltime to forecast
 #'

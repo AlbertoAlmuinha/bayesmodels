@@ -29,6 +29,9 @@ time that the model is fit.
 Other options and argument can be
 set using \code{set_engine()} (See Engine Details below).}
 }
+\value{
+A model specification
+}
 \description{
 General Interface for GARCH Models
 }
@@ -138,7 +141,7 @@ Note that date or date-time class values are excluded from \code{xreg}.
 }
 
 \examples{
-\dontrun{
+\donttest{
 library(tidymodels)
 library(garchmodels)
 library(modeltime)

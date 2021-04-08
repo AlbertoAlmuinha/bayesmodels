@@ -13,6 +13,9 @@ gogarch_rmgarch_multi_predict_impl(object, new_data, ...)
 
 \item{...}{Additional arguments passed to \code{stats::predict()}}
 }
+\value{
+A nested tibble
+}
 \description{
 Bridge prediction function for GARCH models
 }

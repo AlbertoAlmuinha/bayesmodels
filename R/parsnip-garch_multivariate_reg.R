@@ -10,6 +10,7 @@
 #'
 #' Other options and argument can be set using `set_engine()` (See Engine Details below).
 #' 
+#' 
 #' @details 
 #' 
 #' Available engines:
@@ -139,7 +140,7 @@
 #' 
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' library(tidymodels)
 #' library(garchmodels)
 #' library(modeltime)
@@ -201,6 +202,7 @@
 
 
 #' @export
+#' @return A model specfication
 garch_multivariate_reg <- function(mode = "regression",
                                    type = NULL) {
     
@@ -295,6 +297,7 @@ translate.garch_multivariate_reg <- function(x, engine = x$engine, ...) {
 #' @param ... Additional arguments passed to `forecast::Arima`
 #'
 #' @export
+#' @return A fitted model
 rugarch_multi_fit_impl <- function(formula, data, spec_type = "ugarchspec",  period = "auto", ...) {
     
     # X & Y
@@ -366,6 +369,7 @@ print.rugarch_multi_fit_impl <- function(x, ...) {
 #' @param ... Additional arguments passed to `forecast::Arima`
 #'
 #' @export
+#' @return A fitted model
 dcc_rmgarch_multi_fit_impl <- function(formula, data, spec_type = "ugarchspec",  period = "auto", ...) {
     
     # X & Y
@@ -446,6 +450,7 @@ print.dcc_rmgarch_multi_fit_impl <- function(x, ...) {
 #' @param ... Additional arguments passed to `forecast::Arima`
 #'
 #' @export
+#' @return A fitted model
 cgarch_rmgarch_multi_fit_impl <- function(formula, data, spec_type = "ugarchspec",  period = "auto", ...) {
 
     # X & Y
@@ -527,6 +532,7 @@ print.cgarch_rmgarch_multi_fit_impl <- function(x, ...) {
 #' @param ... Additional arguments passed to `forecast::Arima`
 #'
 #' @export
+#' @return A fitted model
 gogarch_rmgarch_multi_fit_impl <- function(formula, data, spec_type = NULL,  period = "auto", ...) {
     
     # X & Y
@@ -585,6 +591,7 @@ predict.rugarch_multi_fit_impl <- function(object, new_data, ...) {
 #' @param ... Additional arguments passed to `stats::predict()`
 #'
 #' @export
+#' @return A nested tibble
 rugarch_multi_predict_impl <- function(object, new_data, ...) {
     
     # PREPARE INPUTS
@@ -652,6 +659,7 @@ predict.dcc_rmgarch_multi_fit_impl <- function(object, new_data, ...) {
 #' @param ... Additional arguments passed to `stats::predict()`
 #'
 #' @export
+#' @return A nested tibble
 dcc_rmgarch_multi_predict_impl <- function(object, new_data, ...) {
     
     # PREPARE INPUTS
@@ -699,6 +707,7 @@ predict.gogarch_rmgarch_multi_fit_impl <- function(object, new_data, ...) {
 #' @param ... Additional arguments passed to `stats::predict()`
 #'
 #' @export
+#' @return A nested tibble
 gogarch_rmgarch_multi_predict_impl <- function(object, new_data, ...) {
     
     # PREPARE INPUTS

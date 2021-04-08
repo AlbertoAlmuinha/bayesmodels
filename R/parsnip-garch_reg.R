@@ -6,6 +6,8 @@
 #' @param garch_order An integer giving the order of the GARCH part for the variance model. Applies to both garch and rugarch engines.
 #' @param ar_order An integer giving the order of the AR part for the mean model. Only applies to rugarch engine.
 #' @param ma_order An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.
+#' @param tune_by Default is set to NULL, when no tuning. If you want to tune, you must choose between "seriesFor" or "sigmaFor" options. 
+#' This will cause the function to not return a nested tibble and be able to tune.
 #' 
 #' These arguments are converted to their specific names at the
 #'  time that the model is fit.
@@ -84,7 +86,7 @@
 #' 
 #' 
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' library(tidymodels)
 #' library(garchmodels)
 #' library(modeltime)
@@ -117,17 +119,20 @@
 #' predict(model_garch_fit, rIBM_future)
 #' } 
 #' @export
+#' @return A model specification
 garch_reg <- function(mode = "regression",
                       arch_order = NULL,
                       garch_order = NULL,
                       ar_order = NULL,
-                      ma_order = NULL) {
+                      ma_order = NULL,
+                      tune_by = NULL) {
     
     args <- list(
         arch_order  = rlang::enquo(arch_order),
         garch_order = rlang::enquo(garch_order),
         ar_order    = rlang::enquo(ar_order),
-        ma_order    = rlang::enquo(ma_order)
+        ma_order    = rlang::enquo(ma_order),
+        tune_by     = rlang::enquo(tune_by)
     )
     
     parsnip::new_model_spec(
@@ -161,6 +166,7 @@ update.garch_reg <- function(object,
                              garch_order = NULL,
                              ar_order = NULL,
                              ma_order = NULL,
+                             tune_by  = NULL,
                              parameters = NULL,
                              fresh = FALSE, ...) {
     
@@ -174,7 +180,8 @@ update.garch_reg <- function(object,
         arch_order = rlang::enquo(arch_order),
         garch_order = rlang::enquo(garch_order),
         ar_order = rlang::enquo(ar_order),
-        ma_order = rlang::enquo(ma_order)
+        ma_order = rlang::enquo(ma_order),
+        tune_by  = rlang::enquo(tune_by)
     )
     
     args <- parsnip::update_main_parameters(args, parameters)
@@ -297,11 +304,17 @@ translate.garch_reg <- function(x, engine = x$engine, ...) {
 #' @param g The order of GARCH part
 #' @param ar The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.
 #' @param ma The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.
+#' @param tune_by Parameter for tuning. 
 #' @param period Period
 #' @param ... Additional arguments passed to `forecast::Arima`
 #'
 #' @export
-rugarch_fit_impl <- function(formula, data, a = 1, g = 1, ar = 1, ma = 1, period = "auto", ...) {
+#' @return A fitted model
+rugarch_fit_impl <- function(formula, data, a = 1, g = 1, ar = 1, ma = 1, tune_by = NULL, period = "auto", ...) {
+    
+    if (!is.null(tune_by)){
+        tune_by <- match.arg(tune_by, choices = c("sigmaFor", "seriesFor"))
+    }
     
     # X & Y
     others <- list(...)
@@ -406,7 +419,8 @@ rugarch_fit_impl <- function(formula, data, a = 1, g = 1, ar = 1, ma = 1, period
         
         extras = list(
             y_var    = y,
-            period   = period
+            period   = period,
+            tune_by  = if (is.null(tune_by)){"None"} else {tune_by}
         ),
         
         # Description - Convert garch model parameters to short description
@@ -435,10 +449,12 @@ predict.rugarch_fit_impl <- function(object, new_data, ...) {
 #' @param ... Additional arguments passed to `stats::predict()`
 #'
 #' @export
+#' @return A nested tibble
 rugarch_predict_impl <- function(object, new_data, ...) {
     
     # PREPARE INPUTS
     model       <- object$models$model_1
+    tune_by     <- object$extras$tune_by
     # y_var       <- object$extras$y_var
     # index       <- object$extras$y 
     # period      <- object$extras$period
@@ -451,14 +467,24 @@ rugarch_predict_impl <- function(object, new_data, ...) {
     
     preds_forecast <- rugarch::ugarchforecast(model, n.ahead = nrow(new_data), ...) 
     
-    preds_forecast <- tibble::tibble(preds_forecast@forecast) %>% 
-                      tibble::rowid_to_column("rowid") %>% 
-                      dplyr::filter(rowid == 5 | rowid == 6) %>%
-                      purrr::set_names(c("rowid", ".pred")) %>%
-                      dplyr::mutate(.name = c("sigmaFor", "seriesFor")) %>%
-                      dplyr::relocate(".name", .before = .pred) %>%
-                      dplyr::select(.name, .pred)
-    
+    if (tune_by == "None"){
+        
+        preds_forecast <- tibble::tibble(preds_forecast@forecast) %>%
+            tibble::rowid_to_column("rowid") %>%
+            dplyr::filter(rowid == 5 | rowid == 6) %>%
+            purrr::set_names(c("rowid", ".pred")) %>%
+            dplyr::mutate(.name = c("sigmaFor", "seriesFor")) %>%
+            dplyr::relocate(".name", .before = .pred) %>%
+            dplyr::select(.name, .pred)
+        
+    } else {
+        
+        preds_forecast <- switch(tune_by,
+                                 "sigmaFor"  = as.numeric(preds_forecast@forecast$sigmaFor),
+                                 "seriesFor" = as.numeric(preds_forecast@forecast$seriesFor))
+        
+    }
+
     return(preds_forecast)
     
 }

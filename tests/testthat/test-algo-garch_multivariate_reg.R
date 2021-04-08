@@ -16,7 +16,7 @@ test_that("garch_multivariate_reg: Rugarch Engine", {
     
     testthat::skip_on_cran()
     
-    model_fit <<- garch_multivariate_reg(mode = "regression", type = "ugarchspec") %>%
+    model_fit <- garch_multivariate_reg(mode = "regression", type = "ugarchspec") %>%
         set_engine("rugarch" , specs = list(spec1 = list(mean.model = list(armaOrder = c(1,0))),
                                             spec2 = list(mean.model = list(armaOrder = c(1,0))),
                                             spec3 = list(mean.model = list(armaOrder = c(1,0)))),
@@ -63,7 +63,7 @@ test_that("garch_multivariate_reg: DCC Engine", {
     
     testthat::skip_on_cran()
     
-    model_fit <<- garch_multivariate_reg(type = "ugarchspec") %>%
+    model_fit <- garch_multivariate_reg(type = "ugarchspec") %>%
         set_engine("dcc_rmgarch" , specs = list(spec1 = list(mean.model = list(armaOrder = c(1,0))),
                                                 spec2 = list(mean.model = list(armaOrder = c(1,0))),
                                                 spec3 = list(mean.model = list(armaOrder = c(1,0)))),
@@ -120,7 +120,7 @@ test_that("garch_multivariate_reg: Copula Engine", {
     
     testthat::skip_on_cran()
     
-    model_fit <<- garch_multivariate_reg(type = "ugarchspec") %>%
+    model_fit <- garch_multivariate_reg(type = "ugarchspec") %>%
         set_engine("c_rmgarch" , specs = list(spec1 = list(mean.model = list(armaOrder = c(1,0))),
                                               spec2 = list(mean.model = list(armaOrder = c(1,0))),
                                               spec3 = list(mean.model = list(armaOrder = c(1,0)))),
@@ -176,7 +176,7 @@ test_that("garch_multivariate_reg: Go-Garch Engine", {
     
     testthat::skip_on_cran()
     
-    model_fit <<- garch_multivariate_reg(type = "ugarchspec") %>%
+    model_fit <- garch_multivariate_reg(type = "ugarchspec") %>%
         set_engine("gogarch_rmgarch" , gogarch_specs = list(variance.model = list(garchOrder = c(2,2)))) %>%
         fit(value ~ date + id, data = rX_train)
     

@@ -9,6 +9,9 @@ delete_attr(x)
 \arguments{
 \item{x}{Data.frame}
 }
+\value{
+A tibble
+}
 \description{
 This function is a internal helper.
 }

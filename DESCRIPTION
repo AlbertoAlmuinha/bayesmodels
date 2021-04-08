@@ -4,8 +4,8 @@ Version: 0.1.0
 Authors@R: c(
     person("Alberto", "Almuiña", email = "albertogonzalezalmuinha@gmail.com", role = c("aut", "cre"))
     )
-Description: Garch framework for use with the "tidymodels" ecosystem. It includes both univariate and 
-    multivariate methods from the "rugarch" and "rmgarch" packages. These models include DCC-Garch, Copula Garch 
+Description: Garch framework for use with the 'tidymodels' ecosystem. It includes both univariate and 
+    multivariate methods from the 'rugarch' and 'rmgarch' packages. These models include DCC-Garch, Copula Garch 
     and Go-GARCH among others.
 License: MIT + file LICENSE
 Encoding: UTF-8

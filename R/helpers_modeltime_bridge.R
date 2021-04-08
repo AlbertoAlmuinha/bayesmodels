@@ -12,6 +12,7 @@
 #' @param desc An optional model description to appear when printing your modeltime objects
 
 #' @export
+#' @return A list with the constructor
 new_modelgarch_bridge <- function(class, models, data, extras = NULL, desc = NULL) {
     
     if (missing(class)) rlang::abort("'class' must be a character vector. This is used to define a print method.")
@@ -61,6 +62,7 @@ print.modelgarch_bridge <- function(x, ...) {
 #'@param x Data.frame
 
 #' @export
+#' @return A tibble
 delete_attr <- function(x){
     
     attr(x, "dimnames") <- NULL

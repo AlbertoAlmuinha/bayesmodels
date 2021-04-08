@@ -25,6 +25,15 @@ largest possible values, respectively.}
 the default is used which matches the units used in \code{range}. If no
 transformation, \code{NULL}.}
 }
+\value{
+A quant param
+
+A quant param
+
+A quant param
+
+A quant param
+}
 \description{
 Tuning Parameters for Univariate Garch Models
 }

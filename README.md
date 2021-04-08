@@ -15,7 +15,7 @@ Downloads](http://cranlogs.r-pkg.org/badges/grand-total/garchmodels?color=bright
 [![Codecov test
 coverage](https://codecov.io/gh/AlbertoAlmuinha/garchmodels/branch/master/graph/badge.svg)](https://codecov.io/gh/AlbertoAlmuinha/garchmodels?branch=master)
 [![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![R-CMD-check](https://github.com/AlbertoAlmuinha/garchmodels/workflows/R-CMD-check/badge.svg)](https://github.com/Alberto-Almuinha/garchmodels/actions)
+[![R-CMD-check](https://github.com/AlbertoAlmuinha/garchmodels/workflows/R-CMD-check/badge.svg)](https://github.com/AlbertoAlmuinha/garchmodels/actions)
 <!-- badges: end -->
 
 > A parsnip backend for `GARCH` models in the `tidymodels` framework.
