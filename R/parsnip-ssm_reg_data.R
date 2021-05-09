@@ -166,3 +166,5 @@ make_ssm_reg <- function() {
         )
     )
 }
+
+# nocov end

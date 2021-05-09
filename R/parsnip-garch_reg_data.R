@@ -184,3 +184,5 @@ make_garch_reg <- function() {
         )
     )
 }
+
+# nocov end

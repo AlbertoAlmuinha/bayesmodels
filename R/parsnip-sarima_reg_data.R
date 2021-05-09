@@ -181,3 +181,5 @@ make_sarima_reg <- function() {
         )
     )
 }
+
+# nocov end

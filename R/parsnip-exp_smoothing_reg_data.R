@@ -109,3 +109,5 @@ make_exponential_smoothing_reg <- function() {
         )
     )
 }
+
+# nocov end

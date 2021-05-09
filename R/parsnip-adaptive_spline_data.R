@@ -102,3 +102,5 @@ make_adaptive_spline_reg <- function() {
         )
     )
 }
+
+#nocov end

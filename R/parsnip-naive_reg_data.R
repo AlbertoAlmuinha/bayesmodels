@@ -139,3 +139,5 @@ make_random_walk_reg <- function() {
         )
     )
 }
+
+# nocov end

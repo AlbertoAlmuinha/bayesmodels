@@ -75,3 +75,5 @@ make_bsr_reg <- function() {
         )
     )
 }
+
+# nocov end

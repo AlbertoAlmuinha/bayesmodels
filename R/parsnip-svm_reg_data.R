@@ -139,3 +139,5 @@ make_svm_reg <- function() {
         )
     )
 }
+
+# nocov end

@@ -24,6 +24,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/bayesmodels)](https://CRAN.R-project.org/package=bayesmodels)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bayesmodels?color=brightgreen)](https://cran.r-project.org/package=bayesmodels)
 ![](http://cranlogs.r-pkg.org/badges/bayesmodels?color=brightgreen)
+[![codecov](https://codecov.io/gh/AlbertoAlmuinha/bayesmodels/branch/master/graph/badge.svg?token=0OXB8WLRJX)](https://codecov.io/gh/AlbertoAlmuinha/bayesmodels)
 [![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![R-CMD-check](https://github.com/AlbertoAlmuinha/bayesmodels/workflows/R-CMD-check/badge.svg)](https://github.com/AlbertoAlmuinha/bayesmodels/actions)
 <!-- badges: end -->
