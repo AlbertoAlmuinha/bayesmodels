@@ -2,96 +2,124 @@
 % Please edit documentation in R/parsnip-garch_reg.R
 \name{garch_reg}
 \alias{garch_reg}
-\title{General Interface for GARCH Models}
+\title{General Interface for GARCH Regression Models}
 \usage{
 garch_reg(
   mode = "regression",
-  arch_order = NULL,
   garch_order = NULL,
-  ar_order = NULL,
-  ma_order = NULL,
-  tune_by = NULL
+  arch_order = NULL,
+  mgarch_order = NULL,
+  non_seasonal_ar = NULL,
+  non_seasonal_ma = NULL,
+  garch_t_student = NULL,
+  asymmetry = NULL,
+  markov_chains = NULL,
+  chain_iter = NULL,
+  warmup_iter = NULL,
+  adapt_delta = NULL,
+  tree_depth = NULL,
+  pred_seed = NULL
 )
 }
 \arguments{
-\item{mode}{A single character string for the type of model.}
+\item{mode}{A single character string for the type of model.
+The only possible value for this model is "regression".}
 
-\item{arch_order}{An integer giving the order of the ARCH part for the variance model. Applies to both garch and rugarch engines.}
+\item{garch_order}{Integer with the garch order.}
 
-\item{garch_order}{An integer giving the order of the GARCH part for the variance model. Applies to both garch and rugarch engines.}
+\item{arch_order}{Integer with the arch_order.}
 
-\item{ar_order}{An integer giving the order of the AR part for the mean model. Only applies to rugarch engine.}
+\item{mgarch_order}{Integer with the mgarch order.}
 
-\item{ma_order}{An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.}
+\item{non_seasonal_ar}{The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.}
 
-\item{tune_by}{Default is set to NULL, when no tuning. If you want to tune, you must choose between "seriesFor" or "sigmaFor" options.
-This will cause the function to not return a nested tibble and be able to tune.
+\item{non_seasonal_ma}{The order of the non-seasonal moving average (MA) terms. Often denoted "q" in pdq-notation}
+
+\item{garch_t_student}{A boolean value to specify for a generalized t-student garch model.}
+
+\item{asymmetry}{a string value for the asymmetric function for an asymmetric GARCH process. By default the
+value "none" for standard GARCH process. If "logit" a logistic function is used for asymmetry, and if
+"exp" an exponential function is used.}
+
+\item{markov_chains}{An integer of the number of Markov Chains chains to be run, by default 4 chains are run.}
+
+\item{chain_iter}{An integer of total iterations per chain including the warm-up, by default the number of iterations are 2000.}
+
+\item{warmup_iter}{A positive integer specifying number of warm-up (aka burn-in) iterations. This also specifies the number of iterations used for step-size adaptation, so warm-up samples should not be used for inference. The number of warmup should not be larger than iter and the default is iter/2.}
+
+\item{adapt_delta}{An optional real value between 0 and 1, the thin of the jumps in a HMC method. By default is 0.9}
+
+\item{tree_depth}{An integer of the maximum depth of the trees evaluated during each iteration. By default is 10.}
+
+\item{pred_seed}{An integer with the seed for using when predicting with the model.}
+}
+\description{
+\code{garch_reg()} is a way to generate a \emph{specification} of a GARCH model
+before fitting and allows the model to be created using
+different packages. Currently the only package is \code{bayesforecast}.
+}
+\details{
+The data given to the function are not saved and are only used
+to determine the \emph{mode} of the model. For \code{garch_reg()}, the
+mode will always be "regression".
+
+The model can be created using the \code{fit()} function using the
+following \emph{engines}:
+\itemize{
+\item "stan" (default) - Connects to \code{\link[bayesforecast:stan_garch]{bayesforecast::stan_garch()}}
+}
+
+\strong{Main Arguments}
+
+The main arguments (tuning parameters) for the model are:
+\itemize{
+\item \code{arch_order}: Integer with the arch_order.
+\item \code{garch_order}: Integer with the garch_order.
+\item \code{mgarch_order}: Integer with the mgarch_order.
+\item \code{garch_t_student}: A boolean value to specify for a generalized t-student garch model.
+\item \code{asymmetry}: a string value for the asymmetric function for an asymmetric GARCH process.
+\item \code{non_seasonal_ar}: The order of the non-seasonal auto-regressive (AR) terms.
+\item \code{non_seasonal_ma}: The order of the non-seasonal moving average (MA)
+\item \code{markov_chains}: An integer of the number of Markov Chains chains to be run.
+\item \code{adapt_delta}: The thin of the jumps in a HMC method.
+\item \code{tree_depth}: The maximum depth of the trees evaluated during each iteration.
+}
 
 These arguments are converted to their specific names at the
 time that the model is fit.
 
 Other options and argument can be
-set using \code{set_engine()} (See Engine Details below).}
-}
-\value{
-A model specification
-}
-\description{
-General Interface for GARCH Models
-}
-\details{
-Available engines:
-\itemize{
-\item \strong{rugarch}: Connects to \code{rugarch::ugarchspec()} first and then to \code{rugarch::ugarchfit()}.
-}
+set using \code{set_engine()} (See Engine Details below).
+
+If parameters need to be modified, \code{update()} can be used
+in lieu of recreating the object from scratch.
 }
 \section{Engine Details}{
 
 
-\strong{rugarch (default)}
-
-The engine uses \code{\link[rugarch:ugarchspec-methods]{rugarch::ugarchspec()}} and \code{\link[rugarch:ugarchfit-methods]{rugarch::ugarchfit()}}.
-
-Function Parameters:\preformatted{## Formal class 'standardGeneric' [package "methods"] with 8 slots
-##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
-##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, 
-##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  
-##   ..@ generic   : chr "ugarchspec"
-##   .. ..- attr(*, "package")= chr "rugarch"
-##   ..@ package   : chr "rugarch"
-##   ..@ group     : list()
-##   ..@ valueClass: chr(0) 
-##   ..@ signature : chr [1:5] "variance.model" "mean.model" "distribution.model" "start.pars" ...
-##   ..@ default   :Formal class 'derivedDefaultMethod' [package "methods"] with 4 slots
-##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), 
-##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, 
-##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  
-##   .. .. ..@ target :Formal class 'signature' [package "methods"] with 3 slots
-##   .. .. .. .. ..@ .Data  : chr "ANY"
-##   .. .. .. .. ..@ names  : chr "variance.model"
-##   .. .. .. .. ..@ package: chr "methods"
-##   .. .. ..@ defined:Formal class 'signature' [package "methods"] with 3 slots
-##   .. .. .. .. ..@ .Data  : chr "ANY"
-##   .. .. .. .. ..@ names  : chr "variance.model"
-##   .. .. .. .. ..@ package: chr "methods"
-##   .. .. ..@ generic: chr "ugarchspec"
-##   .. .. .. ..- attr(*, "package")= chr "rugarch"
-##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), subm| __truncated__ ...
+The standardized parameter names in \code{bayesforecast} can be mapped to their original
+names in each engine:\tabular{ll}{
+   bayesmodels \tab bayesforecast::stan_garch \cr
+   arch_order, garch_order, mgarch_order \tab order = c(s(1), k(1), h(0)) \cr
+   non_seasonal_ar, non_seasonal_ma \tab arma = c(p(1), q(0)) \cr
+   garch_t_student \tab genT(FALSE) \cr
+   assymetry \tab asym('none') \cr
+   markov_chains \tab chains(4) \cr
+   adapt_delta \tab adapt.delta(0.9) \cr
+   tree_depth \tab tree.depth(10) \cr
 }
 
-The Garch order for the variance model is provided using \code{arch_order} and \code{garch_order} parameters..
-The ARMA order for the mean model is provided using \code{ar_order} and \code{ma_order} parameters.
-Other options and arguments can be set using \code{set_engine()}.
 
-#' Parameter Notes:
+Other options can be set using \code{set_engine()}.
+
+\strong{stan (default engine)}
+
+The engine uses \code{\link[bayesforecast:stan_garch]{bayesforecast::stan_garch()}}.
+
+Parameter Notes:
 \itemize{
-\item \code{xreg} - This engine supports xregs for both the variance model and the mean model. You can do this in two ways,
-either enter the matrices through set_engine parameters or as a formula in fit (note that the latter option is more limited,
-since you will not be able to pass two different xregs, one for each model). For simpler cases this is a compact option.
-\item \verb{order parameters} - The parameters of rugarch::ugarchspec are lists containing several elements,
-some of them the commands that are the main arguments of the function. If you want to modify the parameter
-that encompasses such a list, you must know that the parameter passed in the function parameter will always prevail.
-(See Examples).
+\item \code{xreg} - This is supplied via the parsnip / modeltime \code{fit()} interface
+(so don't provide this manually). See Fit Details (below).
 }
 }
 
@@ -106,16 +134,27 @@ The \code{fit()} interface accepts date and date-time features and handles them 
 \item \code{fit(y ~ date)}
 }
 
+\emph{Seasonal Period Specification}
+
+The period can be non-seasonal (\verb{seasonal_period = 1 or "none"}) or
+yearly seasonal (e.g. For monthly time stamps, \code{seasonal_period = 12}, \code{seasonal_period = "12 months"}, or \code{seasonal_period = "yearly"}).
+There are 3 ways to specify:
+\enumerate{
+\item \code{seasonal_period = "auto"}: A seasonal period is selected based on the periodicity of the data (e.g. 12 if monthly)
+\item \code{seasonal_period = 12}: A numeric frequency. For example, 12 is common for monthly data
+\item \code{seasonal_period = "1 year"}: A time-based phrase. For example, "1 year" would convert to 12 for monthly data.
+}
+
 \strong{Univariate (No xregs, Exogenous Regressors):}
 
 For univariate analysis, you must include a date or date-time feature. Simply use:
 \itemize{
-\item Formula Interface: \code{fit(y ~ date)} will ignore xreg's.
+\item Formula Interface (recommended): \code{fit(y ~ date)} will ignore xreg's.
 }
 
 \strong{Multivariate (xregs, Exogenous Regressors)}
 
-The \code{xreg} parameter is populated using the \code{fit()} function:
+The \code{xreg} parameter is populated using the \code{fit()} or \code{fit_xy()} function:
 \itemize{
 \item Only \code{factor}, \verb{ordered factor}, and \code{numeric} data will be used as xregs.
 \item Date and Date-time variables are not used as xregs
@@ -140,37 +179,47 @@ Note that date or date-time class values are excluded from \code{xreg}.
 
 \examples{
 \donttest{
-library(tidymodels)
-library(garchmodels)
-library(modeltime)
-library(tidyverse)
+library(dplyr)
+library(parsnip)
+library(rsample)
 library(timetk)
-library(lubridate)
+library(modeltime)
+library(bayesmodels)
 
-rIBM_extended <- rIBM \%>\%
-    future_frame(.length_out = 24, .bind_data = TRUE) 
+# Data
+m750 <- m4_monthly \%>\% filter(id == "M750")
+m750
 
-rIBM_train  <- rIBM_extended \%>\% drop_na()
-rIBM_future <- rIBM_extended \%>\% filter(is.na(daily_returns))
+# Split Data 80/20
+splits <- rsample::initial_time_split(m750, prop = 0.8)
 
-model_garch_fit <-garchmodels::garch_reg(mode = "regression",
-                                          arch_order = 1,
-                                          garch_order = 1) \%>\%
-    set_engine("rugarch") \%>\%
-    fit(daily_returns ~ date, data = rIBM_train)
+# ---- AUTO ARIMA ----
 
-predict(model_garch_fit, rIBM_future)
+# Model Spec
+model_spec <- garch_reg() \%>\%
+    set_engine("stan")
 
-model_garch_fit <-garchmodels::garch_reg(mode = "regression",
-                                        arch_order = 2,
-                                        garch_order = 2) \%>\%
-    set_engine("rugarch", variance.model = list(model='gjrGARCH', 
-                                                garchOrder=c(1,1)),
-               mean.model     = list(armaOrder=c(0,0))) \%>\%
-    fit(daily_returns ~ date, data = rIBM_train)
+# Fit Spec
+model_fit <- model_spec \%>\%
+    fit(log(value) ~ date, data = training(splits))
+model_fit
 
-predict(model_garch_fit, rIBM_future)
-} 
+
+# Model Spec
+model_spec <- garch_reg(
+        arch_order               = 2,
+        garch_order              = 2,
+        mgarch_order             = 1,
+        non_seasonal_ar          = 1,
+        non_seasonal_ma          = 1
+    ) \%>\%
+    set_engine("stan")
+
+# Fit Spec
+model_fit <- model_spec \%>\%
+    fit(log(value) ~ date, data = training(splits))
+model_fit
+}
 }
 \seealso{
 \code{\link[=fit.model_spec]{fit.model_spec()}}, \code{\link[=set_engine]{set_engine()}}

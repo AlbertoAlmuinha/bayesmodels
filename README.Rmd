@@ -16,51 +16,62 @@ knitr::opts_chunk$set(
 )
 ```
 
-# garchmodels
+# bayesmodels
 
-<img src="vignettes/logo-garchmodels.png" width="147" height="170" align="right" />
+<img src="vignettes/logo-bayesmodels.png" width="147" height="170" align="right" />
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/garchmodels)](https://CRAN.R-project.org/package=garchmodels)
-[![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/garchmodels?color=brightgreen)](https://cran.r-project.org/package=garchmodels)
-[![Downloads](http://cranlogs.r-pkg.org/badges/garchmodels?color=brightgreen)
-[![Codecov test coverage](https://codecov.io/gh/AlbertoAlmuinha/garchmodels/branch/master/graph/badge.svg)](https://codecov.io/gh/AlbertoAlmuinha/garchmodels?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/bayesmodels)](https://CRAN.R-project.org/package=bayesmodels)
+[![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bayesmodels?color=brightgreen)](https://cran.r-project.org/package=bayesmodels)
+![](http://cranlogs.r-pkg.org/badges/bayesmodels?color=brightgreen)
 [![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![R-CMD-check](https://github.com/AlbertoAlmuinha/garchmodels/workflows/R-CMD-check/badge.svg)](https://github.com/AlbertoAlmuinha/garchmodels/actions)
+[![R-CMD-check](https://github.com/AlbertoAlmuinha/bayesmodels/workflows/R-CMD-check/badge.svg)](https://github.com/AlbertoAlmuinha/bayesmodels/actions)
 <!-- badges: end -->
 
-> A parsnip backend for `GARCH` models in the `tidymodels` framework. 
+> A parsnip backend for `Bayesian` models in the `tidymodels` framework. 
 
 ## Tutorials
 
-- [__Getting Started with Garchmodels__](https://albertoalmuinha.github.io/garchmodels/articles/getting-started.html): A walkthrough of the tidy modeling approach with the package.
+- [__Bayesmodels and Modeltime Integration__](https://albertoalmuinha.github.io/bayesmodels/articles/modeltime-integration.html): Learn how to integrate bayesian models with the modeltime ecosystem.
 
 ## Installation
 
-Not on CRAN yet:
+CRAN version (not yet)
 
 ``` r
-#install.packages("garchmodels")
+#install.packages("bayesmodels")
 ```
 
 Development version:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("AlbertoAlmuinha/garchmodels")
+devtools::install_github("AlbertoAlmuinha/bayesmodels")
 ```
 
-## Why Garchmodels?
+## Why Bayesmodels?
 
-> Garchmodels unlocks univariate and multivariate GARCH models in one framework.
+> Bayesmodels unlocks multiple bayesian models in one framework.In addition, it allows you to integrate these models with the Modeltime and the Tidymodels ecosystems.
 
 ```{r, echo=F, out.width='100%', fig.align='center'}
-knitr::include_graphics("vignettes/univariate_multivariate.png")
+knitr::include_graphics("vignettes/portada.png")
 ```
 
-In a single framework you will be able to find what you need:
+In a single framework you will be able to find:
 
-- __Univariate Methods__: `garchmodels` connects to the `rugarch` package.
+- __Sarima__: `bayesmodels` connects to the `bayesforecast` package.
 
-- __Multivariate Methods__: `garchmodels` connects to the `rugarch` and `rmgarch` packages. Available methods include DCC-Garch (Dynamic Conditional Correlation Garch), Copula Garch and GO-Garch models.
+- __Garch__: `bayesmodels` connects to the `bayesforecast` package.
+
+- __Random Walk (Naive)__: `bayesmodels` connects to the `bayesforecast` package.
+
+- __State Space Model__: `bayesmodels` connects to the `bayesforecast` and `bsts` packages.
+
+- __Stochastic Volatility Model__: `bayesmodels` connects to the `bayesforecast` package.
+
+- __Generalized Additive Models (GAMS)__: `bayesmodels` connects to the `brms` package.
+
+- __Adaptive Splines Surface__: `bayesmodels` connects to the `BASS` package.
+
+- __Exponential Smoothing__: `bayesmodels` connects to the `Rglt` package.
 

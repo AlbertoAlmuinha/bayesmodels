@@ -1,58 +1,72 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# garchmodels
+# bayesmodels
 
-<img src="vignettes/logo-garchmodels.png" width="147" height="170" align="right" />
+<img src="vignettes/logo-bayesmodels.png" width="147" height="170" align="right" />
 
 <!-- badges: start -->
 
 [![CRAN
-status](https://www.r-pkg.org/badges/version/garchmodels)](https://CRAN.R-project.org/package=garchmodels)
+status](https://www.r-pkg.org/badges/version/bayesmodels)](https://CRAN.R-project.org/package=bayesmodels)
 [![Total
-Downloads](http://cranlogs.r-pkg.org/badges/grand-total/garchmodels?color=brightgreen)](https://cran.r-project.org/package=garchmodels)
-\[![Downloads](http://cranlogs.r-pkg.org/badges/garchmodels?color=brightgreen)
-[![Codecov test
-coverage](https://codecov.io/gh/AlbertoAlmuinha/garchmodels/branch/master/graph/badge.svg)](https://codecov.io/gh/AlbertoAlmuinha/garchmodels?branch=master)
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bayesmodels?color=brightgreen)](https://cran.r-project.org/package=bayesmodels)
+![](http://cranlogs.r-pkg.org/badges/bayesmodels?color=brightgreen)
 [![Lifecycle:maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
-[![R-CMD-check](https://github.com/AlbertoAlmuinha/garchmodels/workflows/R-CMD-check/badge.svg)](https://github.com/AlbertoAlmuinha/garchmodels/actions)
+[![R-CMD-check](https://github.com/AlbertoAlmuinha/bayesmodels/workflows/R-CMD-check/badge.svg)](https://github.com/AlbertoAlmuinha/bayesmodels/actions)
 <!-- badges: end -->
 
-> A parsnip backend for `GARCH` models in the `tidymodels` framework.
+> A parsnip backend for `Bayesian` models in the `tidymodels` framework.
 
 ## Tutorials
 
--   [**Getting Started with
-    Garchmodels**](https://albertoalmuinha.github.io/garchmodels/articles/getting-started.html):
-    A walkthrough of the tidy modeling approach with the package.
+-   [**Bayesmodels and Modeltime
+    Integration**](https://albertoalmuinha.github.io/bayesmodels/articles/modeltime-integration.html):
+    Learn how to integrate bayesian models with the modeltime ecosystem.
 
 ## Installation
 
-Not on CRAN yet:
+CRAN version (not yet)
 
 ``` r
-#install.packages("garchmodels")
+#install.packages("bayesmodels")
 ```
 
 Development version:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("AlbertoAlmuinha/garchmodels")
+devtools::install_github("AlbertoAlmuinha/bayesmodels")
 ```
 
-## Why Garchmodels?
+## Why Bayesmodels?
 
-> Garchmodels unlocks univariate and multivariate GARCH models in one
-> framework.
+> Bayesmodels unlocks multiple bayesian models in one framework.In
+> addition, it allows you to integrate these models with the Modeltime
+> and the Tidymodels ecosystems.
 
-<img src="vignettes/univariate_multivariate.png" width="100%" style="display: block; margin: auto;" />
+<img src="vignettes/portada.png" width="100%" style="display: block; margin: auto;" />
 
-In a single framework you will be able to find what you need:
+In a single framework you will be able to find:
 
--   **Univariate Methods**: `garchmodels` connects to the `rugarch`
+-   **Sarima**: `bayesmodels` connects to the `bayesforecast` package.
+
+-   **Garch**: `bayesmodels` connects to the `bayesforecast` package.
+
+-   **Random Walk (Naive)**: `bayesmodels` connects to the
+    `bayesforecast` package.
+
+-   **State Space Model**: `bayesmodels` connects to the `bayesforecast`
+    and `bsts` packages.
+
+-   **Stochastic Volatility Model**: `bayesmodels` connects to the
+    `bayesforecast` package.
+
+-   **Generalized Additive Models (GAMS)**: `bayesmodels` connects to
+    the `brms` package.
+
+-   **Adaptive Splines Surface**: `bayesmodels` connects to the `BASS`
     package.
 
--   **Multivariate Methods**: `garchmodels` connects to the `rugarch`
-    and `rmgarch` packages. Available methods include DCC-Garch (Dynamic
-    Conditional Correlation Garch), Copula Garch and GO-Garch models.
+-   **Exponential Smoothing**: `bayesmodels` connects to the `Rglt`
+    package.

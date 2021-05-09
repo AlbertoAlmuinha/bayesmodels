@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • garchmodels</title>
+<title>Function reference • bayesmodels</title>
 
 
 <!-- jquery -->
@@ -70,8 +70,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">garchmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <a class="navbar-link" href="../index.html">bayesmodels</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/getting-started.html">Getting Started with garchmodels</a>
+      <a href="../articles/modeltime-integration.html">Modeltime Integration</a>
     </li>
   </ul>
 </li>
@@ -103,7 +103,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/AlbertoAlmuinha/bayesmodels/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -143,93 +148,201 @@
       <tr>
         
         <td>
-          <p><code><a href="cgarch_rmgarch_multi_fit_impl.html">cgarch_rmgarch_multi_fit_impl()</a></code> </p>
+          <p><code><a href="adaptive_spline.html">adaptive_spline()</a></code> </p>
         </td>
-        <td><p>Low-Level GARCH function for translating modeltime to forecast</p></td>
+        <td><p>General Interface for Adaptive Spline Surface Models</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dcc_rmgarch_multi_fit_impl.html">dcc_rmgarch_multi_fit_impl()</a></code> </p>
+          <p><code><a href="adaptive_splines_params.html">splines_degree()</a></code> <code><a href="adaptive_splines_params.html">max_degree()</a></code> <code><a href="adaptive_splines_params.html">max_categorical_degree()</a></code> <code><a href="adaptive_splines_params.html">min_basis_points()</a></code> </p>
         </td>
-        <td><p>Low-Level GARCH function for translating modeltime to forecast</p></td>
+        <td><p>Tuning Parameters for Adaptive Splines Surface Models</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="dcc_rmgarch_multi_predict_impl.html">dcc_rmgarch_multi_predict_impl()</a></code> </p>
+          <p><code><a href="adaptive_spline_stan_fit_impl.html">adaptive_spline_stan_fit_impl()</a></code> </p>
         </td>
-        <td><p>Bridge prediction function for GARCH models</p></td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="delete_attr.html">delete_attr()</a></code> </p>
+          <p><code><a href="adaptive_spline_stan_predict_impl.html">adaptive_spline_stan_predict_impl()</a></code> </p>
         </td>
-        <td><p>Delete Dimension Attribute</p></td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="garch_multivariate_reg.html">garch_multivariate_reg()</a></code> </p>
+          <p><code><a href="additive_state_space.html">additive_state_space()</a></code> </p>
         </td>
-        <td><p>General Interface for Multivariate GARCH Models</p></td>
+        <td><p>General Interface for Additive Linear State Space Regression Models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bayesian_structural_reg.html">bayesian_structural_reg()</a></code> </p>
+        </td>
+        <td><p>General Interface for Bayesian Structural Time Series Models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bayesian_structural_stan_fit_impl.html">bayesian_structural_stan_fit_impl()</a></code> </p>
+        </td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="bayesian_structural_stan_predict_impl.html">bayesian_structural_stan_predict_impl()</a></code> </p>
+        </td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="exponential_smoothing.html">exponential_smoothing()</a></code> </p>
+        </td>
+        <td><p>General Interface for Exponential Smoothing Models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="exponential_smoothing_params.html">seasonality_type()</a></code> <code><a href="exponential_smoothing_params.html">method()</a></code> <code><a href="exponential_smoothing_params.html">error_method()</a></code> </p>
+        </td>
+        <td><p>Tuning Parameters for Exponential Smoothing Models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="exp_smoothing_stan_fit_impl.html">exp_smoothing_stan_fit_impl()</a></code> </p>
+        </td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="exp_smoothing_stan_predict_impl.html">exp_smoothing_stan_predict_impl()</a></code> </p>
+        </td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="garch_params.html">garch_order()</a></code> <code><a href="garch_params.html">arch_order()</a></code> <code><a href="garch_params.html">mgarch_order()</a></code> <code><a href="garch_params.html">garch_t_student()</a></code> <code><a href="garch_params.html">asymmetry()</a></code> </p>
+        </td>
+        <td><p>Tuning Parameters for GARCHA Models</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="garch_reg.html">garch_reg()</a></code> </p>
         </td>
-        <td><p>General Interface for GARCH Models</p></td>
+        <td><p>General Interface for GARCH Regression Models</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="gogarch_rmgarch_multi_fit_impl.html">gogarch_rmgarch_multi_fit_impl()</a></code> </p>
+          <p><code><a href="garch_stan_fit_impl.html">garch_stan_fit_impl()</a></code> </p>
         </td>
-        <td><p>Low-Level GARCH function for translating modeltime to forecast</p></td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="gogarch_rmgarch_multi_predict_impl.html">gogarch_rmgarch_multi_predict_impl()</a></code> </p>
+          <p><code><a href="garch_stan_predict_impl.html">garch_stan_predict_impl()</a></code> </p>
         </td>
-        <td><p>Bridge prediction function for GARCH models</p></td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="new_modelgarch_bridge.html">new_modelgarch_bridge()</a></code> </p>
+          <p><code><a href="gen_additive_reg.html">gen_additive_reg()</a></code> </p>
         </td>
-        <td><p>Constructor for creating garchmodels models</p></td>
+        <td><p>Interface for Generalized Additive Models (GAM)</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rIBM.html">rIBM</a></code> </p>
+          <p><code><a href="gen_additive_stan_fit_impl.html">gen_additive_stan_fit_impl()</a></code> </p>
         </td>
-        <td><p>The IBM's Daily Returns</p></td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rugarch_fit_impl.html">rugarch_fit_impl()</a></code> </p>
+          <p><code><a href="gen_additive_stan_predict_impl.html">gen_additive_stan_predict_impl()</a></code> </p>
         </td>
-        <td><p>FIT - GARCH -----</p></td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rugarch_multi_fit_impl.html">rugarch_multi_fit_impl()</a></code> </p>
+          <p><code><a href="naive_params.html">seasonal_random_walk()</a></code> </p>
         </td>
-        <td><p>Low-Level GARCH function for translating modeltime to forecast</p></td>
+        <td><p>Tuning Parameters for Random Walk Models</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rugarch_multi_predict_impl.html">rugarch_multi_predict_impl()</a></code> </p>
+          <p><code><a href="random_walk_reg.html">random_walk_reg()</a></code> </p>
         </td>
-        <td><p>Bridge prediction function for GARCH models</p></td>
+        <td><p>General Interface for Naive and Random Walk models Regression Models</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rugarch_predict_impl.html">rugarch_predict_impl()</a></code> </p>
+          <p><code><a href="random_walk_stan_fit_impl.html">random_walk_stan_fit_impl()</a></code> </p>
         </td>
-        <td><p>Bridge prediction function for GARCH models</p></td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="rX_longer.html">rX_longer</a></code> </p>
+          <p><code><a href="random_walk_stan_predict_impl.html">random_walk_stan_predict_impl()</a></code> </p>
         </td>
-        <td><p>IBM, Google and BP's daily returns in long format</p></td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sarima_params.html">non_seasonal_ar()</a></code> <code><a href="sarima_params.html">non_seasonal_differences()</a></code> <code><a href="sarima_params.html">non_seasonal_ma()</a></code> <code><a href="sarima_params.html">seasonal_ar()</a></code> <code><a href="sarima_params.html">seasonal_differences()</a></code> <code><a href="sarima_params.html">seasonal_ma()</a></code> <code><a href="sarima_params.html">markov_chains()</a></code> <code><a href="sarima_params.html">adapt_delta()</a></code> <code><a href="sarima_params.html">tree_depth()</a></code> </p>
+        </td>
+        <td><p>Tuning Parameters for SARIMA Models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sarima_reg.html">sarima_reg()</a></code> </p>
+        </td>
+        <td><p>General Interface for ARIMA Regression Models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Sarima_stan_fit_impl.html">Sarima_stan_fit_impl()</a></code> </p>
+        </td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Sarima_stan_predict_impl.html">Sarima_stan_predict_impl()</a></code> </p>
+        </td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ssm_params.html">trend_model()</a></code> <code><a href="ssm_params.html">damped_model()</a></code> <code><a href="ssm_params.html">seasonal_model()</a></code> </p>
+        </td>
+        <td><p>Tuning Parameters for Additive Linear State Space Regression Models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ssm_stan_fit_impl.html">ssm_stan_fit_impl()</a></code> </p>
+        </td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="ssm_stan_predict_impl.html">ssm_stan_predict_impl()</a></code> </p>
+        </td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="svm_reg.html">svm_reg()</a></code> </p>
+        </td>
+        <td><p>General Interface for Stochastic Volatility Regression Models</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="svm_stan_fit_impl.html">svm_stan_fit_impl()</a></code> </p>
+        </td>
+        <td><p>Low-Level ARIMA function for translating modeltime to forecast</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="svm_stan_predict_impl.html">svm_stan_predict_impl()</a></code> </p>
+        </td>
+        <td><p>Bridge prediction function for ARIMA models</p></td>
       </tr>
     </tbody>
     </table>

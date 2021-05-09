@@ -1,5 +1,6 @@
 utils::globalVariables(
     names = c(
-        "object", "new_data", "values", ".", "name", ".name", ".pred", "rowid"
+        ".", ".actual", ".fitted", "object", "new_data", "Estimate", "model_fit", "residuals", "is_date_class",
+        "preds_forecast"
     )
 )

@@ -1,72 +1,150 @@
+# These functions are tested indirectly when the models are used. Since this
+# function is executed on package startup, you can't execute them to test since
+# they are already in the parsnip model database. We'll exclude them from
+# coverage stats for this reason.
+
+# nocov start
 
 
 make_garch_reg <- function() {
-    parsnip::set_new_model("garch_reg")
-}
-
-
-make_garch_reg_rugarch_rugarch <- function(){
     
-    #### REGRESION
-    model  = "garch_reg"
-    mode   = "regression"
-    engine = "rugarch"
+    model <- "garch_reg"
     
-    parsnip::set_model_engine(model = model, mode = mode, eng = engine)
-    parsnip::set_dependency(model = model, eng = engine, pkg = "rugarch")
-    parsnip::set_dependency(model = model, eng = engine, pkg = "garchmodels")
+    parsnip::set_new_model(model)
+    parsnip::set_model_mode(model, "regression")
     
-    #Args
+    # arima ----
+    
+    # * Model ----
+    parsnip::set_model_engine(model, mode = "regression", eng = "stan")
+    parsnip::set_dependency(model, "stan", "bayesforecast")
+    parsnip::set_dependency(model, "stan", "bayesmodels")
+    
+    # * Args ----
     
     parsnip::set_model_arg(
         model        = model,
-        eng          = engine,
-        parsnip      = "arch_order",
-        original     = "a",
-        func         = list(pkg = "garchmodels", fun = "arch_order"),
-        has_submodel = FALSE
-    )
-    
-    parsnip::set_model_arg(
-        model        = model,
-        eng          = engine,
+        eng          = "stan",
         parsnip      = "garch_order",
-        original     = "g",
-        func         = list(pkg = "garchmodels", fun = "garch_order"),
+        original     = "k",
+        func         = list(pkg = "bayesmodels", fun = "garch_order"),
         has_submodel = FALSE
     )
     
     parsnip::set_model_arg(
         model        = model,
-        eng          = engine,
-        parsnip      = "ar_order",
-        original     = "ar",
-        func         = list(pkg = "garchmodels", fun = "ar_order"),
+        eng          = "stan",
+        parsnip      = "arch_order",
+        original     = "s",
+        func         = list(pkg = "bayesmodels", fun = "arch_order"),
         has_submodel = FALSE
     )
     
     parsnip::set_model_arg(
         model        = model,
-        eng          = engine,
-        parsnip      = "ma_order",
-        original     = "ma",
-        func         = list(pkg = "garchmodels", fun = "ma_order"),
+        eng          = "stan",
+        parsnip      = "mgarch_order",
+        original     = "h",
+        func         = list(pkg = "bayesmodels", fun = "mgarch_order"),
         has_submodel = FALSE
     )
     
     parsnip::set_model_arg(
         model        = model,
-        eng          = engine,
-        parsnip      = "tune_by",
-        original     = "tune_by",
-        func         = list(pkg = "garchmodels", fun = "tune_by"),
+        eng          = "stan",
+        parsnip      = "non_seasonal_ar",
+        original     = "p",
+        func         = list(pkg = "bayesmodels", fun = "non_seasonal_ar"),
+        has_submodel = FALSE
+    )
+
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "non_seasonal_ma",
+        original     = "q",
+        func         = list(pkg = "bayesmodels", fun = "non_seasonal_ma"),
         has_submodel = FALSE
     )
     
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "garch_t_student",
+        original     = "genT",
+        func         = list(pkg = "bayesmodels", fun = "garch_t_student"),
+        has_submodel = FALSE
+    )
+    
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "asymmetry",
+        original     = "asym",
+        func         = list(pkg = "bayesmodels", fun = "asymmetry"),
+        has_submodel = FALSE
+    )
+    
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "markov_chains",
+        original     = "chains",
+        func         = list(pkg = "bayesmodels", fun = "markov_chains"),
+        has_submodel = FALSE
+    )
+    
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "chain_iter",
+        original     = "iter",
+        func         = list(pkg = "bayesmodels", fun = "chain_iter"),
+        has_submodel = FALSE
+    )
+    
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "warmup_iter",
+        original     = "warmup",
+        func         = list(pkg = "bayesmodels", fun = "warmup_iter"),
+        has_submodel = FALSE
+    )
+    
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "adapt_delta",
+        original     = "adapt.delta",
+        func         = list(pkg = "bayesmodels", fun = "adapt_delta"),
+        has_submodel = FALSE
+    )
+    
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "tree_depth",
+        original     = "tree.depth",
+        func         = list(pkg = "bayesmodels", fun = "tree_depth"),
+        has_submodel = FALSE
+    )
+    
+    parsnip::set_model_arg(
+        model        = model,
+        eng          = "stan",
+        parsnip      = "pred_seed",
+        original     = "seed",
+        func         = list(pkg = "bayesmodels", fun = "pred_seed"),
+        has_submodel = FALSE
+    )
+    
+    
+    # * Encoding ----
     parsnip::set_encoding(
-        model = model,
-        eng   = engine,
-        mode  = mode,
+        model   = model,
+        eng     = "stan",
+        mode    = "regression",
         options = list(
             predictor_indicators = "none",
             compute_intercept    = FALSE,
@@ -75,128 +153,34 @@ make_garch_reg_rugarch_rugarch <- function(){
         )
     )
     
+    # * Fit ----
     parsnip::set_fit(
-        model = model,
-        eng = engine,
-        mode = mode,
-        value = list(
-            interface = "formula",
-            protect = c("formula", "data"),
-            func = c(fun = "rugarch_fit_impl"),
-            defaults = list()
+        model         = model,
+        eng           = "stan",
+        mode          = "regression",
+        value         = list(
+            interface = "data.frame",
+            protect   = c("x", "y"),
+            func      = c(fun = "garch_stan_fit_impl"),
+            defaults  = list()
         )
     )
     
+    # * Predict ----
     parsnip::set_pred(
-        model  = model,
-        eng    = engine,
-        mode   = mode,
-        type   = "numeric",
-        value  = list(
-            pre  = NULL,
-            post = NULL,
-            func = c(fun = "predict"),
-            args = list(
-                object = rlang::expr(object$fit),
-                new_data = rlang::expr(new_data)
-            )
+        model         = model,
+        eng           = "stan",
+        mode          = "regression",
+        type          = "numeric",
+        value         = list(
+            pre       = NULL,
+            post      = NULL,
+            func      = c(fun = "predict"),
+            args      =
+                list(
+                    object    = rlang::expr(object$fit),
+                    new_data  = rlang::expr(new_data)
+                )
         )
     )
-    
-    
 }
-
-
-# make_garch_reg_tseries_garch <- function() {
-#     
-#     #### REGRESION
-#     model  = "garch_reg"
-#     mode   = "regression"
-#     engine = "garch"
-#     
-#     parsnip::set_model_engine(model = model, mode = mode, eng = engine)
-#     parsnip::set_dependency(model = model, eng = engine, pkg = "tseries")
-#     parsnip::set_dependency(model = model, eng = engine, pkg = "garchmodels")
-#     
-#     #Args
-#     
-#     parsnip::set_model_arg(
-#         model        = model,
-#         eng          = engine,
-#         parsnip      = "arch_order",
-#         original     = "a",
-#         func         = list(pkg = "garchmodels", fun = "arch_order"),
-#         has_submodel = FALSE
-#     )
-#     
-#     parsnip::set_model_arg(
-#         model        = model,
-#         eng          = engine,
-#         parsnip      = "garch_order",
-#         original     = "g",
-#         func         = list(pkg = "garchmodels", fun = "garch_order"),
-#         has_submodel = FALSE
-#     )
-#     
-#     parsnip::set_model_arg(
-#         model        = model,
-#         eng          = engine,
-#         parsnip      = "ar_order",
-#         original     = "ar_no_apply",
-#         func         = list(pkg = "garchmodels", fun = "ar_order"),
-#         has_submodel = FALSE
-#     )
-#     
-#     parsnip::set_model_arg(
-#         model        = model,
-#         eng          = engine,
-#         parsnip      = "ma_order",
-#         original     = "ma_no_apply",
-#         func         = list(pkg = "garchmodels", fun = "ma_order"),
-#         has_submodel = FALSE
-#     )
-#     
-#     
-#     parsnip::set_encoding(
-#         model = model,
-#         eng   = engine,
-#         mode  = mode,
-#         options = list(
-#             predictor_indicators = "none",
-#             compute_intercept    = FALSE,
-#             remove_intercept     = FALSE,
-#             allow_sparse_x       = FALSE
-#         )
-#     )
-#     
-#     parsnip::set_fit(
-#         model = model,
-#        eng = engine,
-#         mode = mode,
-#         value = list(
-#             interface = "formula",
-#             protect = c("formula", "data"),
-#             func = c(fun = "garch_fit_impl"),
-#             defaults = list()
-#         )
-#     )
-#     
-#     parsnip::set_pred(
-#         model  = model,
-#         eng    = engine,
-#         mode   = mode,
-#         type   = "numeric",
-#         value  = list(
-#             pre  = NULL,
-#             post = NULL,
-#             func = c(fun = "predict"),
-#             args = list(
-#                 object = rlang::expr(object$fit),
-#                 new_data = rlang::expr(new_data)
-#             )
-#         )
-#     )
-#     
-#     
-#     
-# }

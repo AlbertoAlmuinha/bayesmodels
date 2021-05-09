@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>General Interface for GARCH Models — garch_reg • garchmodels</title>
+<title>General Interface for GARCH Regression Models — garch_reg • bayesmodels</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="General Interface for GARCH Models — garch_reg" />
-<meta property="og:description" content="General Interface for GARCH Models" />
+<meta property="og:title" content="General Interface for GARCH Regression Models — garch_reg" />
+<meta property="og:description" content="garch_reg() is a way to generate a specification of a GARCH model
+before fitting and allows the model to be created using
+different packages. Currently the only package is bayesforecast." />
 
 
 
@@ -71,8 +73,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">garchmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <a class="navbar-link" href="../index.html">bayesmodels</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -95,7 +97,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/getting-started.html">Getting Started with garchmodels</a>
+      <a href="../articles/modeltime-integration.html">Modeltime Integration</a>
     </li>
   </ul>
 </li>
@@ -104,7 +106,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/AlbertoAlmuinha/bayesmodels/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -118,21 +125,32 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>General Interface for GARCH Models</h1>
-    
+    <h1>General Interface for GARCH Regression Models</h1>
+    <small class="dont-index">Source: <a href='https://github.com/AlbertoAlmuinha/bayesmodels/blob/master/R/parsnip-garch_reg.R'><code>R/parsnip-garch_reg.R</code></a></small>
     <div class="hidden name"><code>garch_reg.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>General Interface for GARCH Models</p>
+    <p><code>garch_reg()</code> is a way to generate a <em>specification</em> of a GARCH model
+before fitting and allows the model to be created using
+different packages. Currently the only package is <code>bayesforecast</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>garch_reg</span><span class='op'>(</span>
   mode <span class='op'>=</span> <span class='st'>"regression"</span>,
-  arch_order <span class='op'>=</span> <span class='cn'>NULL</span>,
   garch_order <span class='op'>=</span> <span class='cn'>NULL</span>,
-  ar_order <span class='op'>=</span> <span class='cn'>NULL</span>,
-  ma_order <span class='op'>=</span> <span class='cn'>NULL</span>
+  arch_order <span class='op'>=</span> <span class='cn'>NULL</span>,
+  mgarch_order <span class='op'>=</span> <span class='cn'>NULL</span>,
+  non_seasonal_ar <span class='op'>=</span> <span class='cn'>NULL</span>,
+  non_seasonal_ma <span class='op'>=</span> <span class='cn'>NULL</span>,
+  garch_t_student <span class='op'>=</span> <span class='cn'>NULL</span>,
+  asymmetry <span class='op'>=</span> <span class='cn'>NULL</span>,
+  markov_chains <span class='op'>=</span> <span class='cn'>NULL</span>,
+  chain_iter <span class='op'>=</span> <span class='cn'>NULL</span>,
+  warmup_iter <span class='op'>=</span> <span class='cn'>NULL</span>,
+  adapt_delta <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tree_depth <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pred_seed <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -140,104 +158,120 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mode</th>
-      <td><p>A single character string for the type of model.</p></td>
-    </tr>
-    <tr>
-      <th>arch_order</th>
-      <td><p>An integer giving the order of the ARCH part for the variance model. Applies to both garch and rugarch engines.</p></td>
+      <td><p>A single character string for the type of model.
+The only possible value for this model is "regression".</p></td>
     </tr>
     <tr>
       <th>garch_order</th>
-      <td><p>An integer giving the order of the GARCH part for the variance model. Applies to both garch and rugarch engines.</p></td>
+      <td><p>Integer with the garch order.</p></td>
     </tr>
     <tr>
-      <th>ar_order</th>
-      <td><p>An integer giving the order of the AR part for the mean model. Only applies to rugarch engine.</p></td>
+      <th>arch_order</th>
+      <td><p>Integer with the arch_order.</p></td>
     </tr>
     <tr>
-      <th>ma_order</th>
-      <td><p>An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.</p>
-<p>These arguments are converted to their specific names at the
-time that the model is fit.</p>
-<p>Other options and argument can be
-set using <code>set_engine()</code> (See Engine Details below).</p></td>
+      <th>mgarch_order</th>
+      <td><p>Integer with the mgarch order.</p></td>
+    </tr>
+    <tr>
+      <th>non_seasonal_ar</th>
+      <td><p>The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.</p></td>
+    </tr>
+    <tr>
+      <th>non_seasonal_ma</th>
+      <td><p>The order of the non-seasonal moving average (MA) terms. Often denoted "q" in pdq-notation</p></td>
+    </tr>
+    <tr>
+      <th>garch_t_student</th>
+      <td><p>A boolean value to specify for a generalized t-student garch model.</p></td>
+    </tr>
+    <tr>
+      <th>asymmetry</th>
+      <td><p>a string value for the asymmetric function for an asymmetric GARCH process. By default the
+value "none" for standard GARCH process. If "logit" a logistic function is used for asymmetry, and if
+"exp" an exponential function is used.</p></td>
+    </tr>
+    <tr>
+      <th>markov_chains</th>
+      <td><p>An integer of the number of Markov Chains chains to be run, by default 4 chains are run.</p></td>
+    </tr>
+    <tr>
+      <th>chain_iter</th>
+      <td><p>An integer of total iterations per chain including the warm-up, by default the number of iterations are 2000.</p></td>
+    </tr>
+    <tr>
+      <th>warmup_iter</th>
+      <td><p>A positive integer specifying number of warm-up (aka burn-in) iterations. This also specifies the number of iterations used for step-size adaptation, so warm-up samples should not be used for inference. The number of warmup should not be larger than iter and the default is iter/2.</p></td>
+    </tr>
+    <tr>
+      <th>adapt_delta</th>
+      <td><p>An optional real value between 0 and 1, the thin of the jumps in a HMC method. By default is 0.9</p></td>
+    </tr>
+    <tr>
+      <th>tree_depth</th>
+      <td><p>An integer of the maximum depth of the trees evaluated during each iteration. By default is 10.</p></td>
+    </tr>
+    <tr>
+      <th>pred_seed</th>
+      <td><p>An integer with the seed for using when predicting with the model.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Available engines:</p><ul>
-<li><p><strong>garch</strong>: Connects to <code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code></p></li>
-<li><p><strong>rugarch</strong>: Connects to <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html'>rugarch::ugarchspec()</a></code> first and then to <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html'>rugarch::ugarchfit()</a></code>.</p></li>
+    <p>The data given to the function are not saved and are only used
+to determine the <em>mode</em> of the model. For <code>garch_reg()</code>, the
+mode will always be "regression".</p>
+<p>The model can be created using the <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code> function using the
+following <em>engines</em>:</p><ul>
+<li><p>"stan" (default) - Connects to <code><a href='https://rdrr.io/pkg/bayesforecast/man/stan_garch.html'>bayesforecast::stan_garch()</a></code></p></li>
 </ul>
 
+<p><strong>Main Arguments</strong></p>
+<p>The main arguments (tuning parameters) for the model are:</p><ul>
+<li><p><code>arch_order</code>: Integer with the arch_order.</p></li>
+<li><p><code>garch_order</code>: Integer with the garch_order.</p></li>
+<li><p><code>mgarch_order</code>: Integer with the mgarch_order.</p></li>
+<li><p><code>garch_t_student</code>: A boolean value to specify for a generalized t-student garch model.</p></li>
+<li><p><code>asymmetry</code>: a string value for the asymmetric function for an asymmetric GARCH process.</p></li>
+<li><p><code>non_seasonal_ar</code>: The order of the non-seasonal auto-regressive (AR) terms.</p></li>
+<li><p><code>non_seasonal_ma</code>: The order of the non-seasonal moving average (MA)</p></li>
+<li><p><code>markov_chains</code>: An integer of the number of Markov Chains chains to be run.</p></li>
+<li><p><code>adapt_delta</code>: The thin of the jumps in a HMC method.</p></li>
+<li><p><code>tree_depth</code>: The maximum depth of the trees evaluated during each iteration.</p></li>
+</ul>
+
+<p>These arguments are converted to their specific names at the
+time that the model is fit.</p>
+<p>Other options and argument can be
+set using <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine()</a></code> (See Engine Details below).</p>
+<p>If parameters need to be modified, <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code> can be used
+in lieu of recreating the object from scratch.</p>
     <h2 class="hasAnchor" id="engine-details"><a class="anchor" href="#engine-details"></a>Engine Details</h2>
 
     
 
 
-<p><strong>garch</strong></p>
-<p>The engine uses <code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code>.</p>
-<p>Function Parameters:</p><pre><span class='co'>## Registered S3 method overwritten by 'quantmod':</span>
-<span class='co'>##   method            from</span>
-<span class='co'>##   as.zoo.data.frame zoo</span>
-</pre><pre><span class='co'>## function (x, order = c(1, 1), series = NULL, control = garch.control(...), </span>
-<span class='co'>##     ...)</span>
-</pre>
+<p>The standardized parameter names in <code>bayesforecast</code> can be mapped to their original
+names in each engine:</p><table class='table'>
+<tr><td>bayesmodels</td><td>bayesforecast::stan_garch</td></tr>
+<tr><td>arch_order, garch_order, mgarch_order</td><td>order = c(s(1), k(1), h(0))</td></tr>
+<tr><td>non_seasonal_ar, non_seasonal_ma</td><td>arma = c(p(1), q(0))</td></tr>
+<tr><td>garch_t_student</td><td>genT(FALSE)</td></tr>
+<tr><td>assymetry</td><td>asym('none')</td></tr>
+<tr><td>markov_chains</td><td>chains(4)</td></tr>
+<tr><td>adapt_delta</td><td>adapt.delta(0.9)</td></tr>
+<tr><td>tree_depth</td><td>tree.depth(10)</td></tr>
+</table>
 
-<p>The <strong>ORDER</strong> argument is provided to
-<code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code> via <code>garch_reg()</code> parameters, using <code>arch_order</code> and <code>garch_order</code>
-Other options and arguments can be set using <code>set_engine()</code>.</p>
+
+
+<p>Other options can be set using <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine()</a></code>.</p>
+<p><strong>stan (default engine)</strong></p>
+<p>The engine uses <code><a href='https://rdrr.io/pkg/bayesforecast/man/stan_garch.html'>bayesforecast::stan_garch()</a></code>.</p>
 <p>Parameter Notes:</p><ul>
-<li><p><code>xreg</code> - This engine does not support xregs, it only works for univariate time series. See Fit Details (below).</p></li>
-</ul>
-
-<p><strong>rugarch (default)</strong></p>
-<p>The engine uses <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html'>rugarch::ugarchspec()</a></code> and <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html'>rugarch::ugarchfit()</a></code>.</p>
-<p>Function Parameters:</p><pre><span class='co'>## Formal class 'standardGeneric' [package "methods"] with 8 slots</span>
-<span class='co'>##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), </span>
-<span class='co'>##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
-<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, </span>
-<span class='co'>##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), </span>
-<span class='co'>##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), </span>
-<span class='co'>##     ...)  </span>
-<span class='co'>##   ..@ generic   : chr "ugarchspec"</span>
-<span class='co'>##   .. ..- attr(*, "package")= chr "rugarch"</span>
-<span class='co'>##   ..@ package   : chr "rugarch"</span>
-<span class='co'>##   ..@ group     : list()</span>
-<span class='co'>##   ..@ valueClass: chr(0) </span>
-<span class='co'>##   ..@ signature : chr [1:5] "variance.model" "mean.model" "distribution.model" "start.pars" ...</span>
-<span class='co'>##   ..@ default   :Formal class 'derivedDefaultMethod' [package "methods"] with 4 slots</span>
-<span class='co'>##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), </span>
-<span class='co'>##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
-<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, </span>
-<span class='co'>##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), </span>
-<span class='co'>##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), </span>
-<span class='co'>##     ...)  </span>
-<span class='co'>##   .. .. ..@ target :Formal class 'signature' [package "methods"] with 3 slots</span>
-<span class='co'>##   .. .. .. .. ..@ .Data  : chr "ANY"</span>
-<span class='co'>##   .. .. .. .. ..@ names  : chr "variance.model"</span>
-<span class='co'>##   .. .. .. .. ..@ package: chr "methods"</span>
-<span class='co'>##   .. .. ..@ defined:Formal class 'signature' [package "methods"] with 3 slots</span>
-<span class='co'>##   .. .. .. .. ..@ .Data  : chr "ANY"</span>
-<span class='co'>##   .. .. .. .. ..@ names  : chr "variance.model"</span>
-<span class='co'>##   .. .. .. .. ..@ package: chr "methods"</span>
-<span class='co'>##   .. .. ..@ generic: chr "ugarchspec"</span>
-<span class='co'>##   .. .. .. ..- attr(*, "package")= chr "rugarch"</span>
-<span class='co'>##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH",      garchOrder = c(1, 1),| __truncated__ ...</span>
-</pre>
-
-<p>The Garch order for the variance model is provided using <code>arch_order</code> and <code>garch_order</code> parameters..
-The ARMA order for the mean model is provided using <code>ar_order</code> and <code>ma_order</code> parameters.
-Other options and arguments can be set using <code>set_engine()</code>.</p>
-<p>#' Parameter Notes:</p><ul>
-<li><p><code>xreg</code> - This engine supports xregs for both the variance model and the mean model. You can do this in two ways,
-either enter the matrices through set_engine parameters or as a formula in fit (note that the latter option is more limited,
-since you will not be able to pass two different xregs, one for each model). For simpler cases this is a compact option.</p></li>
-<li><p><code>order parameters</code> - The parameters of rugarch::ugarchspec are lists containing several elements,
-some of them the commands that are the main arguments of the function. If you want to modify the parameter
-that encompasses such a list, you must know that the parameter passed in the function parameter will always prevail.
-(See Examples).</p></li>
+<li><p><code>xreg</code> - This is supplied via the parsnip / modeltime <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code> interface
+(so don't provide this manually). See Fit Details (below).</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="fit-details"><a class="anchor" href="#fit-details"></a>Fit Details</h2>
@@ -247,17 +281,26 @@ that encompasses such a list, you must know that the parameter passed in the fun
 
 <p><strong>Date and Date-Time Variable</strong></p>
 <p>It's a requirement to have a date or date-time variable as a predictor.
-The <code>fit()</code> interface accepts date and date-time features and handles them internally.</p><ul>
-<li><p><code>fit(y ~ date)</code></p></li>
+The <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code> interface accepts date and date-time features and handles them internally.</p><ul>
+<li><p><code><a href='https://generics.r-lib.org/reference/fit.html'>fit(y ~ date)</a></code></p></li>
 </ul>
+
+<p><em>Seasonal Period Specification</em></p>
+<p>The period can be non-seasonal (<code>seasonal_period = 1 or "none"</code>) or
+yearly seasonal (e.g. For monthly time stamps, <code>seasonal_period = 12</code>, <code>seasonal_period = "12 months"</code>, or <code>seasonal_period = "yearly"</code>).
+There are 3 ways to specify:</p><ol>
+<li><p><code>seasonal_period = "auto"</code>: A seasonal period is selected based on the periodicity of the data (e.g. 12 if monthly)</p></li>
+<li><p><code>seasonal_period = 12</code>: A numeric frequency. For example, 12 is common for monthly data</p></li>
+<li><p><code>seasonal_period = "1 year"</code>: A time-based phrase. For example, "1 year" would convert to 12 for monthly data.</p></li>
+</ol>
 
 <p><strong>Univariate (No xregs, Exogenous Regressors):</strong></p>
 <p>For univariate analysis, you must include a date or date-time feature. Simply use:</p><ul>
-<li><p>Formula Interface: <code>fit(y ~ date)</code> will ignore xreg's.</p></li>
+<li><p>Formula Interface (recommended): <code><a href='https://generics.r-lib.org/reference/fit.html'>fit(y ~ date)</a></code> will ignore xreg's.</p></li>
 </ul>
 
 <p><strong>Multivariate (xregs, Exogenous Regressors)</strong></p>
-<p>The <code>xreg</code> parameter is populated using the <code>fit()</code> function:</p><ul>
+<p>The <code>xreg</code> parameter is populated using the <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code> or <code><a href='https://generics.r-lib.org/reference/fit_xy.html'>fit_xy()</a></code> function:</p><ul>
 <li><p>Only <code>factor</code>, <code>ordered factor</code>, and <code>numeric</code> data will be used as xregs.</p></li>
 <li><p>Date and Date-time variables are not used as xregs</p></li>
 <li><p><code>character</code> data should be converted to factor.</p></li>
@@ -270,74 +313,313 @@ The <code>fit()</code> interface accepts date and date-time features and handles
 </ol>
 
 <p>The <code>month.lbl</code> is an exogenous regressor that can be passed to the <code>garch_reg()</code> using
-<code>fit()</code>:</p><ul>
-<li><p><code>fit(y ~ date + month.lbl)</code> will pass <code>month.lbl</code> on as an exogenous regressor.</p></li>
+<code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code>:</p><ul>
+<li><p><code><a href='https://generics.r-lib.org/reference/fit.html'>fit(y ~ date + month.lbl)</a></code> will pass <code>month.lbl</code> on as an exogenous regressor.</p></li>
 </ul>
 
 <p>Note that date or date-time class values are excluded from <code>xreg</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>fit.model_spec()</code>, <code>set_engine()</code></p></div>
+    <div class='dont-index'><p><code><a href='https://parsnip.tidymodels.org/reference/fit.html'>fit.model_spec()</a></code>, <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>garchmodels</span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/modeltime'>modeltime</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://parsnip.tidymodels.org'>parsnip</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rsample.tidymodels.org'>rsample</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/timetk'>timetk</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/modeltime'>modeltime</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/AlbertoAlmuinha/bayesmodels'>bayesmodels</a></span><span class='op'>)</span>
 
-<span class='va'>rIBM_extended</span> <span class='op'>&lt;-</span> <span class='va'>rIBM</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/timetk/man/future_frame.html'>future_frame</a></span><span class='op'>(</span>.length_out <span class='op'>=</span> <span class='fl'>24</span>, .bind_data <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> 
-</div><div class='output co'>#&gt; <span class='message'>.date_var is missing. Using: date</span></div><div class='input'>
-<span class='va'>rIBM_train</span>  <span class='op'>&lt;-</span> <span class='va'>rIBM_extended</span> <span class='op'>%&gt;%</span> <span class='fu'>drop_na</span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>rIBM_future</span> <span class='op'>&lt;-</span> <span class='va'>rIBM_extended</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>daily_returns</span><span class='op'>)</span><span class='op'>)</span>
+<span class='co'># Data</span>
+<span class='va'>m750</span> <span class='op'>&lt;-</span> <span class='va'>m4_monthly</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>id</span> <span class='op'>==</span> <span class='st'>"M750"</span><span class='op'>)</span>
+<span class='va'>m750</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 306 x 3</span><span>
+#&gt;    id    date       value
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> M750  1990-01-01  </span><span style='text-decoration: underline;'>6</span><span>370
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> M750  1990-02-01  </span><span style='text-decoration: underline;'>6</span><span>430
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> M750  1990-03-01  </span><span style='text-decoration: underline;'>6</span><span>520
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> M750  1990-04-01  </span><span style='text-decoration: underline;'>6</span><span>580
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> M750  1990-05-01  </span><span style='text-decoration: underline;'>6</span><span>620
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> M750  1990-06-01  </span><span style='text-decoration: underline;'>6</span><span>690
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> M750  1990-07-01  </span><span style='text-decoration: underline;'>6</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> M750  1990-08-01  </span><span style='text-decoration: underline;'>5</span><span>450
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> M750  1990-09-01  </span><span style='text-decoration: underline;'>6</span><span>480
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> M750  1990-10-01  </span><span style='text-decoration: underline;'>6</span><span>820
+#&gt; </span><span style='color: #949494;'># ... with 296 more rows</span><span></div><div class='input'>
+<span class='co'># Split Data 80/20</span>
+<span class='va'>splits</span> <span class='op'>&lt;-</span> <span class='fu'>rsample</span><span class='fu'>::</span><span class='fu'><a href='https://rsample.tidymodels.org/reference/initial_split.html'>initial_time_split</a></span><span class='op'>(</span><span class='va'>m750</span>, prop <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>
 
-<span class='va'>model_garch_fit</span> <span class='op'>&lt;-</span><span class='fu'>garchmodels</span><span class='fu'>::</span><span class='fu'>garch_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span>,
-                                          arch_order <span class='op'>=</span> <span class='fl'>1</span>,
-                                          garch_order <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"rugarch"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>fit</span><span class='op'>(</span><span class='va'>daily_returns</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>rIBM_train</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>frequency = 5 observations per 1 week</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_garch_fit</span>, <span class='va'>rIBM_future</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 24 x 1</span><span>
-#&gt;       .pred
-#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 0.000</span><span style='text-decoration: underline;'>527</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 0.000</span><span style='text-decoration: underline;'>298</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 0.000</span><span style='text-decoration: underline;'>381</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 0.000</span><span style='text-decoration: underline;'>351</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 0.000</span><span style='text-decoration: underline;'>362</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 0.000</span><span style='text-decoration: underline;'>358</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #949494;'># ... with 14 more rows</span><span></div><div class='input'>
-<span class='va'>model_garch_fit</span> <span class='op'>&lt;-</span><span class='fu'>garchmodels</span><span class='fu'>::</span><span class='fu'>garch_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span>,
-                                        arch_order <span class='op'>=</span> <span class='fl'>2</span>,
-                                        garch_order <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"rugarch"</span>, variance.model <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>model<span class='op'>=</span><span class='st'>'gjrGARCH'</span>, 
-                                                garchOrder<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,
-               mean.model     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>armaOrder<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>fit</span><span class='op'>(</span><span class='va'>daily_returns</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>rIBM_train</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>frequency = 5 observations per 1 week</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_garch_fit</span>, <span class='va'>rIBM_future</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 24 x 1</span><span>
-#&gt;       .pred
-#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 0.000</span><span style='text-decoration: underline;'>453</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 0.000</span><span style='text-decoration: underline;'>168</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 0.000</span><span style='text-decoration: underline;'>269</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 0.000</span><span style='text-decoration: underline;'>233</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 0.000</span><span style='text-decoration: underline;'>246</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 0.000</span><span style='text-decoration: underline;'>242</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #949494;'># ... with 14 more rows</span><span></div><div class='input'> 
+<span class='co'># ---- AUTO ARIMA ----</span>
+
+<span class='co'># Model Spec</span>
+<span class='va'>model_spec</span> <span class='op'>&lt;-</span> <span class='fu'>garch_reg</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"stan"</span><span class='op'>)</span>
+
+<span class='co'># Fit Spec</span>
+<span class='va'>model_fit</span> <span class='op'>&lt;-</span> <span class='va'>model_spec</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://generics.r-lib.org/reference/fit.html'>fit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rsample.tidymodels.org/reference/initial_split.html'>training</a></span><span class='op'>(</span><span class='va'>splits</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>frequency = 12 observations per 1 year</span></div><div class='output co'>#&gt; 
+#&gt; SAMPLING FOR MODEL 'tgarch' NOW (CHAIN 1).
+#&gt; Chain 1: 
+#&gt; Chain 1: Gradient evaluation took 0 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+#&gt; Chain 1: Adjust your expectations accordingly!
+#&gt; Chain 1: 
+#&gt; Chain 1: 
+#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 1: 
+#&gt; Chain 1:  Elapsed Time: 2.144 seconds (Warm-up)
+#&gt; Chain 1:                1.575 seconds (Sampling)
+#&gt; Chain 1:                3.719 seconds (Total)
+#&gt; Chain 1: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'tgarch' NOW (CHAIN 2).
+#&gt; Chain 2: 
+#&gt; Chain 2: Gradient evaluation took 0 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+#&gt; Chain 2: Adjust your expectations accordingly!
+#&gt; Chain 2: 
+#&gt; Chain 2: 
+#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 2: 
+#&gt; Chain 2:  Elapsed Time: 2.561 seconds (Warm-up)
+#&gt; Chain 2:                1.134 seconds (Sampling)
+#&gt; Chain 2:                3.695 seconds (Total)
+#&gt; Chain 2: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'tgarch' NOW (CHAIN 3).
+#&gt; Chain 3: 
+#&gt; Chain 3: Gradient evaluation took 0 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+#&gt; Chain 3: Adjust your expectations accordingly!
+#&gt; Chain 3: 
+#&gt; Chain 3: 
+#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 3: 
+#&gt; Chain 3:  Elapsed Time: 2.435 seconds (Warm-up)
+#&gt; Chain 3:                1.119 seconds (Sampling)
+#&gt; Chain 3:                3.554 seconds (Total)
+#&gt; Chain 3: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'tgarch' NOW (CHAIN 4).
+#&gt; Chain 4: 
+#&gt; Chain 4: Gradient evaluation took 0.001 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 10 seconds.
+#&gt; Chain 4: Adjust your expectations accordingly!
+#&gt; Chain 4: 
+#&gt; Chain 4: 
+#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 4: 
+#&gt; Chain 4:  Elapsed Time: 2.654 seconds (Warm-up)
+#&gt; Chain 4:                1.351 seconds (Sampling)
+#&gt; Chain 4:                4.005 seconds (Total)
+#&gt; Chain 4: </div><div class='input'><span class='va'>model_fit</span>
+</div><div class='output co'>#&gt; parsnip model object
+#&gt; 
+#&gt; Fit time:  26.7s 
+#&gt; 
+#&gt; y ~ garch(1,1,1) 
+#&gt; 244 observations and 1 dimension 
+#&gt;  
+#&gt;            mean     se      5%      95%      ess   Rhat
+#&gt; mu0      9.1386 0.0002  9.1179   9.1579 3854.753 0.9999
+#&gt; sigma0   0.0043 0.0000  0.0032   0.0057 4247.120 0.9998
+#&gt; arch     0.7434 0.0014  0.5997   0.9011 3954.256 1.0021
+#&gt; garch    0.0384 0.0006  0.0020   0.1097 4218.956 1.0006
+#&gt; mgarch  -0.0087 0.0079 -0.8341   0.8035 3633.746 1.0009
+#&gt; loglik 112.8395 0.8379  7.2609 153.6689 3718.928 1.0000
+#&gt; 
+#&gt;  Samples were drawn using sampling(NUTS). For each parameter, ess
+#&gt;  is the effective sample size, and Rhat is the potential
+#&gt;  scale reduction factor on split chains (at convergence, Rhat = 1). </div><div class='input'>
+
+<span class='co'># Model Spec</span>
+<span class='va'>model_spec</span> <span class='op'>&lt;-</span> <span class='fu'>garch_reg</span><span class='op'>(</span>
+        arch_order               <span class='op'>=</span> <span class='fl'>2</span>,
+        garch_order              <span class='op'>=</span> <span class='fl'>2</span>,
+        mgarch_order             <span class='op'>=</span> <span class='fl'>1</span>,
+        non_seasonal_ar          <span class='op'>=</span> <span class='fl'>1</span>,
+        non_seasonal_ma          <span class='op'>=</span> <span class='fl'>1</span>
+    <span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"stan"</span><span class='op'>)</span>
+
+<span class='co'># Fit Spec</span>
+<span class='va'>model_fit</span> <span class='op'>&lt;-</span> <span class='va'>model_spec</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://generics.r-lib.org/reference/fit.html'>fit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rsample.tidymodels.org/reference/initial_split.html'>training</a></span><span class='op'>(</span><span class='va'>splits</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>frequency = 12 observations per 1 year</span></div><div class='output co'>#&gt; 
+#&gt; SAMPLING FOR MODEL 'tgarch' NOW (CHAIN 1).
+#&gt; Chain 1: 
+#&gt; Chain 1: Gradient evaluation took 0 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+#&gt; Chain 1: Adjust your expectations accordingly!
+#&gt; Chain 1: 
+#&gt; Chain 1: 
+#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 1: 
+#&gt; Chain 1:  Elapsed Time: 15.418 seconds (Warm-up)
+#&gt; Chain 1:                6.7 seconds (Sampling)
+#&gt; Chain 1:                22.118 seconds (Total)
+#&gt; Chain 1: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'tgarch' NOW (CHAIN 2).
+#&gt; Chain 2: 
+#&gt; Chain 2: Gradient evaluation took 0 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+#&gt; Chain 2: Adjust your expectations accordingly!
+#&gt; Chain 2: 
+#&gt; Chain 2: 
+#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 2: 
+#&gt; Chain 2:  Elapsed Time: 17.103 seconds (Warm-up)
+#&gt; Chain 2:                4.336 seconds (Sampling)
+#&gt; Chain 2:                21.439 seconds (Total)
+#&gt; Chain 2: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'tgarch' NOW (CHAIN 3).
+#&gt; Chain 3: 
+#&gt; Chain 3: Gradient evaluation took 0.001 seconds
+#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 10 seconds.
+#&gt; Chain 3: Adjust your expectations accordingly!
+#&gt; Chain 3: 
+#&gt; Chain 3: 
+#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 3: 
+#&gt; Chain 3:  Elapsed Time: 18.634 seconds (Warm-up)
+#&gt; Chain 3:                3.861 seconds (Sampling)
+#&gt; Chain 3:                22.495 seconds (Total)
+#&gt; Chain 3: 
+#&gt; 
+#&gt; SAMPLING FOR MODEL 'tgarch' NOW (CHAIN 4).
+#&gt; Chain 4: 
+#&gt; Chain 4: Gradient evaluation took 0 seconds
+#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
+#&gt; Chain 4: Adjust your expectations accordingly!
+#&gt; Chain 4: 
+#&gt; Chain 4: 
+#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+#&gt; Chain 4: 
+#&gt; Chain 4:  Elapsed Time: 14.651 seconds (Warm-up)
+#&gt; Chain 4:                3.973 seconds (Sampling)
+#&gt; Chain 4:                18.624 seconds (Total)
+#&gt; Chain 4: </div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 1.73, indicating chains have not mixed.</span>
+#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
+#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
+#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='input'><span class='va'>model_fit</span>
+</div><div class='output co'>#&gt; parsnip model object
+#&gt; 
+#&gt; Fit time:  1m 36.5s 
+#&gt; 
+#&gt; y ~ arma(1,1)+garch(2,2,1) 
+#&gt; 244 observations and 1 dimension 
+#&gt;  
+#&gt;             mean     se       5%      95%       ess   Rhat
+#&gt; mu0       8.7442 0.0021   8.5766   8.9038    1.2995 2.1222
+#&gt; sigma0    0.0015 0.0000   0.0009   0.0021   11.5190 1.0608
+#&gt; arch.1    0.4061 0.0021   0.1991   0.6402    3.3758 1.2098
+#&gt; arch.2    0.3719 0.0020   0.1641   0.5879    8.0674 1.0855
+#&gt; garch.1   0.0602 0.0009   0.0033   0.1778 3963.6762 1.0032
+#&gt; garch.2   0.0469 0.0007   0.0028   0.1330  141.3700 1.0137
+#&gt; mgarch    0.0057 0.0078  -0.8149   0.8195 3926.1255 1.0007
+#&gt; ar        0.0434 0.0002   0.0254   0.0621    1.2980 2.1222
+#&gt; ma        0.7725 0.0006   0.7026   0.8327    2.7370 1.2757
+#&gt; loglik  228.1614 0.8471 117.5114 270.8889   26.4965 1.0337
+#&gt; 
+#&gt;  Samples were drawn using sampling(NUTS). For each parameter, ess
+#&gt;  is the effective sample size, and Rhat is the potential
+#&gt;  scale reduction factor on split chains (at convergence, Rhat = 1). </div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

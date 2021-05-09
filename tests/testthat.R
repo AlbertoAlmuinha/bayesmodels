@@ -1,8 +1,9 @@
 library(testthat)
-library(garchmodels)
-
+library(bayesmodels)
+library(modeltime)
+library(tidymodels)
 library(timetk)
 library(tidyverse)
-library(tidymodels)
+library(lubridate)
 
-test_check("garchmodels")
+#test_check("bayesmodels")

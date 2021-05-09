@@ -2,11 +2,11 @@
 
 # IMPORTS ----
 # - Parsnip gives user access to parsnip functions (fit.model_spec, set_engine)
-# - rugarch gives user acces to ugarspech options
+# - bsts gives user acces to AddLocalLinearTrend functions etc
 
-#' @import rugarch
+#' @import bayesforecast
+#' @import bsts
 #' @import parsnip
-#' @import rmgarch
  
 # ON LOAD ----
 
@@ -17,19 +17,24 @@
 .onLoad <- function(libname, pkgname) {
     # This defines the model database
     
+    make_sarima_reg()
+    
     make_garch_reg()
     
-    make_garch_reg_rugarch_rugarch()
+    make_svm_reg()
     
-    make_garch_multi_reg()
+    make_ssm_reg()
     
-    make_garch_mutivariate_reg_rugarch_rugarch()
+    make_random_walk_reg()
     
-    make_garch_mutivariate_reg_rmgarch_dccrmgarch()
+    make_gen_additive_reg()
+    make_gen_additive_reg_stan()
     
-    make_garch_mutivariate_reg_rmgarch_crmgarch()
+    make_bsr_reg()
     
-    make_garch_mutivariate_reg_rmgarch_gogarchrmgarch()
+    make_exponential_smoothing_reg()
+    
+    make_adaptive_spline_reg()
     
 }
 

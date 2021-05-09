@@ -1,49 +1,91 @@
-# garch_reg() - General Interface GARCH Models
-#' General Interface for GARCH Models
+#' General Interface for GARCH Regression Models
+#'
+#' `garch_reg()` is a way to generate a _specification_ of a GARCH model
+#'  before fitting and allows the model to be created using
+#'  different packages. Currently the only package is `bayesforecast`.
 #'
 #' @param mode A single character string for the type of model.
-#' @param arch_order An integer giving the order of the ARCH part for the variance model. Applies to both garch and rugarch engines.
-#' @param garch_order An integer giving the order of the GARCH part for the variance model. Applies to both garch and rugarch engines.
-#' @param ar_order An integer giving the order of the AR part for the mean model. Only applies to rugarch engine.
-#' @param ma_order An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.
-#' @param tune_by Default is set to NULL, when no tuning. If you want to tune, you must choose between "seriesFor" or "sigmaFor" options. 
-#' This will cause the function to not return a nested tibble and be able to tune.
+#'  The only possible value for this model is "regression".
+#' @param garch_order Integer with the garch order.
+#' @param arch_order Integer with the arch_order.
+#' @param mgarch_order Integer with the mgarch order.
+#' @param non_seasonal_ar The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.
+#' @param non_seasonal_ma The order of the non-seasonal moving average (MA) terms. Often denoted "q" in pdq-notation
+#' @param garch_t_student A boolean value to specify for a generalized t-student garch model.
+#' @param asymmetry a string value for the asymmetric function for an asymmetric GARCH process. By default the 
+#' value "none" for standard GARCH process. If "logit" a logistic function is used for asymmetry, and if 
+#' "exp" an exponential function is used.
+#' @param markov_chains An integer of the number of Markov Chains chains to be run, by default 4 chains are run.
+#' @param chain_iter An integer of total iterations per chain including the warm-up, by default the number of iterations are 2000.
+#' @param warmup_iter A positive integer specifying number of warm-up (aka burn-in) iterations. This also specifies the number of iterations used for step-size adaptation, so warm-up samples should not be used for inference. The number of warmup should not be larger than iter and the default is iter/2.
+#' @param adapt_delta An optional real value between 0 and 1, the thin of the jumps in a HMC method. By default is 0.9
+#' @param tree_depth An integer of the maximum depth of the trees evaluated during each iteration. By default is 10.
+#' @param pred_seed An integer with the seed for using when predicting with the model.
+#'
+#'
+#' @details
+#' The data given to the function are not saved and are only used
+#'  to determine the _mode_ of the model. For `garch_reg()`, the
+#'  mode will always be "regression".
+#'
+#' The model can be created using the `fit()` function using the
+#'  following _engines_:
+#'
+#'  - "stan" (default) - Connects to [bayesforecast::stan_garch()]
+#'
+#' __Main Arguments__
+#'
+#' The main arguments (tuning parameters) for the model are:
 #' 
+#'  - `arch_order`: Integer with the arch_order.
+#'  - `garch_order`: Integer with the garch_order.
+#'  - `mgarch_order`: Integer with the mgarch_order.
+#'  - `garch_t_student`: A boolean value to specify for a generalized t-student garch model.
+#'  - `asymmetry`: a string value for the asymmetric function for an asymmetric GARCH process.
+#'  - `non_seasonal_ar`: The order of the non-seasonal auto-regressive (AR) terms.
+#'  - `non_seasonal_ma`: The order of the non-seasonal moving average (MA)
+#'  - `markov_chains`: An integer of the number of Markov Chains chains to be run.
+#'  - `adapt_delta`: The thin of the jumps in a HMC method.
+#'  - `tree_depth`: The maximum depth of the trees evaluated during each iteration.
+#'
 #' These arguments are converted to their specific names at the
 #'  time that the model is fit.
 #'
 #' Other options and argument can be
 #'  set using `set_engine()` (See Engine Details below).
-#' 
-#' @details 
-#' 
-#' Available engines:
-#' - __rugarch__: Connects to `rugarch::ugarchspec()` first and then to `rugarch::ugarchfit()`.
-#' 
+#'
+#'  If parameters need to be modified, `update()` can be used
+#'  in lieu of recreating the object from scratch.
+#'
+#'
 #' @section Engine Details:
-#' 
-#' __rugarch (default)__
-#' 
-#' The engine uses [rugarch::ugarchspec()] and [rugarch::ugarchfit()].
-#' 
-#' Function Parameters:
-#'  ```{r echo = FALSE}
-#' str(rugarch::ugarchspec)
+#'
+#' The standardized parameter names in `bayesforecast` can be mapped to their original
+#' names in each engine:
+#'
+#' ```{r echo = FALSE}
+#' tibble::tribble(
+#'    ~"bayesmodels", ~"bayesforecast::stan_garch",
+#'    "arch_order, garch_order, mgarch_order", "order = c(s(1), k(1), h(0))", 
+#'    "non_seasonal_ar, non_seasonal_ma", "arma = c(p(1), q(0))",
+#'    "garch_t_student", "genT(FALSE)",
+#'    "assymetry", "asym('none')",
+#'    "markov_chains", "chains(4)",
+#'    "adapt_delta", "adapt.delta(0.9)",
+#'    "tree_depth", "tree.depth(10)"
+#' ) %>% knitr::kable()
 #' ```
+#'
+#' Other options can be set using `set_engine()`.
+#'
+#' __stan (default engine)__
+#'
+#' The engine uses [bayesforecast::stan_garch()].
 #' 
-#' The Garch order for the variance model is provided using `arch_order` and `garch_order` parameters..
-#' The ARMA order for the mean model is provided using `ar_order` and `ma_order` parameters.
-#' Other options and arguments can be set using `set_engine()`.
-#' 
-#' #' Parameter Notes:
-#' - `xreg` - This engine supports xregs for both the variance model and the mean model. You can do this in two ways, 
-#' either enter the matrices through set_engine parameters or as a formula in fit (note that the latter option is more limited, 
-#' since you will not be able to pass two different xregs, one for each model). For simpler cases this is a compact option.
-#' - `order parameters` - The parameters of rugarch::ugarchspec are lists containing several elements, 
-#' some of them the commands that are the main arguments of the function. If you want to modify the parameter 
-#' that encompasses such a list, you must know that the parameter passed in the function parameter will always prevail. 
-#' (See Examples).
-#' 
+#' Parameter Notes:
+#' - `xreg` - This is supplied via the parsnip / modeltime `fit()` interface
+#'  (so don't provide this manually). See Fit Details (below).
+#'
 #' @section Fit Details:
 #'
 #' __Date and Date-Time Variable__
@@ -53,15 +95,26 @@
 #'
 #' - `fit(y ~ date)`
 #'
+#' _Seasonal Period Specification_
+#'
+#' The period can be non-seasonal (`seasonal_period = 1 or "none"`) or
+#' yearly seasonal (e.g. For monthly time stamps, `seasonal_period = 12`, `seasonal_period = "12 months"`, or `seasonal_period = "yearly"`).
+#' There are 3 ways to specify:
+#'
+#' 1. `seasonal_period = "auto"`: A seasonal period is selected based on the periodicity of the data (e.g. 12 if monthly)
+#' 2. `seasonal_period = 12`: A numeric frequency. For example, 12 is common for monthly data
+#' 3. `seasonal_period = "1 year"`: A time-based phrase. For example, "1 year" would convert to 12 for monthly data.
+#'
+#'
 #' __Univariate (No xregs, Exogenous Regressors):__
 #'
 #' For univariate analysis, you must include a date or date-time feature. Simply use:
 #'
-#'  - Formula Interface: `fit(y ~ date)` will ignore xreg's.
+#'  - Formula Interface (recommended): `fit(y ~ date)` will ignore xreg's.
 #'
 #' __Multivariate (xregs, Exogenous Regressors)__
 #'
-#'  The `xreg` parameter is populated using the `fit()` function:
+#'  The `xreg` parameter is populated using the `fit()` or `fit_xy()` function:
 #'
 #'  - Only `factor`, `ordered factor`, and `numeric` data will be used as xregs.
 #'  - Date and Date-time variables are not used as xregs
@@ -83,56 +136,71 @@
 #'
 #'
 #' @seealso [fit.model_spec()], [set_engine()]
-#' 
-#' 
-#' @examples 
+#'
+#' @examples
 #' \donttest{
-#' library(tidymodels)
-#' library(garchmodels)
-#' library(modeltime)
-#' library(tidyverse)
+#' library(dplyr)
+#' library(parsnip)
+#' library(rsample)
 #' library(timetk)
-#' library(lubridate)
-#' 
-#' rIBM_extended <- rIBM %>%
-#'     future_frame(.length_out = 24, .bind_data = TRUE) 
-#' 
-#' rIBM_train  <- rIBM_extended %>% drop_na()
-#' rIBM_future <- rIBM_extended %>% filter(is.na(daily_returns))
-#' 
-#' model_garch_fit <-garchmodels::garch_reg(mode = "regression",
-#'                                           arch_order = 1,
-#'                                           garch_order = 1) %>%
-#'     set_engine("rugarch") %>%
-#'     fit(daily_returns ~ date, data = rIBM_train)
-#' 
-#' predict(model_garch_fit, rIBM_future)
-#' 
-#' model_garch_fit <-garchmodels::garch_reg(mode = "regression",
-#'                                         arch_order = 2,
-#'                                         garch_order = 2) %>%
-#'     set_engine("rugarch", variance.model = list(model='gjrGARCH', 
-#'                                                 garchOrder=c(1,1)),
-#'                mean.model     = list(armaOrder=c(0,0))) %>%
-#'     fit(daily_returns ~ date, data = rIBM_train)
-#' 
-#' predict(model_garch_fit, rIBM_future)
-#' } 
+#' library(modeltime)
+#' library(bayesmodels)
+#'
+#' # Data
+#' m750 <- m4_monthly %>% filter(id == "M750")
+#' m750
+#'
+#' # Split Data 80/20
+#' splits <- rsample::initial_time_split(m750, prop = 0.8)
+#'
+#' # ---- AUTO ARIMA ----
+#'
+#' # Model Spec
+#' model_spec <- garch_reg() %>%
+#'     set_engine("stan")
+#'
+#' # Fit Spec
+#' model_fit <- model_spec %>%
+#'     fit(log(value) ~ date, data = training(splits))
+#' model_fit
+#'
+#'
+#' # Model Spec
+#' model_spec <- garch_reg(
+#'         arch_order               = 2,
+#'         garch_order              = 2,
+#'         mgarch_order             = 1,
+#'         non_seasonal_ar          = 1,
+#'         non_seasonal_ma          = 1
+#'     ) %>%
+#'     set_engine("stan")
+#'
+#' # Fit Spec
+#' model_fit <- model_spec %>%
+#'     fit(log(value) ~ date, data = training(splits))
+#' model_fit
+#'}
 #' @export
-#' @return A model specification
-garch_reg <- function(mode = "regression",
-                      arch_order = NULL,
-                      garch_order = NULL,
-                      ar_order = NULL,
-                      ma_order = NULL,
-                      tune_by = NULL) {
+garch_reg <- function(mode = "regression", garch_order = NULL, arch_order = NULL, mgarch_order = NULL, 
+                       non_seasonal_ar = NULL, non_seasonal_ma = NULL, garch_t_student = NULL, asymmetry = NULL,  markov_chains = NULL,
+                       chain_iter = NULL, warmup_iter = NULL, adapt_delta = NULL, tree_depth = NULL, pred_seed = NULL) {
     
     args <- list(
-        arch_order  = rlang::enquo(arch_order),
-        garch_order = rlang::enquo(garch_order),
-        ar_order    = rlang::enquo(ar_order),
-        ma_order    = rlang::enquo(ma_order),
-        tune_by     = rlang::enquo(tune_by)
+        garch_order               = rlang::enquo(garch_order),
+        arch_order                = rlang::enquo(arch_order),
+        mgarch_order              = rlang::enquo(mgarch_order),
+        garch_t_student           = rlang::enquo(garch_t_student),
+        asymmetry                 = rlang::enquo(asymmetry),
+        non_seasonal_ar           = rlang::enquo(non_seasonal_ar),
+        non_seasonal_ma           = rlang::enquo(non_seasonal_ma),
+        
+        markov_chains             = rlang::enquo(markov_chains),
+        chain_iter                = rlang::enquo(chain_iter),
+        warmup_iter               = rlang::enquo(warmup_iter),
+        adapt_delta               = rlang::enquo(adapt_delta),
+        tree_depth                = rlang::enquo(tree_depth),
+        
+        pred_seed                 = rlang::enquo(pred_seed)
     )
     
     parsnip::new_model_spec(
@@ -148,7 +216,7 @@ garch_reg <- function(mode = "regression",
 
 #' @export
 print.garch_reg <- function(x, ...) {
-    cat("GARCH Model Specification (", x$mode, ")\n\n", sep = "")
+    cat("GARCH Regression Model Specification (", x$mode, ")\n\n", sep = "")
     parsnip::model_printer(x, ...)
     
     if(!is.null(x$method$fit$args)) {
@@ -161,14 +229,11 @@ print.garch_reg <- function(x, ...) {
 
 #' @export
 #' @importFrom stats update
-update.garch_reg <- function(object,
-                             arch_order = NULL,
-                             garch_order = NULL,
-                             ar_order = NULL,
-                             ma_order = NULL,
-                             tune_by  = NULL,
-                             parameters = NULL,
-                             fresh = FALSE, ...) {
+update.garch_reg <- function(object, parameters = NULL,
+                             garch_order = NULL, arch_order = NULL, mgarch_order = NULL, 
+                             non_seasonal_ar = NULL, non_seasonal_ma = NULL, garch_t_student = NULL, asymmetry = NULL,  markov_chains = NULL,
+                             chain_iter = NULL, warmup_iter = NULL, adapt_delta = NULL, tree_depth = NULL, pred_seed = NULL,
+                              fresh = FALSE, ...) {
     
     parsnip::update_dot_check(...)
     
@@ -177,11 +242,21 @@ update.garch_reg <- function(object,
     }
     
     args <- list(
-        arch_order = rlang::enquo(arch_order),
-        garch_order = rlang::enquo(garch_order),
-        ar_order = rlang::enquo(ar_order),
-        ma_order = rlang::enquo(ma_order),
-        tune_by  = rlang::enquo(tune_by)
+        garch_order               = rlang::enquo(garch_order),
+        arch_order                = rlang::enquo(arch_order),
+        mgarch_order              = rlang::enquo(mgarch_order),
+        garch_t_student           = rlang::enquo(garch_t_student),
+        asymmetry                 = rlang::enquo(asymmetry),
+        non_seasonal_ar           = rlang::enquo(non_seasonal_ar),
+        non_seasonal_ma           = rlang::enquo(non_seasonal_ma),
+        
+        markov_chains             = rlang::enquo(markov_chains),
+        chain_iter                = rlang::enquo(chain_iter),
+        warmup_iter               = rlang::enquo(warmup_iter),
+        adapt_delta               = rlang::enquo(adapt_delta),
+        tree_depth                = rlang::enquo(tree_depth),
+        
+        pred_seed                 = rlang::enquo(pred_seed)
     )
     
     args <- parsnip::update_main_parameters(args, parameters)
@@ -211,198 +286,94 @@ update.garch_reg <- function(object,
 #' @importFrom parsnip translate
 translate.garch_reg <- function(x, engine = x$engine, ...) {
     if (is.null(engine)) {
-        message("Used `engine = 'rugarch'` for translation.")
-        engine <- "rugarch"
+        message("Used `engine = 'stan'` for translation.")
+        engine <- "stan"
     }
     x <- parsnip::translate.default(x, engine, ...)
     
     x
 }
 
-#' # FIT - GARCH -----
-#' 
-#' #' Low-Level GARCH function for translating modeltime to forecast
-#' #'
-#' #' @param formula A dataframe of xreg (exogenous regressors)
-#' #' @param data A numeric vector of values to fit
-#' #' @param a The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.
-#' #' @param g The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.
-#' #' @param ... Additional arguments passed to `forecast::Arima`
-#' #'
-#' #' @export
-#' garch_fit_impl <- function(formula, data, a = 1, g = 1, ar_no_apply = NULL, ma_no_apply = NULL, period = "auto", ...) {
-#'     
-#'     # X & Y
-#'     others <- list(...)
-#'     
-#'      y <- all.vars(formula)[1]
-#'      x <- attr(stats::terms(formula, data = data), "term.labels")
-#'     
-#'     outcome <- data[[y]]
-#'     predictors <- data %>% dplyr::select(dplyr::all_of(x))
-#'     
-#'     # INDEX & PERIOD
-#'     # Determine Period, Index Col, and Index
-#'     index_tbl <- modeltime::parse_index_from_data(predictors)
-#'     period    <- modeltime::parse_period_from_index(index_tbl, period)
-#'     idx_col   <- names(index_tbl)
-#'     idx       <- timetk::tk_index(index_tbl)
-#'     
-#'     # XREGS
-#'     # Clean names, get xreg recipe, process predictors
-#'     # xreg_recipe <- create_xreg_recipe(predictor, prepare = TRUE)
-#'     # xreg_matrix <- juice_xreg_recipe(xreg_recipe, format = "matrix")
-#'     
-#'     # FIT
-#'     outcome <- stats::ts(outcome, frequency = period)
-#'     
-#'     fit_garch <- tseries::garch(outcome, order = c(a, g), ...)
-#'     
-#'     # RETURN
-#'     modeltime::new_modeltime_bridge(
-#'         class = "garch_fit_impl",
-#'         
-#'         # Models
-#'         models = list(
-#'             model_1 = fit_garch
-#'         ),
-#'         
-#'         # Data - Date column (matches original), .actual, .fitted, and .residuals columns
-#'         data = tibble::tibble(
-#'             !! idx_col  := idx,
-#'             .actual      =  as.numeric(outcome),
-#'             .fitted      =  fit_garch$fitted.values[,1],
-#'             .residuals   =  fit_garch$residuals
-#'         ),
-#'         
-#'         extras = list(
-#'             y_var    = y,
-#'             period   = period,
-#'             otros    = others
-#'         ),
-#'         
-#'         # Description - Convert arima model parameters to short description
-#'         desc = stringr::str_glue('GARCH ({fit_garch$order[1]}, {fit_garch$order[2]}) Model')
-#'     )
-#'     
-#' }
-#' 
-#' #' @export
-#' print.garch_fit_impl <- function(x, ...) {
-#'     print(x$models$model_1)
-#'     invisible(x)
-#' }
 
+# FIT - Arima -----
 
-# FIT - GARCH -----
-
-#' Low-Level GARCH function for translating modeltime to forecast
+#' Low-Level ARIMA function for translating modeltime to forecast
 #'
-#' @param formula A dataframe of xreg (exogenous regressors)
-#' @param data A numeric vector of values to fit
-#' @param a The order of ARCH part
-#' @param g The order of GARCH part
-#' @param ar The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.
-#' @param ma The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.
-#' @param tune_by Parameter for tuning. 
-#' @param period Period
+#' @param x A dataframe of xreg (exogenous regressors)
+#' @param y A numeric vector of values to fit
+#' @param s garch_order
+#' @param k arch_order
+#' @param h mgarch_order
+#' @param p The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.
+#' @param q The order of the non-seasonal moving average (MA) terms. Often denoted "q" in pdq-notation.
+#' @param genT a boolean value to specify for a generalized t-student garch model.
+#' @param asym a string value for the asymmetric function for an asymmetric GARCH process.
+#' @param chains An integer of the number of Markov Chains chains to be run, by default 4 chains are run.
+#' @param iter An integer of total iterations per chain including the warm-up, by default the number of iterations are 2000.
+#' @param warmup A positive integer specifying number of warm-up (aka burn-in) iterations. This also specifies the number of iterations used for step-size adaptation, so warm-up samples should not be used for inference. The number of warmup should not be larger than iter and the default is iter/2.
+#' @param adapt.delta An optional real value between 0 and 1, the thin of the jumps in a HMC method. By default is 0.9
+#' @param tree.depth An integer of the maximum depth of the trees evaluated during each iteration. By default is 10.
+#' @param seed An integer with the seed for using when predicting with the model.
 #' @param ... Additional arguments passed to `forecast::Arima`
 #'
 #' @export
-#' @return A fitted model
-rugarch_fit_impl <- function(formula, data, a = 1, g = 1, ar = 1, ma = 1, tune_by = NULL, period = "auto", ...) {
-    
-    if (!is.null(tune_by)){
-        tune_by <- match.arg(tune_by, choices = c("sigmaFor", "seriesFor"))
-    }
+garch_stan_fit_impl <- function(x, y, s = 1, k = 1, h = 1, p = 0, q = 0, genT = FALSE, asym = "none",
+                                 chains = 4, iter = 2000, warmup = iter/2, adapt.delta = 0.9, tree.depth = 10, seed = NULL,
+                                 ...) {
     
     # X & Y
-    others <- list(...)
+    # Expect outcomes  = vector
+    # Expect predictor = data.frame
+    outcome    <- y
+    predictor  <- x
     
-    if (any(names(others) %in% "variance.model")) {
-        
-        others$variance.model$garchOrder <- c(a, g)
-        
-    } else { #Defaults Settings
-        
-        others[['variance.model']] <- list(model = "sGARCH", 
-                                           garchOrder = c(a, g), 
-                                           submodel = NULL, 
-                                           external.regressors = NULL, 
-                                           variance.targeting = FALSE)
-        
-    }
-    
-    
-    if (any(names(others) %in% "mean.model")) {
-        
-        others$mean.model$armaOrder <- c(ar, ma)
-        
-    } else { #Defaults Settings
-        
-        others[['mean.model']] <- list(armaOrder = c(ar, ma), include.mean = TRUE, archm = FALSE, 
-                                       archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE)
-        
-    }
-    
-    y <- all.vars(formula)[1]
-    x <- attr(stats::terms(formula, data = data), "term.labels")
-    
-    outcome <- data[[y]]
-    predictors <- data %>% dplyr::select(dplyr::all_of(x))
+    asym <- match.arg(asym, choices = c("none", "logit", "exp"))
     
     # INDEX & PERIOD
     # Determine Period, Index Col, and Index
-    index_tbl <- modeltime::parse_index_from_data(predictors)
-    period    <- modeltime::parse_period_from_index(index_tbl, period)
+    index_tbl <- modeltime::parse_index_from_data(predictor)
+    period    <- modeltime::parse_period_from_index(index_tbl, "auto")
     idx_col   <- names(index_tbl)
     idx       <- timetk::tk_index(index_tbl)
     
     # XREGS
     # Clean names, get xreg recipe, process predictors
-    xreg_recipe <- modeltime::create_xreg_recipe(predictors, prepare = TRUE)
+    xreg_recipe <- modeltime::create_xreg_recipe(predictor, prepare = TRUE)
     xreg_matrix <- modeltime::juice_xreg_recipe(xreg_recipe, format = "matrix")
     
-    safe_is_null <- purrr::safely(function(x){is.null(x)}, otherwise = NA, quiet = TRUE)
-    
-    if (!is.null(xreg_matrix)){
-        
-        if (any(names(others) %in% "variance.model")){
-            
-            if (safe_is_null(others$variance.model$external.regressors) %>% .$result == F){
-                others$variance.model$external.regressors <- as.matrix(xreg_matrix)
-            }
-            
-        }
-        
-        if (any(names(others) %in% "mean.model")){
-            
-            if (safe_is_null(others$mean.model$external.regressors) %>% .$result == F){
-                others$mean.model$external.regressors <- as.matrix(xreg_matrix)
-            }
-            
-        }
-        
-    }
-    
-    #UGSPEC
-    
-    ugspec <-parsnip::make_call(fun  = "ugarchspec",
-                                ns   = "rugarch",
-                                args = others)
-    
-    ugspec <-rlang::eval_tidy(ugspec)
-    
     # FIT
-    #outcome <- stats::ts(outcome, frequency = period)
-    outcome <- data.frame(outcome = outcome)
-    rownames(outcome)<-idx
+    outcome <- stats::ts(outcome, frequency = period)
     
-    fit_garch <- rugarch::ugarchfit(ugspec, data = outcome, ...)
+    if (!is.null(xreg_matrix)) {
+        fit_garch   <- bayesforecast::stan_garch(outcome, 
+                                                 order       = c(s, k, h),
+                                                 arma        = c(p, q),
+                                                 xreg        = xreg_matrix,  
+                                                 genT        = genT,
+                                                 asym        = asym, 
+                                                 chains      = chains,
+                                                 iter        = iter,
+                                                 warmup      = warmup,
+                                                 tree.depth  = tree.depth,
+                                                 adapt.delta = adapt.delta,
+                                                 ...)
+    } else {
+        fit_garch   <- bayesforecast::stan_garch(outcome, 
+                                                 order       = c(s, k, h),
+                                                 arma        = c(p, q),
+                                                 genT        = genT,
+                                                 asym        = asym, 
+                                                 chains      = chains,
+                                                 iter        = iter,
+                                                 warmup      = warmup,
+                                                 tree.depth  = tree.depth,
+                                                 adapt.delta = adapt.delta,
+                                                 ...)
+    }
     
     # RETURN
     modeltime::new_modeltime_bridge(
-        class = "rugarch_fit_impl",
+        class = "garch_stan_fit_impl",
         
         # Models
         models = list(
@@ -412,110 +383,65 @@ rugarch_fit_impl <- function(formula, data, a = 1, g = 1, ar = 1, ma = 1, tune_b
         # Data - Date column (matches original), .actual, .fitted, and .residuals columns
         data = tibble::tibble(
             !! idx_col  := idx,
-            .actual      =  as.numeric(outcome$outcome),
-            .fitted      =  fit_garch@fit$fitted.values,
-            .residuals   =  fit_garch@fit$residuals
+            .actual      =  as.numeric(fit_garch$model$yreal),
+            .fitted      =  .actual - as.numeric(residuals(fit_garch)),
+            .residuals   =  as.numeric(residuals(fit_garch))
         ),
         
+        # Preprocessing Recipe (prepped) - Used in predict method
         extras = list(
-            y_var    = y,
-            period   = period,
-            tune_by  = if (is.null(tune_by)){"None"} else {tune_by}
+            xreg_recipe = xreg_recipe,
+            pred_seed   = seed
         ),
         
-        # Description - Convert garch model parameters to short description
-        desc = stringr::str_glue('Variance {fit_garch@model$modeldesc$vmodel} ({a}, {g}) - ({stringr::str_to_title(fit_garch@model$modeldesc$distribution)}) Model')
+        # Description - Convert arima model parameters to short description
+        desc = "Bayesian GARCH Model"
     )
     
 }
 
 #' @export
-print.rugarch_fit_impl <- function(x, ...) {
+print.garch_stan_fit_impl <- function(x, ...) {
     print(x$models$model_1)
     invisible(x)
 }
 
-# PREDICT ----
+
 
 #' @export
-predict.rugarch_fit_impl <- function(object, new_data, ...) {
-    rugarch_predict_impl(object, new_data, ...)
+predict.garch_stan_fit_impl <- function(object, new_data, ...) {
+    garch_stan_predict_impl(object, new_data, ...)
 }
 
-
-#' Bridge prediction function for GARCH models
+#' Bridge prediction function for ARIMA models
 #'
 #' @inheritParams parsnip::predict.model_fit
-#' @param ... Additional arguments passed to `stats::predict()`
+#' @param ... Additional arguments passed to `forecast::Arima()`
 #'
 #' @export
-#' @return A nested tibble
-rugarch_predict_impl <- function(object, new_data, ...) {
+garch_stan_predict_impl <- function(object, new_data, ...) {
     
     # PREPARE INPUTS
     model       <- object$models$model_1
-    tune_by     <- object$extras$tune_by
-    # y_var       <- object$extras$y_var
-    # index       <- object$extras$y 
-    # period      <- object$extras$period
-    # 
-    # outcome     <- new_data %>% dplyr::select({{ y_var }})
-    # 
-    # outcome <- stats::ts(outcome, frequency = period)
+    idx_train   <- object$data %>% timetk::tk_index()
+    xreg_recipe <- object$extras$xreg_recipe
+    seed        <- object$extras$pred_seed
+    h_horizon   <- nrow(new_data)
+    
+    # XREG
+    xreg_matrix <- modeltime::bake_xreg_recipe(xreg_recipe, new_data, format = "matrix")
     
     # PREDICTIONS
-    
-    preds_forecast <- rugarch::ugarchforecast(model, n.ahead = nrow(new_data), ...) 
-    
-    if (tune_by == "None"){
-        
-        preds_forecast <- tibble::tibble(preds_forecast@forecast) %>%
-            tibble::rowid_to_column("rowid") %>%
-            dplyr::filter(rowid == 5 | rowid == 6) %>%
-            purrr::set_names(c("rowid", ".pred")) %>%
-            dplyr::mutate(.name = c("sigmaFor", "seriesFor")) %>%
-            dplyr::relocate(".name", .before = .pred) %>%
-            dplyr::select(.name, .pred)
-        
+    if (!is.null(xreg_matrix)) {
+        preds_forecast <- bayesforecast::forecast(model, h = h_horizon, xreg = xreg_matrix, seed = seed, ...)
     } else {
-        
-        preds_forecast <- switch(tune_by,
-                                 "sigmaFor"  = as.numeric(preds_forecast@forecast$sigmaFor),
-                                 "seriesFor" = as.numeric(preds_forecast@forecast$seriesFor))
-        
+        preds_forecast <- bayesforecast::forecast(model, h = h_horizon, seed = seed,  ...)
     }
-
-    return(preds_forecast)
+    
+    # Return predictions as numeric vector
+    preds <- tibble::as_tibble(preds_forecast) %>% purrr::pluck(1)
+    
+    return(preds)
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
