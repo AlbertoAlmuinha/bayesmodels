@@ -21,6 +21,7 @@ Imports:
     rlang (>= 0.1.2),
     brms,
     BASS,
+    stanHeaders,
     Rlgt,
     rstan,
     magrittr,
