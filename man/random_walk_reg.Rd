@@ -122,7 +122,7 @@ For univariate analysis, you must include a date or date-time feature. Simply us
 }
 
 \examples{
-\donttest{
+\dontrun{
 library(dplyr)
 library(parsnip)
 library(rsample)
