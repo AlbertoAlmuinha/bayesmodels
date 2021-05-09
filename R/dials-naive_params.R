@@ -11,12 +11,6 @@
 #'  - `adapt_delta`: The thin of the jumps in a HMC method
 #'  - `tree_depth`: Maximum depth of the trees
 #'
-#' @examples
-#' seasonal_random_walk()
-#'
-#' markov_chains()
-#'
-#' tree_depth()
 #'
 #'
 #' @name naive_params

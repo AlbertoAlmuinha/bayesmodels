@@ -19,12 +19,3 @@ The main parameters for Random Walk Models are:
 \item \code{tree_depth}: Maximum depth of the trees
 }
 }
-\examples{
-seasonal_random_walk()
-
-markov_chains()
-
-tree_depth()
-
-
-}
