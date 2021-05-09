@@ -92,12 +92,10 @@ m750_extended <- m750 \%>\%
 m750_train  <- m750_extended \%>\% drop_na()
 m750_future <- m750_extended \%>\% filter(is.na(value))
 
-model_fit_gam <- gen_additive_reg(mode = "regression") \%>\%
+model_fit_gam <- gen_additive_reg(mode = "regression", markov_chains = 2) \%>\%
     set_engine("stan", family=Gamma(link="log")) \%>\%
     fit(value ~  date + s(date_month, k = 12)
-        + s(date_num)
-        + s(lag_24)
-        + s(date_num, date_month),
+        + s(lag_24),
         data = m750_train) 
  }
 }
