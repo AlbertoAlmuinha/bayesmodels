@@ -91,7 +91,7 @@ Note that date or date-time class values are excluded from \code{xreg}.
 }
 
 \examples{
-\donttest{
+\dontrun{
 library(dplyr)
 library(parsnip)
 library(rsample)

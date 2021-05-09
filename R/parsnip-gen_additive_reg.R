@@ -47,7 +47,7 @@
 #' 
 #' @examples 
 #' 
-#' \donttest{
+#' \dontrun{
 #' library(tidymodels)
 #' library(bayesmodels)
 #' library(modeltime)

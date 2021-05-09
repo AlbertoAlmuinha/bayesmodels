@@ -69,7 +69,7 @@ These are applied in the \code{fit()} function:\if{html}{\out{<div class="r">}}\
 
 \examples{
 
-\donttest{
+\dontrun{
 library(tidymodels)
 library(bayesmodels)
 library(modeltime)
