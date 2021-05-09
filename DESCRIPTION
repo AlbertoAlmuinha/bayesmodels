@@ -34,7 +34,8 @@ Imports:
     workflows,
     modeltime,
     timetk,
-    BH
+    BH,
+    RcppEigen
 Suggests: 
     tidymodels,
     tidyverse,
