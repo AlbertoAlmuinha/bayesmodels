@@ -66,12 +66,10 @@
 #' m750_train  <- m750_extended %>% drop_na()
 #' m750_future <- m750_extended %>% filter(is.na(value))
 #' 
-#' model_fit_gam <- gen_additive_reg(mode = "regression") %>%
+#' model_fit_gam <- gen_additive_reg(mode = "regression", markov_chains = 2) %>%
 #'     set_engine("stan", family=Gamma(link="log")) %>%
 #'     fit(value ~  date + s(date_month, k = 12)
-#'         + s(date_num)
-#'         + s(lag_24)
-#'         + s(date_num, date_month),
+#'         + s(lag_24),
 #'         data = m750_train) 
 #'  }
 #' @export
@@ -233,7 +231,7 @@ gen_additive_stan_fit_impl <- function(formula, data, chains = 4, iter = 2000, w
                                     ns   = "brms",
                                     args = args)
     
-    model_gam <- rlang::eval_tidy(model_call)
+    model_gam <- rlang::eval_tidy(model_call, env = rlang::current_env())
     
     # RETURN
     modeltime::new_modeltime_bridge(
