@@ -183,16 +183,12 @@ The number of warmup should not be larger than iter and the default is iter/2.</
 
 <p><strong>stan</strong></p>
 <p>This engine uses <code><a href='https://rdrr.io/pkg/brms/man/brm.html'>brms::brm()</a></code> and has the following parameters,
-which can be modified through the <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>parsnip::set_engine()</a></code> function.</p><pre><span class='co'>## function (formula, data, family = gaussian(), prior = NULL, autocor = NULL, </span>
-<span class='co'>##     data2 = NULL, cov_ranef = NULL, sample_prior = "no", sparse = NULL, </span>
-<span class='co'>##     knots = NULL, stanvars = NULL, stan_funs = NULL, fit = NA, save_pars = NULL, </span>
-<span class='co'>##     save_ranef = NULL, save_mevars = NULL, save_all_pars = NULL, inits = "random", </span>
-<span class='co'>##     chains = 4, iter = 2000, warmup = floor(iter/2), thin = 1, cores = getOption("mc.cores", </span>
-<span class='co'>##         1), threads = NULL, normalize = getOption("brms.normalize", TRUE), </span>
-<span class='co'>##     control = NULL, algorithm = getOption("brms.algorithm", "sampling"), </span>
-<span class='co'>##     backend = getOption("brms.backend", "rstan"), future = getOption("future", </span>
-<span class='co'>##         FALSE), silent = 1, seed = NA, save_model = NULL, stan_model_args = list(), </span>
-<span class='co'>##     file = NULL, file_refit = "never", empty = FALSE, rename = TRUE, ...)</span>
+which can be modified through the <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>parsnip::set_engine()</a></code> function.</p><pre><span class='co'>## function (formula, data, family = gaussian(), prior = NULL, autocor = NULL, data2 = NULL, cov_ranef = NULL, sample_prior = "no", </span>
+<span class='co'>##     sparse = NULL, knots = NULL, stanvars = NULL, stan_funs = NULL, fit = NA, save_pars = NULL, save_ranef = NULL, save_mevars = NULL, </span>
+<span class='co'>##     save_all_pars = NULL, inits = "random", chains = 4, iter = 2000, warmup = floor(iter/2), thin = 1, cores = getOption("mc.cores", </span>
+<span class='co'>##         1), threads = NULL, normalize = getOption("brms.normalize", TRUE), control = NULL, algorithm = getOption("brms.algorithm", </span>
+<span class='co'>##         "sampling"), backend = getOption("brms.backend", "rstan"), future = getOption("future", FALSE), silent = 1, seed = NA, save_model = NULL, </span>
+<span class='co'>##     stan_model_args = list(), file = NULL, file_refit = "never", empty = FALSE, rename = TRUE, ...)</span>
 </pre>
 
     <h2 class="hasAnchor" id="fit-details"><a class="anchor" href="#fit-details"></a>Fit Details</h2>
@@ -268,8 +264,8 @@ which can be modified through the <code><a href='https://parsnip.tidymodels.org/
 </div><div class='output co'>#&gt; <span class='message'>frequency = 12 observations per 1 year</span></div><div class='output co'>#&gt; <span class='message'>Compiling Stan program...</span></div><div class='output co'>#&gt; <span class='message'>Start sampling</span></div><div class='output co'>#&gt; 
 #&gt; SAMPLING FOR MODEL '827d50e4850f94b3ae8c23dea39c615d' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000181 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.81 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.000182 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.82 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -286,9 +282,9 @@ which can be modified through the <code><a href='https://parsnip.tidymodels.org/
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 26.2211 seconds (Warm-up)
-#&gt; Chain 1:                26.828 seconds (Sampling)
-#&gt; Chain 1:                53.0491 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 26.2782 seconds (Warm-up)
+#&gt; Chain 1:                26.9416 seconds (Sampling)
+#&gt; Chain 1:                53.2199 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
 #&gt; SAMPLING FOR MODEL '827d50e4850f94b3ae8c23dea39c615d' NOW (CHAIN 2).
@@ -311,9 +307,9 @@ which can be modified through the <code><a href='https://parsnip.tidymodels.org/
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 27.2714 seconds (Warm-up)
-#&gt; Chain 2:                27.0772 seconds (Sampling)
-#&gt; Chain 2:                54.3486 seconds (Total)
+#&gt; Chain 2:  Elapsed Time: 25.5031 seconds (Warm-up)
+#&gt; Chain 2:                24.7101 seconds (Sampling)
+#&gt; Chain 2:                50.2131 seconds (Total)
 #&gt; Chain 2: </div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
