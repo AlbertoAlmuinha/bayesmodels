@@ -300,20 +300,20 @@ The <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></cod
 <span class='co'># Fit Spec</span>
 <span class='va'>model_fit</span> <span class='op'>&lt;-</span> <span class='va'>model_spec</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://generics.r-lib.org/reference/fit.html'>fit</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span> <span class='op'>~</span> <span class='va'>date</span> <span class='op'>+</span> <span class='fu'><a href='http://lubridate.tidyverse.org/reference/month.html'>month</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rsample.tidymodels.org/reference/initial_split.html'>training</a></span><span class='op'>(</span><span class='va'>splits</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>frequency = 12 observations per 1 year</span></div><div class='output co'>#&gt; MCMC Start #-- May 09 16:48:46 --# nbasis: 0 
-#&gt; MCMC iteration 1000 #-- May 09 16:48:47 --# nbasis: 0 
-#&gt; MCMC iteration 2000 #-- May 09 16:48:47 --# nbasis: 0 
-#&gt; MCMC iteration 3000 #-- May 09 16:48:48 --# nbasis: 0 
-#&gt; MCMC iteration 4000 #-- May 09 16:48:49 --# nbasis: 0 
-#&gt; MCMC iteration 5000 #-- May 09 16:48:50 --# nbasis: 0 
-#&gt; MCMC iteration 6000 #-- May 09 16:48:51 --# nbasis: 0 
-#&gt; MCMC iteration 7000 #-- May 09 16:48:51 --# nbasis: 0 
-#&gt; MCMC iteration 8000 #-- May 09 16:48:52 --# nbasis: 0 
-#&gt; MCMC iteration 9000 #-- May 09 16:48:53 --# nbasis: 0 
-#&gt; MCMC iteration 10000 #-- May 09 16:48:54 --# nbasis: 0 </div><div class='input'><span class='va'>model_fit</span>
+</div><div class='output co'>#&gt; <span class='message'>frequency = 12 observations per 1 year</span></div><div class='output co'>#&gt; MCMC Start #-- May 09 18:06:02 --# nbasis: 0 
+#&gt; MCMC iteration 1000 #-- May 09 18:06:03 --# nbasis: 0 
+#&gt; MCMC iteration 2000 #-- May 09 18:06:04 --# nbasis: 0 
+#&gt; MCMC iteration 3000 #-- May 09 18:06:05 --# nbasis: 0 
+#&gt; MCMC iteration 4000 #-- May 09 18:06:05 --# nbasis: 0 
+#&gt; MCMC iteration 5000 #-- May 09 18:06:06 --# nbasis: 0 
+#&gt; MCMC iteration 6000 #-- May 09 18:06:07 --# nbasis: 0 
+#&gt; MCMC iteration 7000 #-- May 09 18:06:07 --# nbasis: 0 
+#&gt; MCMC iteration 8000 #-- May 09 18:06:08 --# nbasis: 0 
+#&gt; MCMC iteration 9000 #-- May 09 18:06:09 --# nbasis: 0 
+#&gt; MCMC iteration 10000 #-- May 09 18:06:09 --# nbasis: 0 </div><div class='input'><span class='va'>model_fit</span>
 </div><div class='output co'>#&gt; parsnip model object
 #&gt; 
-#&gt; Fit time:  8.6s 
+#&gt; Fit time:  7.9s 
 #&gt; 
 #&gt; Call:
 #&gt;  BASS::bass(xx = xreg_matrix, y = outcome, maxInt = maxInt, maxInt.cat = maxInt.cat,      degree = degree, npart = npart) 

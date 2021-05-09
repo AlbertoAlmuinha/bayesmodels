@@ -260,18 +260,16 @@ which can be modified through the <code><a href='https://parsnip.tidymodels.org/
 <span class='va'>m750_train</span>  <span class='op'>&lt;-</span> <span class='va'>m750_extended</span> <span class='op'>%&gt;%</span> <span class='fu'>drop_na</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>m750_future</span> <span class='op'>&lt;-</span> <span class='va'>m750_extended</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='va'>model_fit_gam</span> <span class='op'>&lt;-</span> <span class='fu'>gen_additive_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<span class='va'>model_fit_gam</span> <span class='op'>&lt;-</span> <span class='fu'>gen_additive_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span>, markov_chains <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"stan"</span>, family<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/family.html'>Gamma</a></span><span class='op'>(</span>link<span class='op'>=</span><span class='st'>"log"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://generics.r-lib.org/reference/fit.html'>fit</a></span><span class='op'>(</span><span class='va'>value</span> <span class='op'>~</span>  <span class='va'>date</span> <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>date_month</span>, k <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
-        <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>date_num</span><span class='op'>)</span>
-        <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>lag_24</span><span class='op'>)</span>
-        <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>date_num</span>, <span class='va'>date_month</span><span class='op'>)</span>,
+        <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>lag_24</span><span class='op'>)</span>,
         data <span class='op'>=</span> <span class='va'>m750_train</span><span class='op'>)</span> 
 </div><div class='output co'>#&gt; <span class='message'>frequency = 12 observations per 1 year</span></div><div class='output co'>#&gt; <span class='message'>Compiling Stan program...</span></div><div class='output co'>#&gt; <span class='message'>Start sampling</span></div><div class='output co'>#&gt; 
-#&gt; SAMPLING FOR MODEL '786e34aa061e8138358d8448cc97a00e' NOW (CHAIN 1).
+#&gt; SAMPLING FOR MODEL '827d50e4850f94b3ae8c23dea39c615d' NOW (CHAIN 1).
 #&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0.000346 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 3.46 seconds.
+#&gt; Chain 1: Gradient evaluation took 0.00019 seconds
+#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.9 seconds.
 #&gt; Chain 1: Adjust your expectations accordingly!
 #&gt; Chain 1: 
 #&gt; Chain 1: 
@@ -288,15 +286,15 @@ which can be modified through the <code><a href='https://parsnip.tidymodels.org/
 #&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 152.463 seconds (Warm-up)
-#&gt; Chain 1:                162.541 seconds (Sampling)
-#&gt; Chain 1:                315.005 seconds (Total)
+#&gt; Chain 1:  Elapsed Time: 28.8837 seconds (Warm-up)
+#&gt; Chain 1:                29.6837 seconds (Sampling)
+#&gt; Chain 1:                58.5674 seconds (Total)
 #&gt; Chain 1: 
 #&gt; 
-#&gt; SAMPLING FOR MODEL '786e34aa061e8138358d8448cc97a00e' NOW (CHAIN 2).
+#&gt; SAMPLING FOR MODEL '827d50e4850f94b3ae8c23dea39c615d' NOW (CHAIN 2).
 #&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0.000177 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.77 seconds.
+#&gt; Chain 2: Gradient evaluation took 9.1e-05 seconds
+#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.91 seconds.
 #&gt; Chain 2: Adjust your expectations accordingly!
 #&gt; Chain 2: 
 #&gt; Chain 2: 
@@ -313,63 +311,10 @@ which can be modified through the <code><a href='https://parsnip.tidymodels.org/
 #&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 #&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 #&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 155.772 seconds (Warm-up)
-#&gt; Chain 2:                164.716 seconds (Sampling)
-#&gt; Chain 2:                320.488 seconds (Total)
-#&gt; Chain 2: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL '786e34aa061e8138358d8448cc97a00e' NOW (CHAIN 3).
-#&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0.000206 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 2.06 seconds.
-#&gt; Chain 3: Adjust your expectations accordingly!
-#&gt; Chain 3: 
-#&gt; Chain 3: 
-#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 157.481 seconds (Warm-up)
-#&gt; Chain 3:                162.961 seconds (Sampling)
-#&gt; Chain 3:                320.442 seconds (Total)
-#&gt; Chain 3: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL '786e34aa061e8138358d8448cc97a00e' NOW (CHAIN 4).
-#&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0.000157 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 1.57 seconds.
-#&gt; Chain 4: Adjust your expectations accordingly!
-#&gt; Chain 4: 
-#&gt; Chain 4: 
-#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 157.731 seconds (Warm-up)
-#&gt; Chain 4:                159.88 seconds (Sampling)
-#&gt; Chain 4:                317.61 seconds (Total)
-#&gt; Chain 4: </div><div class='output co'>#&gt; <span class='warning'>Warning: There were 400 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Examine the pairs() plot to diagnose sampling problems</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 3.16, indicating chains have not mixed.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
+#&gt; Chain 2:  Elapsed Time: 28.9341 seconds (Warm-up)
+#&gt; Chain 2:                29.7441 seconds (Sampling)
+#&gt; Chain 2:                58.6782 seconds (Total)
+#&gt; Chain 2: </div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
 #&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
 #&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
