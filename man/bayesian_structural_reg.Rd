@@ -13,6 +13,9 @@ The only possible value for this model is "regression".}
 \item{distribution}{The model family for the observation equation.
 Non-Gaussian model families use data augmentation to recover a conditionally Gaussian model.}
 }
+\value{
+A model spec
+}
 \description{
 \code{bayesian_structural_reg()} is a way to generate a \emph{specification} of a Bayesian Structural Time Series Model
 before fitting and allows the model to be created using

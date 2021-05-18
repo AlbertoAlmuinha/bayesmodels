@@ -13,6 +13,13 @@ damped_model()
 
 seasonal_model()
 }
+\value{
+A parameter
+
+A parameter
+
+A parameter
+}
 \description{
 Tuning Parameters for Additive Linear State Space Regression Models
 }

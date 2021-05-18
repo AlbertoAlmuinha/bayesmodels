@@ -26,6 +26,9 @@ Defaults to the number of predictors, which could result in overfitting.}
 \item{min_basis_points}{minimum number of non-zero points in a basis function. If the response is functional, this refers only to the portion of the basis function coming from the non-functional predictors.
 Defaults to 20 or 0.1 times the number of observations, whichever is smaller.}
 }
+\value{
+A model spec
+}
 \description{
 \code{adaptive_spline()} is a way to generate a \emph{specification} of an Adaptive Spline Surface model
 before fitting and allows the model to be created using

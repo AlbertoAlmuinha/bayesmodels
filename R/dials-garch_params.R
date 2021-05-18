@@ -30,6 +30,7 @@
 #' @name garch_params
 
 #' @export
+#' @return A parameter
 #' @rdname garch_params
 garch_order <- function(range = c(0L, 3L), trans = NULL) {
     dials::new_quant_param(
@@ -43,6 +44,7 @@ garch_order <- function(range = c(0L, 3L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname garch_params
 arch_order <- function(range = c(0L, 3L), trans = NULL) {
     dials::new_quant_param(
@@ -56,6 +58,7 @@ arch_order <- function(range = c(0L, 3L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname garch_params
 mgarch_order <- function(range = c(0L, 3L), trans = NULL) {
     dials::new_quant_param(
@@ -69,6 +72,7 @@ mgarch_order <- function(range = c(0L, 3L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname garch_params
 garch_t_student <- function() {
     dials::new_qual_param(
@@ -81,6 +85,7 @@ garch_t_student <- function() {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname garch_params
 asymmetry <- function() {
     dials::new_qual_param(

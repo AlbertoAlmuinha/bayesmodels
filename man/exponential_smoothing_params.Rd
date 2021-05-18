@@ -13,6 +13,13 @@ method()
 
 error_method()
 }
+\value{
+A parameter
+
+A parameter
+
+A parameter
+}
 \description{
 Tuning Parameters for Exponential Smoothing Models
 }

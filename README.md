@@ -27,10 +27,10 @@ Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bayesmodels?color=bright
 
 ## Installation
 
-CRAN version (not yet)
+CRAN version
 
 ``` r
-#install.packages("bayesmodels")
+install.packages("bayesmodels")
 ```
 
 Development version:

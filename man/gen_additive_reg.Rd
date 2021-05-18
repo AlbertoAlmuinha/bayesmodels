@@ -27,6 +27,8 @@ The number of warmup should not be larger than iter and the default is iter/2.}
 }
 \value{
 A \code{parsnip} model specification
+
+A model spec
 }
 \description{
 Interface for Generalized Additive Models (GAM)

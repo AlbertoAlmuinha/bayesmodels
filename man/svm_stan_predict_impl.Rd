@@ -13,6 +13,9 @@ svm_stan_predict_impl(object, new_data, ...)
 
 \item{...}{Additional arguments passed to \code{forecast::Arima()}}
 }
+\value{
+A prediction
+}
 \description{
 Bridge prediction function for ARIMA models
 }

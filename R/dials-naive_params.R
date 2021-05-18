@@ -16,6 +16,7 @@
 #' @name naive_params
 
 #' @export
+#' @return A parameter
 #' @rdname naive_params
 seasonal_random_walk <- function() {
     dials::new_qual_param(

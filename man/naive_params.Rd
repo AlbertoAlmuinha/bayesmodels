@@ -7,6 +7,9 @@
 \usage{
 seasonal_random_walk()
 }
+\value{
+A parameter
+}
 \description{
 Tuning Parameters for Random Walk Models
 }

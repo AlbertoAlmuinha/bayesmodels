@@ -37,10 +37,10 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-CRAN version (not yet)
+CRAN version 
 
 ``` r
-#install.packages("bayesmodels")
+install.packages("bayesmodels")
 ```
 
 Development version:

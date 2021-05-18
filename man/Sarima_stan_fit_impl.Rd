@@ -57,6 +57,9 @@ of "auto" or time-based phrase of "2 weeks" can be used if a date or date-time v
 
 \item{...}{Additional arguments passed to \code{forecast::Arima}}
 }
+\value{
+A modeltime model
+}
 \description{
 Low-Level ARIMA function for translating modeltime to forecast
 }

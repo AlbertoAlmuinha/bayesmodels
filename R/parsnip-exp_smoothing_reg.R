@@ -97,6 +97,8 @@
 #'
 #'
 #' @seealso [fit.model_spec()], [set_engine()]
+#' 
+#' @return A model spec
 #'
 #' @examples
 #' \dontrun{
@@ -232,6 +234,8 @@ translate.exponential_smoothing <- function(x, engine = x$engine, ...) {
 #' @param error.size.method Either "std" (monotonically, but slower than proportionally, 
 #' growing with the series values) or "innov" (proportional to a smoothed abs size of innovations, i.e. surprises)
 #' @param ... Additional arguments passed to `forecast::Arima`
+#' 
+#' @return A modeltime model
 #'
 #' @export
 exp_smoothing_stan_fit_impl <- function(x, y, seasonality = 1, seasonality2 = 1, seasonality.type = "multiplicative", 
@@ -342,6 +346,8 @@ predict.exp_smoothing_stan_fit_impl <- function(object, new_data, ...) {
 #'
 #' @inheritParams parsnip::predict.model_fit
 #' @param ... Additional arguments passed to `forecast::Arima()`
+#' 
+#' @return A prediction
 #'
 #' @export
 exp_smoothing_stan_predict_impl <- function(object, new_data, ...) {

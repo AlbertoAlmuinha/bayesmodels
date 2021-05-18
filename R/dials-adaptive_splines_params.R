@@ -23,6 +23,7 @@
 
 
 #' @export
+#' @return A parameter
 #' @rdname adaptive_splines_params
 splines_degree <- function(range = c(0L, 5L), trans = NULL) {
     dials::new_quant_param(
@@ -36,6 +37,7 @@ splines_degree <- function(range = c(0L, 5L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname adaptive_splines_params
 max_degree <- function(range = c(0L, 5L), trans = NULL) {
     dials::new_quant_param(
@@ -49,6 +51,7 @@ max_degree <- function(range = c(0L, 5L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname adaptive_splines_params
 max_categorical_degree <- function(range = c(0L, 5L), trans = NULL) {
     dials::new_quant_param(
@@ -62,6 +65,7 @@ max_categorical_degree <- function(range = c(0L, 5L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname adaptive_splines_params
 min_basis_points <- function(range = c(0L, 1000L), trans = NULL) {
     dials::new_quant_param(

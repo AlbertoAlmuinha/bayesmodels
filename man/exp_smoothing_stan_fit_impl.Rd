@@ -34,6 +34,9 @@ growing with the series values) or "innov" (proportional to a smoothed abs size 
 
 \item{...}{Additional arguments passed to \code{forecast::Arima}}
 }
+\value{
+A modeltime model
+}
 \description{
 Low-Level ARIMA function for translating modeltime to forecast
 }

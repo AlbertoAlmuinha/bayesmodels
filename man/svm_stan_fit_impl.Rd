@@ -41,6 +41,9 @@ svm_stan_fit_impl(
 
 \item{...}{Additional arguments passed to \code{forecast::Arima}}
 }
+\value{
+A modeltime model
+}
 \description{
 Low-Level ARIMA function for translating modeltime to forecast
 }

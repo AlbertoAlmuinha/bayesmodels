@@ -28,6 +28,17 @@ largest possible values, respectively.}
 the default is used which matches the units used in \code{range}. If no
 transformation, \code{NULL}.}
 }
+\value{
+A parameter
+
+A parameter
+
+A parameter
+
+A parameter
+
+A parameter
+}
 \description{
 Tuning Parameters for GARCHA Models
 }

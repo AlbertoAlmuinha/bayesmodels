@@ -33,6 +33,9 @@ average of HW and seasAvg methods.}
 \item{error_method}{Function providing size of the error. Either "std" (monotonically, but slower than proportionally,
 growing with the series values) or "innov" (proportional to a smoothed abs size of innovations, i.e. surprises)}
 }
+\value{
+A model spec
+}
 \description{
 \code{exponential_smoothing()} is a way to generate a \emph{specification} of an ETS model
 before fitting and allows the model to be created using

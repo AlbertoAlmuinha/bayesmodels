@@ -75,6 +75,8 @@
 #'
 #'
 #' @seealso [fit.model_spec()], [set_engine()]
+#' 
+#' @return A model spec
 #'
 #' @examples
 #' \dontrun{
@@ -198,6 +200,8 @@ translate.bayesian_structural_reg <- function(x, engine = x$engine, ...) {
 #' @param family The model family for the observation equation. 
 #' Non-Gaussian model families use data augmentation to recover a conditionally Gaussian model.
 #' @param ... Additional arguments passed to `forecast::Arima`
+#' 
+#' @return A modeltime model
 #'
 #' @export
 bayesian_structural_stan_fit_impl <- function(formula, data, family = "gaussian",  ...) {
@@ -269,6 +273,8 @@ predict.bayesian_structural_stan_fit_impl <- function(object, new_data, ...) {
 #'
 #' @inheritParams parsnip::predict.model_fit
 #' @param ... Additional arguments passed to `forecast::Arima()`
+#' 
+#' @return A prediction
 #'
 #' @export
 bayesian_structural_stan_predict_impl <- function(object, new_data, ...) {

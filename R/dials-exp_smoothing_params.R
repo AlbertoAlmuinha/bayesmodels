@@ -30,6 +30,7 @@
 #' @name exponential_smoothing_params
 
 #' @export
+#' @return A parameter
 #' @rdname exponential_smoothing_params
 seasonality_type <- function() {
     dials::new_qual_param(
@@ -42,6 +43,7 @@ seasonality_type <- function() {
 
 
 #' @export
+#' @return A parameter
 #' @rdname exponential_smoothing_params
 method <- function() {
     dials::new_qual_param(
@@ -53,6 +55,7 @@ method <- function() {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname exponential_smoothing_params
 error_method <- function() {
     dials::new_qual_param(

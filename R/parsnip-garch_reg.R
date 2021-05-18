@@ -136,6 +136,8 @@
 #'
 #'
 #' @seealso [fit.model_spec()], [set_engine()]
+#' 
+#' @return A model spec
 #'
 #' @examples
 #' \dontrun{
@@ -315,6 +317,8 @@ translate.garch_reg <- function(x, engine = x$engine, ...) {
 #' @param tree.depth An integer of the maximum depth of the trees evaluated during each iteration. By default is 10.
 #' @param seed An integer with the seed for using when predicting with the model.
 #' @param ... Additional arguments passed to `forecast::Arima`
+#' 
+#' @return A modeltime model
 #'
 #' @export
 garch_stan_fit_impl <- function(x, y, s = 1, k = 1, h = 1, p = 0, q = 0, genT = FALSE, asym = "none",
@@ -417,6 +421,8 @@ predict.garch_stan_fit_impl <- function(object, new_data, ...) {
 #'
 #' @inheritParams parsnip::predict.model_fit
 #' @param ... Additional arguments passed to `forecast::Arima()`
+#' 
+#' @return A prediction
 #'
 #' @export
 garch_stan_predict_impl <- function(object, new_data, ...) {

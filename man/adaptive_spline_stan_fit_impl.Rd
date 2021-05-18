@@ -29,6 +29,9 @@ adaptive_spline_stan_fit_impl(
 
 \item{...}{Extra arguments}
 }
+\value{
+A modeltime model
+}
 \description{
 Low-Level ARIMA function for translating modeltime to forecast
 }

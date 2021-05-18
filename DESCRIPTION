@@ -5,13 +5,12 @@ Authors@R: c(
     person("Alberto", "Almuiña", email = "albertogonzalezalmuinha@gmail.com", role = c("aut", "cre"))
     )
 Description: Bayesian framework for use with the 'tidymodels' ecosystem. Includes the following models: Sarima, Garch, 
-    Random walk (naive), Additive Linear State Space Models, Stochastic Volatily Models from 'bayesforecast' package,
+    Random walk (naive), Additive Linear State Space Models, Stochastic Volatility Models from 'bayesforecast' package,
     Adaptive Splines Surfaces from 'BASS' package and ETS from 'Rlgt' package.
 URL: https://github.com/AlbertoAlmuinha/bayesmodels
 BugReports: https://github.com/AlbertoAlmuinha/bayesmodels/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 Depends:
     R (>= 4.0.0),
     parsnip,
@@ -34,9 +33,7 @@ Imports:
     rsample,
     workflows,
     modeltime,
-    timetk,
-    BH,
-    RcppEigen
+    timetk
 Suggests: 
     tidymodels,
     tidyverse,

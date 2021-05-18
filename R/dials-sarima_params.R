@@ -28,6 +28,7 @@
 
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 non_seasonal_ar <- function(range = c(0L, 5L), trans = NULL) {
     dials::new_quant_param(
@@ -41,6 +42,7 @@ non_seasonal_ar <- function(range = c(0L, 5L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 non_seasonal_differences <- function(range = c(0L, 2L), trans = NULL) {
     dials::new_quant_param(
@@ -54,6 +56,7 @@ non_seasonal_differences <- function(range = c(0L, 2L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 non_seasonal_ma <- function(range = c(0L, 5L), trans = NULL) {
     dials::new_quant_param(
@@ -67,6 +70,7 @@ non_seasonal_ma <- function(range = c(0L, 5L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 seasonal_ar <- function(range = c(0L, 2L), trans = NULL) {
     dials::new_quant_param(
@@ -80,6 +84,7 @@ seasonal_ar <- function(range = c(0L, 2L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 seasonal_differences <- function(range = c(0L, 1L), trans = NULL) {
     dials::new_quant_param(
@@ -93,6 +98,7 @@ seasonal_differences <- function(range = c(0L, 1L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 seasonal_ma <- function(range = c(0L, 2L), trans = NULL) {
     dials::new_quant_param(
@@ -106,6 +112,7 @@ seasonal_ma <- function(range = c(0L, 2L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 markov_chains <- function(range = c(0L, 8L), trans = NULL) {
     dials::new_quant_param(
@@ -119,6 +126,7 @@ markov_chains <- function(range = c(0L, 8L), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 adapt_delta <- function(range = c(0, 1), trans = NULL) {
     dials::new_quant_param(
@@ -132,6 +140,7 @@ adapt_delta <- function(range = c(0, 1), trans = NULL) {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname sarima_params
 tree_depth <- function(range = c(0L, 100L), trans = NULL) {
     dials::new_quant_param(

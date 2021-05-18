@@ -23,7 +23,8 @@
 #'
 #' @name ssm_params
 
-#' @export
+#' @
+#' @return A parameter
 #' @rdname ssm_params
 trend_model <- function() {
     dials::new_qual_param(
@@ -36,6 +37,7 @@ trend_model <- function() {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname ssm_params
 damped_model <- function() {
     dials::new_qual_param(
@@ -48,6 +50,7 @@ damped_model <- function() {
 }
 
 #' @export
+#' @return A parameter
 #' @rdname ssm_params
 seasonal_model <- function() {
     dials::new_qual_param(

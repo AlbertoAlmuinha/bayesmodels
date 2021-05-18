@@ -43,7 +43,7 @@
 #' ``` r
 #' fit(value ~ s(date_mon, k = 12) + s(date_num), data = df)
 #' ```
-#' 
+#' @return A model spec
 #' 
 #' @examples 
 #' 
@@ -179,6 +179,8 @@ translate.gen_additive_reg <- function(x, engine = x$engine, ...) {
 #' @param iter An integer of total iterations per chain including the warm-up, by default the number of iterations are 2000.
 #' @param warmup A positive integer specifying number of warm-up (aka burn-in) iterations. This also specifies the number of iterations used for step-size adaptation, so warm-up samples should not be used for inference. The number of warmup should not be larger than iter and the default is iter/2.
 #' @param ... Additional arguments passed to `forecast::Arima`
+#' 
+#' @return A modeltime model
 #'
 #' @export
 gen_additive_stan_fit_impl <- function(formula, data, chains = 4, iter = 2000, warmup = 1000, ...) {
@@ -278,6 +280,8 @@ predict.gen_additive_stan_fit_impl <- function(object, new_data, ...) {
 #'
 #' @inheritParams parsnip::predict.model_fit
 #' @param ... Additional arguments passed to `forecast::Arima()`
+#' 
+#' @return A prediction
 #'
 #' @export
 gen_additive_stan_predict_impl <- function(object, new_data, ...) {

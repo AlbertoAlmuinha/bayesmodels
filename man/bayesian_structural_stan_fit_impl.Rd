@@ -16,6 +16,9 @@ Non-Gaussian model families use data augmentation to recover a conditionally Gau
 
 \item{...}{Additional arguments passed to \code{forecast::Arima}}
 }
+\value{
+A modeltime model
+}
 \description{
 Low-Level ARIMA function for translating modeltime to forecast
 }

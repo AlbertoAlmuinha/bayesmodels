@@ -53,6 +53,9 @@ value "none" for standard GARCH process. If "logit" a logistic function is used 
 
 \item{pred_seed}{An integer with the seed for using when predicting with the model.}
 }
+\value{
+A model spec
+}
 \description{
 \code{garch_reg()} is a way to generate a \emph{specification} of a GARCH model
 before fitting and allows the model to be created using

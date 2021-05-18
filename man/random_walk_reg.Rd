@@ -36,6 +36,9 @@ The only possible value for this model is "regression".}
 
 \item{pred_seed}{An integer with the seed for using when predicting with the model.}
 }
+\value{
+A model spec
+}
 \description{
 \code{random_walk_reg()} is a way to generate a \emph{specification} of Naive and Random Walk models
 before fitting and allows the model to be created using

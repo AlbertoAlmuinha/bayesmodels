@@ -54,6 +54,9 @@ See Fit Details below.}
 
 \item{pred_seed}{An integer with the seed for using when predicting with the model.}
 }
+\value{
+A model spec
+}
 \description{
 \code{sarima_reg()} is a way to generate a \emph{specification} of an ARIMA model
 before fitting and allows the model to be created using
