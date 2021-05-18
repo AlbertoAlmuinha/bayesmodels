@@ -33,7 +33,10 @@ Imports:
     rsample,
     workflows,
     modeltime,
-    timetk
+    timetk,
+    cli,
+    crayon,
+    rstudioapi
 Suggests: 
     tidymodels,
     tidyverse,

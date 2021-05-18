@@ -45,12 +45,16 @@ Interface for Generalized Additive Models (GAM)
 \strong{stan}
 
 This engine uses \code{\link[brms:brm]{brms::brm()}} and has the following parameters,
-which can be modified through the \code{\link[parsnip:set_engine]{parsnip::set_engine()}} function.\preformatted{## function (formula, data, family = gaussian(), prior = NULL, autocor = NULL, data2 = NULL, cov_ranef = NULL, sample_prior = "no", 
-##     sparse = NULL, knots = NULL, stanvars = NULL, stan_funs = NULL, fit = NA, save_pars = NULL, save_ranef = NULL, save_mevars = NULL, 
-##     save_all_pars = NULL, inits = "random", chains = 4, iter = 2000, warmup = floor(iter/2), thin = 1, cores = getOption("mc.cores", 
-##         1), threads = NULL, normalize = getOption("brms.normalize", TRUE), control = NULL, algorithm = getOption("brms.algorithm", 
-##         "sampling"), backend = getOption("brms.backend", "rstan"), future = getOption("future", FALSE), silent = 1, seed = NA, save_model = NULL, 
-##     stan_model_args = list(), file = NULL, file_refit = "never", empty = FALSE, rename = TRUE, ...)
+which can be modified through the \code{\link[parsnip:set_engine]{parsnip::set_engine()}} function.\preformatted{## function (formula, data, family = gaussian(), prior = NULL, autocor = NULL, 
+##     data2 = NULL, cov_ranef = NULL, sample_prior = "no", sparse = NULL, 
+##     knots = NULL, stanvars = NULL, stan_funs = NULL, fit = NA, save_pars = NULL, 
+##     save_ranef = NULL, save_mevars = NULL, save_all_pars = NULL, inits = "random", 
+##     chains = 4, iter = 2000, warmup = floor(iter/2), thin = 1, cores = getOption("mc.cores", 
+##         1), threads = NULL, normalize = getOption("brms.normalize", TRUE), 
+##     control = NULL, algorithm = getOption("brms.algorithm", "sampling"), 
+##     backend = getOption("brms.backend", "rstan"), future = getOption("future", 
+##         FALSE), silent = 1, seed = NA, save_model = NULL, stan_model_args = list(), 
+##     file = NULL, file_refit = "never", empty = FALSE, rename = TRUE, ...)
 }
 }
 

@@ -35,7 +35,6 @@ The main parameters for Additive Linear State Space Regression Models are:
 }
 }
 \examples{
-trend_model()
 
 damped_model()
 
