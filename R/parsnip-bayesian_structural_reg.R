@@ -220,6 +220,24 @@ bayesian_structural_stan_fit_impl <- function(formula, data, family = "gaussian"
         
     }
     
+    y <- all.vars(formula)[1]
+    x <- attr(stats::terms(formula, data = data), "term.labels")
+    
+    predictors <- data %>% dplyr::select(dplyr::all_of(x))
+    
+    # INDEX 
+    # Determine Index Col
+    index_tbl <- modeltime::parse_index_from_data(predictors)
+    idx_col   <- names(index_tbl)
+    
+    x <- dplyr::setdiff(x, idx_col)
+    
+    if (length(x)==0){
+        formula <- as.vector(purrr::as_vector(data[, y]))
+    } else {
+        formula <- stats::reformulate(termlabels = x, response = y)   
+    }
+    
     args[["formula"]] <- formula
     args[["data"]] <- data
     

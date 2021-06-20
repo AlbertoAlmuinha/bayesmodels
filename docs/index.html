@@ -13,7 +13,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="The Tidymodels Extension for Bayesian Models ">
 <meta property="og:description" content="Bayesian framework for use with the tidymodels ecosystem. Includes the following models: Sarima, Garch, 
-    Random walk (naive), Additive Linear State Space Models, Stochastic Volatily Models from bayesforecast package,
+    Random walk (naive), Additive Linear State Space Models, Stochastic Volatility Models from bayesforecast package,
     Adaptive Splines Surfaces from BASS package and ETS from Rlgt package.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -88,7 +88,7 @@
 <a href="#bayesmodels" class="anchor"></a>bayesmodels</h1></div>
 <p><img src="articles/logo-bayesmodels.png" width="147" height="170" align="right"></p>
 <!-- badges: start -->
-<p><a href="https://CRAN.R-project.org/package=bayesmodels"><img src="https://www.r-pkg.org/badges/version/bayesmodels" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=bayesmodels"><img src="http://cranlogs.r-pkg.org/badges/grand-total/bayesmodels?color=brightgreen" alt="Total Downloads"></a> <img src="http://cranlogs.r-pkg.org/badges/bayesmodels?color=brightgreen"><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle:maturing"></a> <a href="https://github.com/AlbertoAlmuinha/bayesmodels/actions"><img src="https://github.com/AlbertoAlmuinha/bayesmodels/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <!-- badges: end --></p>
+<p><a href="https://CRAN.R-project.org/package=bayesmodels"><img src="https://www.r-pkg.org/badges/version/bayesmodels" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=bayesmodels"><img src="http://cranlogs.r-pkg.org/badges/grand-total/bayesmodels?color=brightgreen" alt="Total Downloads"></a> <img src="http://cranlogs.r-pkg.org/badges/bayesmodels?color=brightgreen"><a href="https://codecov.io/gh/AlbertoAlmuinha/bayesmodels"><img src="https://codecov.io/gh/AlbertoAlmuinha/bayesmodels/branch/master/graph/badge.svg?token=0OXB8WLRJX" alt="codecov"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle:maturing"></a> <a href="https://github.com/AlbertoAlmuinha/bayesmodels/actions"><img src="https://github.com/AlbertoAlmuinha/bayesmodels/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <!-- badges: end --></p>
 <blockquote>
 <p>A parsnip backend for <code>Bayesian</code> models in the <code>tidymodels</code> framework.</p>
 </blockquote>
@@ -103,9 +103,9 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>CRAN version (not yet)</p>
+<p>CRAN version</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#install.packages("bayesmodels")</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bayesmodels"</span><span class="op">)</span></code></pre></div>
 <p>Development version:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
@@ -137,6 +137,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=bayesmodels">https://​cloud.r-project.org/​package=bayesmodels</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/AlbertoAlmuinha/bayesmodels/">https://​github.com/​AlbertoAlmuinha/​bayesmodels/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/AlbertoAlmuinha/bayesmodels/issues">https://​github.com/​AlbertoAlmuinha/​bayesmodels/​issues</a>

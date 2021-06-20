@@ -170,6 +170,7 @@ The number of warmup should not be larger than iter and the default is iter/2.</
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code>parsnip</code> model specification</p>
+<p>A model spec</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><strong>Available Engines:</strong></p><ul>
@@ -183,16 +184,12 @@ The number of warmup should not be larger than iter and the default is iter/2.</
 
 <p><strong>stan</strong></p>
 <p>This engine uses <code><a href='https://rdrr.io/pkg/brms/man/brm.html'>brms::brm()</a></code> and has the following parameters,
-which can be modified through the <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>parsnip::set_engine()</a></code> function.</p><pre><span class='co'>## function (formula, data, family = gaussian(), prior = NULL, autocor = NULL, </span>
-<span class='co'>##     data2 = NULL, cov_ranef = NULL, sample_prior = "no", sparse = NULL, </span>
-<span class='co'>##     knots = NULL, stanvars = NULL, stan_funs = NULL, fit = NA, save_pars = NULL, </span>
-<span class='co'>##     save_ranef = NULL, save_mevars = NULL, save_all_pars = NULL, inits = "random", </span>
-<span class='co'>##     chains = 4, iter = 2000, warmup = floor(iter/2), thin = 1, cores = getOption("mc.cores", </span>
-<span class='co'>##         1), threads = NULL, normalize = getOption("brms.normalize", TRUE), </span>
-<span class='co'>##     control = NULL, algorithm = getOption("brms.algorithm", "sampling"), </span>
-<span class='co'>##     backend = getOption("brms.backend", "rstan"), future = getOption("future", </span>
-<span class='co'>##         FALSE), silent = 1, seed = NA, save_model = NULL, stan_model_args = list(), </span>
-<span class='co'>##     file = NULL, file_refit = "never", empty = FALSE, rename = TRUE, ...)</span>
+which can be modified through the <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>parsnip::set_engine()</a></code> function.</p><pre><span class='co'>## function (formula, data, family = gaussian(), prior = NULL, autocor = NULL, data2 = NULL, cov_ranef = NULL, sample_prior = "no", </span>
+<span class='co'>##     sparse = NULL, knots = NULL, stanvars = NULL, stan_funs = NULL, fit = NA, save_pars = NULL, save_ranef = NULL, save_mevars = NULL, </span>
+<span class='co'>##     save_all_pars = NULL, inits = "random", chains = 4, iter = 2000, warmup = floor(iter/2), thin = 1, cores = getOption("mc.cores", </span>
+<span class='co'>##         1), threads = NULL, normalize = getOption("brms.normalize", TRUE), control = NULL, algorithm = getOption("brms.algorithm", </span>
+<span class='co'>##         "sampling"), backend = getOption("brms.backend", "rstan"), future = getOption("future", FALSE), silent = 1, seed = NA, save_model = NULL, </span>
+<span class='co'>##     stan_model_args = list(), file = NULL, file_refit = "never", empty = FALSE, rename = TRUE, ...)</span>
 </pre>
 
     <h2 class="hasAnchor" id="fit-details"><a class="anchor" href="#fit-details"></a>Fit Details</h2>
@@ -211,40 +208,12 @@ which can be modified through the <code><a href='https://parsnip.tidymodels.org/
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'># \donttest{</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>-- <span style='font-weight: bold;'>Attaching packages</span><span> -------------------------------------- tidymodels 0.1.2 --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>broom    </span><span> 0.7.2      </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>recipes  </span><span> 0.1.15</span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>dials    </span><span> 0.0.9      </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tibble   </span><span> 3.1.0 </span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>ggplot2  </span><span> 3.3.3      </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tidyr    </span><span> 1.1.3 </span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>infer    </span><span> 0.5.3      </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tune     </span><span> 0.1.3 </span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>modeldata</span><span> 0.1.0      </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>workflows</span><span> 0.2.2 </span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>purrr    </span><span> 0.3.4      </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>yardstick</span><span> 0.0.8 </span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'tibble' was built under R version 4.0.4</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'tidyr' was built under R version 4.0.4</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'tune' was built under R version 4.0.4</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'workflows' was built under R version 4.0.4</span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> ----------------------------------------- tidymodels_conflicts() --</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>purrr</span><span>::</span><span style='color: #00BB00;'>discard()</span><span>    masks </span><span style='color: #0000BB;'>scales</span><span>::discard()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span>     masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>first()</span><span>      masks </span><span style='color: #0000BB;'>xts</span><span>::first()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>lag()</span><span>        masks </span><span style='color: #0000BB;'>stats</span><span>::lag()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>last()</span><span>       masks </span><span style='color: #0000BB;'>xts</span><span>::last()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>select()</span><span>     masks </span><span style='color: #0000BB;'>MASS</span><span>::select()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>recipes</span><span>::</span><span style='color: #00BB00;'>step()</span><span>     masks </span><span style='color: #0000BB;'>stats</span><span>::step()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dials</span><span>::</span><span style='color: #00BB00;'>tree_depth()</span><span> masks </span><span style='color: #0000BB;'>bayesmodels</span><span>::tree_depth()</span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/AlbertoAlmuinha/bayesmodels'>bayesmodels</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/AlbertoAlmuinha/bayesmodels'>bayesmodels</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/modeltime'>modeltime</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Attaching packages</span><span> --------------------------------------- tidyverse 1.3.0 --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.4.0     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.5.1</span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>stringr</span><span> 1.4.0     </span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'forcats' was built under R version 4.0.4</span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> ------------------------------------------ tidyverse_conflicts() --</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>lubridate</span><span>::</span><span style='color: #00BB00;'>as.difftime()</span><span> masks </span><span style='color: #0000BB;'>base</span><span>::as.difftime()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>readr</span><span>::</span><span style='color: #00BB00;'>col_factor()</span><span>      masks </span><span style='color: #0000BB;'>scales</span><span>::col_factor()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>lubridate</span><span>::</span><span style='color: #00BB00;'>date()</span><span>        masks </span><span style='color: #0000BB;'>base</span><span>::date()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>purrr</span><span>::</span><span style='color: #00BB00;'>discard()</span><span>         masks </span><span style='color: #0000BB;'>scales</span><span>::discard()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span>          masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>first()</span><span>           masks </span><span style='color: #0000BB;'>xts</span><span>::first()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>stringr</span><span>::</span><span style='color: #00BB00;'>fixed()</span><span>         masks </span><span style='color: #0000BB;'>recipes</span><span>::fixed()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>lubridate</span><span>::</span><span style='color: #00BB00;'>intersect()</span><span>   masks </span><span style='color: #0000BB;'>base</span><span>::intersect()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>lag()</span><span>             masks </span><span style='color: #0000BB;'>stats</span><span>::lag()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>last()</span><span>            masks </span><span style='color: #0000BB;'>xts</span><span>::last()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>select()</span><span>          masks </span><span style='color: #0000BB;'>MASS</span><span>::select()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>lubridate</span><span>::</span><span style='color: #00BB00;'>setdiff()</span><span>     masks </span><span style='color: #0000BB;'>base</span><span>::setdiff()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>readr</span><span>::</span><span style='color: #00BB00;'>spec()</span><span>            masks </span><span style='color: #0000BB;'>yardstick</span><span>::spec()</span>
-#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>lubridate</span><span>::</span><span style='color: #00BB00;'>union()</span><span>       masks </span><span style='color: #0000BB;'>base</span><span>::union()</span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/timetk'>timetk</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/timetk'>timetk</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
 
 <span class='va'>m750_extended</span> <span class='op'>&lt;-</span> <span class='va'>m750</span> <span class='op'>%&gt;%</span>
@@ -254,125 +223,17 @@ which can be modified through the <code><a href='https://parsnip.tidymodels.org/
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>ungroup</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>date_num <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>date_month <span class='op'>=</span> <span class='fu'><a href='http://lubridate.tidyverse.org/reference/month.html'>month</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>.date_var is missing. Using: date</span></div><div class='input'>
+
 <span class='va'>m750_train</span>  <span class='op'>&lt;-</span> <span class='va'>m750_extended</span> <span class='op'>%&gt;%</span> <span class='fu'>drop_na</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>m750_future</span> <span class='op'>&lt;-</span> <span class='va'>m750_extended</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='va'>model_fit_gam</span> <span class='op'>&lt;-</span> <span class='fu'>gen_additive_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<span class='va'>model_fit_gam</span> <span class='op'>&lt;-</span> <span class='fu'>gen_additive_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span>, markov_chains <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"stan"</span>, family<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/stats/family.html'>Gamma</a></span><span class='op'>(</span>link<span class='op'>=</span><span class='st'>"log"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://generics.r-lib.org/reference/fit.html'>fit</a></span><span class='op'>(</span><span class='va'>value</span> <span class='op'>~</span>  <span class='va'>date</span> <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>date_month</span>, k <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
-        <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>date_num</span><span class='op'>)</span>
-        <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>lag_24</span><span class='op'>)</span>
-        <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>date_num</span>, <span class='va'>date_month</span><span class='op'>)</span>,
+        <span class='op'>+</span> <span class='fu'>s</span><span class='op'>(</span><span class='va'>lag_24</span><span class='op'>)</span>,
         data <span class='op'>=</span> <span class='va'>m750_train</span><span class='op'>)</span> 
-</div><div class='output co'>#&gt; <span class='message'>frequency = 12 observations per 1 year</span></div><div class='output co'>#&gt; <span class='message'>Compiling Stan program...</span></div><div class='output co'>#&gt; <span class='message'>Start sampling</span></div><div class='output co'>#&gt; 
-#&gt; SAMPLING FOR MODEL '16ad7d7777089cbadf794d06a194d2d6' NOW (CHAIN 1).
-#&gt; Chain 1: 
-#&gt; Chain 1: Gradient evaluation took 0 seconds
-#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
-#&gt; Chain 1: Adjust your expectations accordingly!
-#&gt; Chain 1: 
-#&gt; Chain 1: 
-#&gt; Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 1: 
-#&gt; Chain 1:  Elapsed Time: 137.198 seconds (Warm-up)
-#&gt; Chain 1:                147.233 seconds (Sampling)
-#&gt; Chain 1:                284.431 seconds (Total)
-#&gt; Chain 1: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL '16ad7d7777089cbadf794d06a194d2d6' NOW (CHAIN 2).
-#&gt; Chain 2: 
-#&gt; Chain 2: Gradient evaluation took 0 seconds
-#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
-#&gt; Chain 2: Adjust your expectations accordingly!
-#&gt; Chain 2: 
-#&gt; Chain 2: 
-#&gt; Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 2: 
-#&gt; Chain 2:  Elapsed Time: 140.24 seconds (Warm-up)
-#&gt; Chain 2:                148.636 seconds (Sampling)
-#&gt; Chain 2:                288.876 seconds (Total)
-#&gt; Chain 2: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL '16ad7d7777089cbadf794d06a194d2d6' NOW (CHAIN 3).
-#&gt; Chain 3: 
-#&gt; Chain 3: Gradient evaluation took 0 seconds
-#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
-#&gt; Chain 3: Adjust your expectations accordingly!
-#&gt; Chain 3: 
-#&gt; Chain 3: 
-#&gt; Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 3: 
-#&gt; Chain 3:  Elapsed Time: 139.073 seconds (Warm-up)
-#&gt; Chain 3:                156.998 seconds (Sampling)
-#&gt; Chain 3:                296.071 seconds (Total)
-#&gt; Chain 3: 
-#&gt; 
-#&gt; SAMPLING FOR MODEL '16ad7d7777089cbadf794d06a194d2d6' NOW (CHAIN 4).
-#&gt; Chain 4: 
-#&gt; Chain 4: Gradient evaluation took 0 seconds
-#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0 seconds.
-#&gt; Chain 4: Adjust your expectations accordingly!
-#&gt; Chain 4: 
-#&gt; Chain 4: 
-#&gt; Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
-#&gt; Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
-#&gt; Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
-#&gt; Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
-#&gt; Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
-#&gt; Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
-#&gt; Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
-#&gt; Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
-#&gt; Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
-#&gt; Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
-#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
-#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
-#&gt; Chain 4: 
-#&gt; Chain 4:  Elapsed Time: 142.316 seconds (Warm-up)
-#&gt; Chain 4:                150.857 seconds (Sampling)
-#&gt; Chain 4:                293.173 seconds (Total)
-#&gt; Chain 4: </div><div class='output co'>#&gt; <span class='warning'>Warning: There were 400 transitions after warmup that exceeded the maximum treedepth. Increase max_treedepth above 10. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#maximum-treedepth-exceeded</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Examine the pairs() plot to diagnose sampling problems</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The largest R-hat is 2.41, indicating chains have not mixed.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#r-hat</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#bulk-ess</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Tail Effective Samples Size (ESS) is too low, indicating posterior variances and tail quantiles may be unreliable.</span>
-#&gt; <span class='warning'>Running the chains for more iterations may help. See</span>
-#&gt; <span class='warning'>http://mc-stan.org/misc/warnings.html#tail-ess</span></div><div class='input'> <span class='co'># }</span>
-</div></span></pre>
+ <span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
