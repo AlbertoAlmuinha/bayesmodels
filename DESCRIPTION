@@ -1,6 +1,6 @@
 Package: bayesmodels
 Title: The 'Tidymodels' Extension for Bayesian Models 
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Alberto", "Almuiña", email = "albertogonzalezalmuinha@gmail.com", role = c("aut", "cre"))
     )
