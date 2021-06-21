@@ -266,6 +266,7 @@ bayesian_structural_stan_fit_impl <- function(formula, data, family = "gaussian"
         
         # Preprocessing Recipe (prepped) - Used in predict method
         extras = list(
+            date_var = idx_col
         ),
         
         # Description - Convert arima model parameters to short description
@@ -299,10 +300,17 @@ bayesian_structural_stan_predict_impl <- function(object, new_data, ...) {
     
     # PREPARE INPUTS
     model       <- object$models$model_1
+    date_var    <- object$extras$date_var
     
-    # PREDICTIONS
+    old_data <- new_data %>% dplyr::select(-date_var)
     
-    preds <- stats::predict(model, newdata = new_data, ...)$mean
+    comp <- apply(old_data, 1, is.na) %>% apply(., 1, sum)
+    
+    if (all(comp)==dim(old_data)[1]){
+        preds <- stats::predict(model, h = nrow(new_data), ...)$mean
+    } else {
+        preds <- stats::predict(model, newdata = new_data, ...)$mean
+    }
     
     return(preds)
     
