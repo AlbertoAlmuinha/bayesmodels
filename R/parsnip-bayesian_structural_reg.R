@@ -310,7 +310,7 @@ bayesian_structural_stan_predict_impl <- function(object, new_data, ...) {
         comp <- apply(old_data, 1, is.na) %>% apply(., 1, sum)
     }
     
-    if (all(comp==dim(old_data)[1])){
+    if (all(comp==dim(old_data)[1]) | ncol(old_data) == 1){
         preds <- stats::predict(model, h = nrow(new_data), ...)$mean
     } else {
         preds <- stats::predict(model, newdata = new_data, ...)$mean
