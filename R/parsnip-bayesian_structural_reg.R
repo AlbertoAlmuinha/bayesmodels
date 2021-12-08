@@ -195,8 +195,8 @@ translate.bayesian_structural_reg <- function(x, engine = x$engine, ...) {
 
 #' Low-Level ARIMA function for translating modeltime to forecast
 #'
-#' @param formula A dataframe of xreg (exogenous regressors)
-#' @param data A numeric vector of values to fit
+#' @param data A dataframe of xreg (exogenous regressors)
+#' @param formula A numeric vector of values to fit
 #' @param family The model family for the observation equation. 
 #' Non-Gaussian model families use data augmentation to recover a conditionally Gaussian model.
 #' @param ... Additional arguments passed to `forecast::Arima`
@@ -204,7 +204,7 @@ translate.bayesian_structural_reg <- function(x, engine = x$engine, ...) {
 #' @return A modeltime model
 #'
 #' @export
-bayesian_structural_stan_fit_impl <- function(formula, data, family = "gaussian",  ...) {
+bayesian_structural_stan_fit_impl <- function(data, formula, family = "gaussian",  ...) {
     
     args <- list(...)
     
@@ -227,15 +227,22 @@ bayesian_structural_stan_fit_impl <- function(formula, data, family = "gaussian"
     
     # INDEX 
     # Determine Index Col
-    index_tbl <- modeltime::parse_index_from_data(predictors)
+    #index_tbl <- modeltime::parse_index_from_data(predictors)
+    #idx_col   <- names(index_tbl)
+    
+    index_tbl <- parse_index_from_data(predictors)
+    period    <- parse_period_from_index(index_tbl, "auto")
     idx_col   <- names(index_tbl)
+    idx       <- timetk::tk_index(index_tbl)
     
     x <- dplyr::setdiff(x, idx_col)
     
     if (length(x)==0){
         formula <- as.vector(purrr::as_vector(data[, y]))
+        var <- y
     } else {
-        formula <- stats::reformulate(termlabels = x, response = y)   
+        formula <- stats::reformulate(termlabels = x, response = y) 
+        var <- c(x, y)
     }
     
     args[["formula"]] <- formula
@@ -258,7 +265,8 @@ bayesian_structural_stan_fit_impl <- function(formula, data, family = "gaussian"
         
         # Data - Date column (matches original), .actual, .fitted, and .residuals columns
         data = tibble::tibble(
-            .date        = timetk::tk_make_timeseries(start_date = "1970", length_out = length(model_fit$original.series)),
+            #.date        = timetk::tk_make_timeseries(start_date = "1970", length_out = length(model_fit$original.series)),
+            !! idx_col  := idx,
             .actual      =  as.numeric(model_fit$original.series),
             .fitted      =  .actual - as.numeric(apply(residuals(model_fit), 2, mean)),
             .residuals   =  as.numeric(apply(residuals(model_fit), 2, mean))
@@ -266,7 +274,8 @@ bayesian_structural_stan_fit_impl <- function(formula, data, family = "gaussian"
         
         # Preprocessing Recipe (prepped) - Used in predict method
         extras = list(
-            date_var = idx_col
+            date_var = idx_col,
+            predictors = var
         ),
         
         # Description - Convert arima model parameters to short description
@@ -301,8 +310,9 @@ bayesian_structural_stan_predict_impl <- function(object, new_data, ...) {
     # PREPARE INPUTS
     model       <- object$models$model_1
     date_var    <- object$extras$date_var
+    predictors  <- object$extras$predictors
     
-    old_data <- new_data %>% dplyr::select(-date_var)
+    old_data <- new_data %>% dplyr::select(-date_var) %>% dplyr::select(predictors)
     
     if (ncol(old_data) == 1){
         comp <- apply(old_data, 1, is.na) %>% sum()
