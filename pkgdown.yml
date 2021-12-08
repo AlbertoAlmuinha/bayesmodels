@@ -1,7 +1,7 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   modeltime-integration: modeltime-integration.html
-last_built: 2021-06-28T21:05Z
+last_built: 2021-12-08T18:10Z
 

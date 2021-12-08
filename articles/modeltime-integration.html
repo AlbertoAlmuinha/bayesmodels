@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bayesmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -64,7 +60,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/AlbertoAlmuinha/bayesmodels/">
+  <a href="https://github.com/AlbertoAlmuinha/bayesmodels/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -85,7 +81,7 @@
       <h1 data-toc-skip>Modeltime Integration</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/AlbertoAlmuinha/bayesmodels/blob/master/vignettes/modeltime-integration.Rmd"><code>vignettes/modeltime-integration.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AlbertoAlmuinha/bayesmodels/blob/HEAD/vignettes/modeltime-integration.Rmd" class="external-link"><code>vignettes/modeltime-integration.Rmd</code></a></small>
       <div class="hidden name"><code>modeltime-integration.Rmd</code></div>
 
     </div>
@@ -111,9 +107,9 @@
 <li><p><strong>Adaptive Splines Surface</strong>: <code>bayesmodels</code> connects to the <code>BASS</code> package.</p></li>
 <li><p><strong>Exponential Smoothing</strong>: <code>bayesmodels</code> connects to the <code>Rglt</code> package.</p></li>
 </ul>
-<div id="the-modeltime-workflow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-modeltime-workflow" class="anchor"></a>The Modeltime Workflow</h2>
+<div class="section level2">
+<h2 id="the-modeltime-workflow">The Modeltime Workflow<a class="anchor" aria-label="anchor" href="#the-modeltime-workflow"></a>
+</h2>
 <p>Here’s the general process and where the functions fit.</p>
 <div class="figure" style="text-align: center">
 <img src="modeltime_workflow.jpg" alt="The Modeltime Workflow" width="100%"><p class="caption">
@@ -134,61 +130,61 @@ The Modeltime Workflow
 </ol>
 <p>Let’s go through a guided tour to kick the tires on <code>modeltime</code>.</p>
 </div>
-<div id="time-series-forecasting-example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#time-series-forecasting-example" class="anchor"></a>Time Series Forecasting Example</h2>
+<div class="section level2">
+<h2 id="time-series-forecasting-example">Time Series Forecasting Example<a class="anchor" aria-label="anchor" href="#time-series-forecasting-example"></a>
+</h2>
 <p>Load libraries to complete this short tutorial.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AlbertoAlmuinha/bayesmodels">bayesmodels</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/modeltime">modeltime</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/timetk">timetk</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org" class="external-link">tidymodels</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AlbertoAlmuinha/bayesmodels" class="external-link">bayesmodels</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/modeltime" class="external-link">modeltime</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/timetk" class="external-link">timetk</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span>
 <span class="co"># This toggles plots from plotly (interactive) to ggplot (static)</span>
 <span class="va">interactive</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></code></pre></div>
-<div id="step-1---collect-data-and-split-into-training-and-test-sets-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-1---collect-data-and-split-into-training-and-test-sets-" class="anchor"></a>Step 1 - Collect data and split into training and test sets.</h3>
+<div class="section level3">
+<h3 id="step-1---collect-data-and-split-into-training-and-test-sets-">Step 1 - Collect data and split into training and test sets.<a class="anchor" aria-label="anchor" href="#step-1---collect-data-and-split-into-training-and-test-sets-"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Data</span>
-<span class="va">m750</span> <span class="op">&lt;-</span> <span class="va">m4_monthly</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op">==</span> <span class="st">"M750"</span><span class="op">)</span></code></pre></div>
+<span class="va">m750</span> <span class="op">&lt;-</span> <span class="va">m4_monthly</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">id</span> <span class="op">==</span> <span class="st">"M750"</span><span class="op">)</span></code></pre></div>
 <p>We can visualize the dataset.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">m750</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/timetk/man/plot_time_series.html">plot_time_series</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">value</span>, .interactive <span class="op">=</span> <span class="va">interactive</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">m750</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/pkg/timetk/man/plot_time_series.html" class="external-link">plot_time_series</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">value</span>, .interactive <span class="op">=</span> <span class="va">interactive</span><span class="op">)</span></code></pre></div>
 <p><img src="modeltime-integration_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;"></p>
-<p>Let’s split the data into training and test sets using <code><a href="https://rsample.tidymodels.org/reference/initial_split.html">initial_time_split()</a></code></p>
+<p>Let’s split the data into training and test sets using <code><a href="https://rsample.tidymodels.org/reference/initial_split.html" class="external-link">initial_time_split()</a></code></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Split Data 80/20</span>
-<span class="va">splits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html">initial_time_split</a></span><span class="op">(</span><span class="va">m750</span>, prop <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
+<span class="va">splits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html" class="external-link">initial_time_split</a></span><span class="op">(</span><span class="va">m750</span>, prop <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="step-2---create-fit-multiple-models" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-2---create-fit-multiple-models" class="anchor"></a>Step 2 - Create &amp; Fit Multiple Models</h3>
+<div class="section level3">
+<h3 id="step-2---create-fit-multiple-models">Step 2 - Create &amp; Fit Multiple Models<a class="anchor" aria-label="anchor" href="#step-2---create-fit-multiple-models"></a>
+</h3>
 <p>We can easily create dozens of forecasting models by combining <code>bayesmodels</code>, <code>modeltime</code> and <code>parsnip</code>. We can also use the <code>workflows</code> interface for adding preprocessing! Your forecasting possibilities are endless. Let’s model a couple of arima models:</p>
 <p><strong>Important note: Handling Date Features</strong></p>
-<p><em>Bayesmodels and Modeltime models</em> (e.g. <code>sarima_reg() and arima_reg()</code>) are created with a date or date time feature in the model. You will see that most models include a formula like <code><a href="https://generics.r-lib.org/reference/fit.html">fit(value ~ date, data)</a></code>.</p>
-<p><em>Parsnip models</em> (e.g. <code><a href="https://parsnip.tidymodels.org/reference/linear_reg.html">linear_reg()</a></code>) typically should not have date features, but may contain derivatives of dates (e.g. month, year, etc). You will often see formulas like <code><a href="https://generics.r-lib.org/reference/fit.html">fit(value ~ as.numeric(date) + month(date), data)</a></code>.</p>
-<div id="model-1-arima-modeltime" class="section level4">
-<h4 class="hasAnchor">
-<a href="#model-1-arima-modeltime" class="anchor"></a>Model 1: ARIMA (Modeltime)</h4>
-<p>First, we create a basic univariate ARIMA model using “Arima” using <code><a href="https://rdrr.io/pkg/modeltime/man/arima_reg.html">arima_reg()</a></code></p>
+<p><em>Bayesmodels and Modeltime models</em> (e.g. <code>sarima_reg() and arima_reg()</code>) are created with a date or date time feature in the model. You will see that most models include a formula like <code>fit(value ~ date, data)</code>.</p>
+<p><em>Parsnip models</em> (e.g. <code><a href="https://parsnip.tidymodels.org/reference/linear_reg.html" class="external-link">linear_reg()</a></code>) typically should not have date features, but may contain derivatives of dates (e.g. month, year, etc). You will often see formulas like <code>fit(value ~ as.numeric(date) + month(date), data)</code>.</p>
+<div class="section level4">
+<h4 id="model-1-arima-modeltime">Model 1: ARIMA (Modeltime)<a class="anchor" aria-label="anchor" href="#model-1-arima-modeltime"></a>
+</h4>
+<p>First, we create a basic univariate ARIMA model using “Arima” using <code><a href="https://rdrr.io/pkg/modeltime/man/arima_reg.html" class="external-link">arima_reg()</a></code></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Model 1: arima ----</span>
-<span class="va">model_fit_arima</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/arima_reg.html">arima_reg</a></span><span class="op">(</span>non_seasonal_ar <span class="op">=</span> <span class="fl">0</span>,
+<span class="va">model_fit_arima</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/arima_reg.html" class="external-link">arima_reg</a></span><span class="op">(</span>non_seasonal_ar <span class="op">=</span> <span class="fl">0</span>,
                             non_seasonal_differences <span class="op">=</span> <span class="fl">1</span>,
                             non_seasonal_ma <span class="op">=</span> <span class="fl">1</span>,
                             seasonal_period <span class="op">=</span> <span class="fl">12</span>,
                             seasonal_ar <span class="op">=</span> <span class="fl">0</span>,
                             seasonal_differences <span class="op">=</span> <span class="fl">1</span>,
-                            seasonal_ma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html">set_engine</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"arima"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="va">date</span>, data <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html">training</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                            seasonal_ma <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"arima"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="va">date</span>, data <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html" class="external-link">training</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="model-2-arima-bayesmodels" class="section level4">
-<h4 class="hasAnchor">
-<a href="#model-2-arima-bayesmodels" class="anchor"></a>Model 2: ARIMA (Bayesmodels)</h4>
+<div class="section level4">
+<h4 id="model-2-arima-bayesmodels">Model 2: ARIMA (Bayesmodels)<a class="anchor" aria-label="anchor" href="#model-2-arima-bayesmodels"></a>
+</h4>
 <p>Now, we create the same model but from a Bayesian perspective with the package <code>bayesmodels</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Model 2: arima_boost ----</span>
@@ -199,14 +195,14 @@ The Modeltime Workflow
                                   seasonal_ar <span class="op">=</span> <span class="fl">0</span>,
                                   seasonal_differences <span class="op">=</span> <span class="fl">1</span>,
                                   seasonal_ma <span class="op">=</span> <span class="fl">1</span>,
-                                  pred_seed <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html">set_engine</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"stan"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="va">date</span>, data <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html">training</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span><span class="op">)</span>
+                                  pred_seed <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span>engine <span class="op">=</span> <span class="st">"stan"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="va">date</span>, data <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html" class="external-link">training</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 1).</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1: Gradient evaluation took 0.000102 seconds</span>
-<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.02 seconds.</span>
+<span class="co">#&gt; Chain 1: Gradient evaluation took 9.8e-05 seconds</span>
+<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.98 seconds.</span>
 <span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; Chain 1: </span>
@@ -223,15 +219,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1:  Elapsed Time: 2.76563 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 1:                2.2806 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 1:                5.04623 seconds (Total)</span>
+<span class="co">#&gt; Chain 1:  Elapsed Time: 0.563502 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 1:                0.442646 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 1:                1.00615 seconds (Total)</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 2).</span>
 <span class="co">#&gt; Chain 2: </span>
-<span class="co">#&gt; Chain 2: Gradient evaluation took 0.000104 seconds</span>
-<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 1.04 seconds.</span>
+<span class="co">#&gt; Chain 2: Gradient evaluation took 7.2e-05 seconds</span>
+<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.72 seconds.</span>
 <span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 2: </span>
 <span class="co">#&gt; Chain 2: </span>
@@ -248,15 +244,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 2: </span>
-<span class="co">#&gt; Chain 2:  Elapsed Time: 0.626652 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 2:                0.475921 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 2:                1.10257 seconds (Total)</span>
+<span class="co">#&gt; Chain 2:  Elapsed Time: 0.534723 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 2:                0.436558 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 2:                0.971281 seconds (Total)</span>
 <span class="co">#&gt; Chain 2: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 3).</span>
 <span class="co">#&gt; Chain 3: </span>
-<span class="co">#&gt; Chain 3: Gradient evaluation took 7.6e-05 seconds</span>
-<span class="co">#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.76 seconds.</span>
+<span class="co">#&gt; Chain 3: Gradient evaluation took 8.3e-05 seconds</span>
+<span class="co">#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.83 seconds.</span>
 <span class="co">#&gt; Chain 3: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 3: </span>
 <span class="co">#&gt; Chain 3: </span>
@@ -273,15 +269,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 3: </span>
-<span class="co">#&gt; Chain 3:  Elapsed Time: 0.832584 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 3:                0.679382 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 3:                1.51197 seconds (Total)</span>
+<span class="co">#&gt; Chain 3:  Elapsed Time: 0.554415 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 3:                0.442166 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 3:                0.996581 seconds (Total)</span>
 <span class="co">#&gt; Chain 3: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 4).</span>
 <span class="co">#&gt; Chain 4: </span>
-<span class="co">#&gt; Chain 4: Gradient evaluation took 8.1e-05 seconds</span>
-<span class="co">#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.81 seconds.</span>
+<span class="co">#&gt; Chain 4: Gradient evaluation took 7.5e-05 seconds</span>
+<span class="co">#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.75 seconds.</span>
 <span class="co">#&gt; Chain 4: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 4: </span>
 <span class="co">#&gt; Chain 4: </span>
@@ -298,26 +294,26 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 4: </span>
-<span class="co">#&gt; Chain 4:  Elapsed Time: 0.648906 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 4:                0.486226 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 4:                1.13513 seconds (Total)</span>
+<span class="co">#&gt; Chain 4:  Elapsed Time: 0.54871 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 4:                0.44644 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 4:                0.99515 seconds (Total)</span>
 <span class="co">#&gt; Chain 4:</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">model_fit_arima_bayes</span><span class="op">$</span><span class="va">fit</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">model_1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model_fit_arima_bayes</span><span class="op">$</span><span class="va">fit</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">model_1</span><span class="op">)</span></code></pre></div>
 <p><img src="modeltime-integration_files/figure-html/unnamed-chunk-10-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div id="model-3-random-walk-naive-bayesmodels" class="section level4">
-<h4 class="hasAnchor">
-<a href="#model-3-random-walk-naive-bayesmodels" class="anchor"></a>Model 3: Random Walk (Naive) (Bayesmodels)</h4>
+<div class="section level4">
+<h4 id="model-3-random-walk-naive-bayesmodels">Model 3: Random Walk (Naive) (Bayesmodels)<a class="anchor" aria-label="anchor" href="#model-3-random-walk-naive-bayesmodels"></a>
+</h4>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_fit_naive</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_walk_reg.html">random_walk_reg</a></span><span class="op">(</span>seasonal_random_walk <span class="op">=</span> <span class="cn">TRUE</span>, seasonal_period <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op">%&gt;%</span>
-                   <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html">set_engine</a></span><span class="op">(</span><span class="st">"stan"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-                   <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html">fit</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="va">date</span> <span class="op">+</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html">training</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">model_fit_naive</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_walk_reg.html">random_walk_reg</a></span><span class="op">(</span>seasonal_random_walk <span class="op">=</span> <span class="cn">TRUE</span>, seasonal_period <span class="op">=</span> <span class="fl">12</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+                   <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"stan"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+                   <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="va">date</span> <span class="op">+</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html" class="external-link">month</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html" class="external-link">training</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 1).</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1: Gradient evaluation took 5.3e-05 seconds</span>
-<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.53 seconds.</span>
+<span class="co">#&gt; Chain 1: Gradient evaluation took 4.4e-05 seconds</span>
+<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.44 seconds.</span>
 <span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; Chain 1: </span>
@@ -334,15 +330,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1:  Elapsed Time: 0.599218 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 1:                0.199982 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 1:                0.7992 seconds (Total)</span>
+<span class="co">#&gt; Chain 1:  Elapsed Time: 0.323054 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 1:                0.216392 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 1:                0.539446 seconds (Total)</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 2).</span>
 <span class="co">#&gt; Chain 2: </span>
-<span class="co">#&gt; Chain 2: Gradient evaluation took 3.5e-05 seconds</span>
-<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.35 seconds.</span>
+<span class="co">#&gt; Chain 2: Gradient evaluation took 3.6e-05 seconds</span>
+<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.36 seconds.</span>
 <span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 2: </span>
 <span class="co">#&gt; Chain 2: </span>
@@ -359,15 +355,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 2: </span>
-<span class="co">#&gt; Chain 2:  Elapsed Time: 0.847428 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 2:                0.208722 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 2:                1.05615 seconds (Total)</span>
+<span class="co">#&gt; Chain 2:  Elapsed Time: 0.402457 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 2:                0.196768 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 2:                0.599225 seconds (Total)</span>
 <span class="co">#&gt; Chain 2: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 3).</span>
 <span class="co">#&gt; Chain 3: </span>
-<span class="co">#&gt; Chain 3: Gradient evaluation took 2.9e-05 seconds</span>
-<span class="co">#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.29 seconds.</span>
+<span class="co">#&gt; Chain 3: Gradient evaluation took 3.9e-05 seconds</span>
+<span class="co">#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.39 seconds.</span>
 <span class="co">#&gt; Chain 3: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 3: </span>
 <span class="co">#&gt; Chain 3: </span>
@@ -384,15 +380,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 3: </span>
-<span class="co">#&gt; Chain 3:  Elapsed Time: 0.871166 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 3:                0.226306 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 3:                1.09747 seconds (Total)</span>
+<span class="co">#&gt; Chain 3:  Elapsed Time: 0.534988 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 3:                0.216811 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 3:                0.751799 seconds (Total)</span>
 <span class="co">#&gt; Chain 3: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 4).</span>
 <span class="co">#&gt; Chain 4: </span>
-<span class="co">#&gt; Chain 4: Gradient evaluation took 3.2e-05 seconds</span>
-<span class="co">#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.32 seconds.</span>
+<span class="co">#&gt; Chain 4: Gradient evaluation took 3.5e-05 seconds</span>
+<span class="co">#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.35 seconds.</span>
 <span class="co">#&gt; Chain 4: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 4: </span>
 <span class="co">#&gt; Chain 4: </span>
@@ -409,38 +405,38 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 4: </span>
-<span class="co">#&gt; Chain 4:  Elapsed Time: 0.402976 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 4:                0.219074 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 4:                0.62205 seconds (Total)</span>
+<span class="co">#&gt; Chain 4:  Elapsed Time: 0.770891 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 4:                0.201002 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 4:                0.971893 seconds (Total)</span>
 <span class="co">#&gt; Chain 4:</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">model_fit_naive</span><span class="op">$</span><span class="va">fit</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">model_1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model_fit_naive</span><span class="op">$</span><span class="va">fit</span><span class="op">$</span><span class="va">models</span><span class="op">$</span><span class="va">model_1</span><span class="op">)</span></code></pre></div>
 <p><img src="modeltime-integration_files/figure-html/unnamed-chunk-12-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 </div>
-<div id="step-3---add-fitted-models-to-a-model-table-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-3---add-fitted-models-to-a-model-table-" class="anchor"></a>Step 3 - Add fitted models to a Model Table.</h3>
-<p>The next step is to add each of the models to a Modeltime Table using <code><a href="https://rdrr.io/pkg/modeltime/man/modeltime_table.html">modeltime_table()</a></code>. This step does some basic checking to make sure each of the models are fitted and that organizes into a scalable structure called a <strong><em>“Modeltime Table”</em></strong> that is used as part of our <em>forecasting workflow.</em></p>
+<div class="section level3">
+<h3 id="step-3---add-fitted-models-to-a-model-table-">Step 3 - Add fitted models to a Model Table.<a class="anchor" aria-label="anchor" href="#step-3---add-fitted-models-to-a-model-table-"></a>
+</h3>
+<p>The next step is to add each of the models to a Modeltime Table using <code><a href="https://rdrr.io/pkg/modeltime/man/modeltime_table.html" class="external-link">modeltime_table()</a></code>. This step does some basic checking to make sure each of the models are fitted and that organizes into a scalable structure called a <strong><em>“Modeltime Table”</em></strong> that is used as part of our <em>forecasting workflow.</em></p>
 <p>We have 2 models to add.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">models_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_table.html">modeltime_table</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">models_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_table.html" class="external-link">modeltime_table</a></span><span class="op">(</span>
     <span class="va">model_fit_arima</span>,
     <span class="va">model_fit_arima_bayes</span>,
     <span class="va">model_fit_naive</span>
 <span class="op">)</span>
 <span class="va">models_tbl</span>
 <span class="co">#&gt; # Modeltime Table</span>
-<span class="co">#&gt; # A tibble: 3 x 3</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="co">#&gt;   .model_id .model   .model_desc            </span>
-<span class="co">#&gt;       &lt;int&gt; &lt;list&gt;   &lt;chr&gt;                  </span>
-<span class="co">#&gt; 1         1 &lt;fit[+]&gt; ARIMA(0,1,1)(0,1,1)[12]</span>
-<span class="co">#&gt; 2         2 &lt;fit[+]&gt; BAYESIAN ARIMA MODEL   </span>
-<span class="co">#&gt; 3         3 &lt;fit[+]&gt; NAIVE MODEL</span></code></pre></div>
+<span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1 <span style="color: #949494;">&lt;fit[+]&gt;</span> ARIMA(0,1,1)(0,1,1)[12]</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         2 <span style="color: #949494;">&lt;fit[+]&gt;</span> BAYESIAN ARIMA MODEL   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>         3 <span style="color: #949494;">&lt;fit[+]&gt;</span> NAIVE MODEL</span></code></pre></div>
 </div>
-<div id="step-4---calibrate-the-model-to-a-testing-set-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-4---calibrate-the-model-to-a-testing-set-" class="anchor"></a>Step 4 - Calibrate the model to a testing set.</h3>
+<div class="section level3">
+<h3 id="step-4---calibrate-the-model-to-a-testing-set-">Step 4 - Calibrate the model to a testing set.<a class="anchor" aria-label="anchor" href="#step-4---calibrate-the-model-to-a-testing-set-"></a>
+</h3>
 <p>Calibrating adds a new column, <code>.calibration_data</code>, with the test predictions and residuals inside. A few notes on Calibration:</p>
 <ul>
 <li>Calibration is how confidence intervals and accuracy metrics are determined</li>
@@ -449,45 +445,45 @@ The Modeltime Workflow
 <li>After calibrating, the calibration data follows the data through the forecasting workflow.</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">calibration_tbl</span> <span class="op">&lt;-</span> <span class="va">models_tbl</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_calibrate.html">modeltime_calibrate</a></span><span class="op">(</span>new_data <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html">testing</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">calibration_tbl</span> <span class="op">&lt;-</span> <span class="va">models_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_calibrate.html" class="external-link">modeltime_calibrate</a></span><span class="op">(</span>new_data <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html" class="external-link">testing</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span><span class="op">)</span>
 <span class="va">calibration_tbl</span>
 <span class="co">#&gt; # Modeltime Table</span>
-<span class="co">#&gt; # A tibble: 3 x 5</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="co">#&gt;   .model_id .model   .model_desc             .type .calibration_data</span>
-<span class="co">#&gt;       &lt;int&gt; &lt;list&gt;   &lt;chr&gt;                   &lt;chr&gt; &lt;list&gt;           </span>
-<span class="co">#&gt; 1         1 &lt;fit[+]&gt; ARIMA(0,1,1)(0,1,1)[12] Test  &lt;tibble [31 × 4]&gt;</span>
-<span class="co">#&gt; 2         2 &lt;fit[+]&gt; BAYESIAN ARIMA MODEL    Test  &lt;tibble [31 × 4]&gt;</span>
-<span class="co">#&gt; 3         3 &lt;fit[+]&gt; NAIVE MODEL             Test  &lt;tibble [31 × 4]&gt;</span></code></pre></div>
+<span class="co">#&gt;       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>         1 <span style="color: #949494;">&lt;fit[+]&gt;</span> ARIMA(0,1,1)(0,1,1)[12] Test  <span style="color: #949494;">&lt;tibble [31 × 4]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>         2 <span style="color: #949494;">&lt;fit[+]&gt;</span> BAYESIAN ARIMA MODEL    Test  <span style="color: #949494;">&lt;tibble [31 × 4]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>         3 <span style="color: #949494;">&lt;fit[+]&gt;</span> NAIVE MODEL             Test  <span style="color: #949494;">&lt;tibble [31 × 4]&gt;</span></span></code></pre></div>
 </div>
-<div id="step-5---testing-set-forecast-accuracy-evaluation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-5---testing-set-forecast-accuracy-evaluation" class="anchor"></a>Step 5 - Testing Set Forecast &amp; Accuracy Evaluation</h3>
+<div class="section level3">
+<h3 id="step-5---testing-set-forecast-accuracy-evaluation">Step 5 - Testing Set Forecast &amp; Accuracy Evaluation<a class="anchor" aria-label="anchor" href="#step-5---testing-set-forecast-accuracy-evaluation"></a>
+</h3>
 <p>There are 2 critical parts to an evaluation.</p>
 <ul>
 <li>Visualizing the Forecast vs Test Data Set</li>
 <li>Evaluating the Test (Out of Sample) Accuracy</li>
 </ul>
-<div id="a---visualizing-the-forecast-test" class="section level4">
-<h4 class="hasAnchor">
-<a href="#a---visualizing-the-forecast-test" class="anchor"></a>5A - Visualizing the Forecast Test</h4>
+<div class="section level4">
+<h4 id="a---visualizing-the-forecast-test">5A - Visualizing the Forecast Test<a class="anchor" aria-label="anchor" href="#a---visualizing-the-forecast-test"></a>
+</h4>
 <p>Visualizing the Test Error is easy to do using the <strong>interactive plotly visualization (just toggle the visibility of the models using the Legend).</strong></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">calibration_tbl</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_forecast.html">modeltime_forecast</a></span><span class="op">(</span>
-        new_data    <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html">testing</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span>,
+<code class="sourceCode R"><span class="va">calibration_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_forecast.html" class="external-link">modeltime_forecast</a></span><span class="op">(</span>
+        new_data    <span class="op">=</span> <span class="fu"><a href="https://rsample.tidymodels.org/reference/initial_split.html" class="external-link">testing</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span>,
         actual_data <span class="op">=</span> <span class="va">m750</span>
-    <span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/plot_modeltime_forecast.html">plot_modeltime_forecast</a></span><span class="op">(</span>
+    <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/plot_modeltime_forecast.html" class="external-link">plot_modeltime_forecast</a></span><span class="op">(</span>
       .legend_max_width <span class="op">=</span> <span class="fl">25</span>, <span class="co"># For mobile screens</span>
       .interactive      <span class="op">=</span> <span class="va">interactive</span>
     <span class="op">)</span></code></pre></div>
 <p><img src="modeltime-integration_files/figure-html/unnamed-chunk-15-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div id="b---accuracy-metrics" class="section level4">
-<h4 class="hasAnchor">
-<a href="#b---accuracy-metrics" class="anchor"></a>5B - Accuracy Metrics</h4>
-<p>We can use <code><a href="https://rdrr.io/pkg/modeltime/man/modeltime_accuracy.html">modeltime_accuracy()</a></code> to collect common accuracy metrics. The default reports the following metrics using <code>yardstick</code> functions:</p>
+<div class="section level4">
+<h4 id="b---accuracy-metrics">5B - Accuracy Metrics<a class="anchor" aria-label="anchor" href="#b---accuracy-metrics"></a>
+</h4>
+<p>We can use <code><a href="https://rdrr.io/pkg/modeltime/man/modeltime_accuracy.html" class="external-link">modeltime_accuracy()</a></code> to collect common accuracy metrics. The default reports the following metrics using <code>yardstick</code> functions:</p>
 <ul>
 <li>
 <strong>MAE</strong> - Mean absolute error, <code>mae()</code>
@@ -509,11 +505,11 @@ The Modeltime Workflow
 </li>
 </ul>
 <p>These of course can be customized following the rules for creating new yardstick metrics, but the defaults are very useful. Refer to <code>default_forecast_accuracy_metrics()</code> to learn more.</p>
-<p>To make table-creation a bit easier, I’ve included <code><a href="https://rdrr.io/pkg/modeltime/man/table_modeltime_accuracy.html">table_modeltime_accuracy()</a></code> for outputing results in either interactive (<code>reactable</code>) or static (<code>gt</code>) tables.</p>
+<p>To make table-creation a bit easier, I’ve included <code><a href="https://rdrr.io/pkg/modeltime/man/table_modeltime_accuracy.html" class="external-link">table_modeltime_accuracy()</a></code> for outputing results in either interactive (<code>reactable</code>) or static (<code>gt</code>) tables.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">calibration_tbl</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_accuracy.html">modeltime_accuracy</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/table_modeltime_accuracy.html">table_modeltime_accuracy</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">calibration_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_accuracy.html" class="external-link">modeltime_accuracy</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/table_modeltime_accuracy.html" class="external-link">table_modeltime_accuracy</a></span><span class="op">(</span>
         .interactive <span class="op">=</span> <span class="va">interactive</span>
     <span class="op">)</span></code></pre></div>
 <div id="ksmdoqnets" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -573,7 +569,7 @@ The Modeltime Workflow
   font-size: 85%;
   font-weight: initial;
   padding-top: 0;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
@@ -645,7 +641,7 @@ The Modeltime Workflow
   border-bottom-color: #D3D3D3;
   vertical-align: bottom;
   padding-top: 5px;
-  padding-bottom: 6px;
+  padding-bottom: 5px;
   overflow-x: hidden;
   display: inline-block;
   width: 100%;
@@ -885,41 +881,41 @@ The Modeltime Workflow
 <td class="gt_row gt_right">2</td>
 <td class="gt_row gt_left">BAYESIAN ARIMA MODEL</td>
 <td class="gt_row gt_left">Test</td>
-<td class="gt_row gt_right">169.01</td>
-<td class="gt_row gt_right">1.57</td>
-<td class="gt_row gt_right">0.58</td>
-<td class="gt_row gt_right">1.59</td>
-<td class="gt_row gt_right">218.11</td>
-<td class="gt_row gt_right">0.93</td>
+<td class="gt_row gt_right">142.65</td>
+<td class="gt_row gt_right">1.33</td>
+<td class="gt_row gt_right">0.49</td>
+<td class="gt_row gt_right">1.34</td>
+<td class="gt_row gt_right">184.96</td>
+<td class="gt_row gt_right">0.94</td>
 </tr>
 <tr>
 <td class="gt_row gt_right">3</td>
 <td class="gt_row gt_left">NAIVE MODEL</td>
 <td class="gt_row gt_left">Test</td>
-<td class="gt_row gt_right">272.65</td>
-<td class="gt_row gt_right">2.55</td>
-<td class="gt_row gt_right">0.93</td>
-<td class="gt_row gt_right">2.60</td>
-<td class="gt_row gt_right">341.68</td>
-<td class="gt_row gt_right">0.85</td>
+<td class="gt_row gt_right">273.97</td>
+<td class="gt_row gt_right">2.56</td>
+<td class="gt_row gt_right">0.94</td>
+<td class="gt_row gt_right">2.61</td>
+<td class="gt_row gt_right">343.04</td>
+<td class="gt_row gt_right">0.84</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<div id="step-6---refit-to-full-dataset-forecast-forward" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-6---refit-to-full-dataset-forecast-forward" class="anchor"></a>Step 6 - Refit to Full Dataset &amp; Forecast Forward</h3>
-<p>The final step is to refit the models to the full dataset using <code><a href="https://rdrr.io/pkg/modeltime/man/modeltime_refit.html">modeltime_refit()</a></code> and forecast them forward.</p>
+<div class="section level3">
+<h3 id="step-6---refit-to-full-dataset-forecast-forward">Step 6 - Refit to Full Dataset &amp; Forecast Forward<a class="anchor" aria-label="anchor" href="#step-6---refit-to-full-dataset-forecast-forward"></a>
+</h3>
+<p>The final step is to refit the models to the full dataset using <code><a href="https://rdrr.io/pkg/modeltime/man/modeltime_refit.html" class="external-link">modeltime_refit()</a></code> and forecast them forward.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">refit_tbl</span> <span class="op">&lt;-</span> <span class="va">calibration_tbl</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_refit.html">modeltime_refit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">m750</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">refit_tbl</span> <span class="op">&lt;-</span> <span class="va">calibration_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_refit.html" class="external-link">modeltime_refit</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">m750</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 1).</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1: Gradient evaluation took 9.4e-05 seconds</span>
-<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.94 seconds.</span>
+<span class="co">#&gt; Chain 1: Gradient evaluation took 0.000104 seconds</span>
+<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 1.04 seconds.</span>
 <span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; Chain 1: </span>
@@ -936,15 +932,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1:  Elapsed Time: 3.38662 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 1:                3.16241 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 1:                6.54904 seconds (Total)</span>
+<span class="co">#&gt; Chain 1:  Elapsed Time: 3.21915 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 1:                2.98287 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 1:                6.20202 seconds (Total)</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 2).</span>
 <span class="co">#&gt; Chain 2: </span>
-<span class="co">#&gt; Chain 2: Gradient evaluation took 6.5e-05 seconds</span>
-<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.65 seconds.</span>
+<span class="co">#&gt; Chain 2: Gradient evaluation took 6.8e-05 seconds</span>
+<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.68 seconds.</span>
 <span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 2: </span>
 <span class="co">#&gt; Chain 2: </span>
@@ -961,15 +957,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 2: </span>
-<span class="co">#&gt; Chain 2:  Elapsed Time: 0.61999 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 2:                0.529354 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 2:                1.14934 seconds (Total)</span>
+<span class="co">#&gt; Chain 2:  Elapsed Time: 0.590646 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 2:                0.512171 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 2:                1.10282 seconds (Total)</span>
 <span class="co">#&gt; Chain 2: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 3).</span>
 <span class="co">#&gt; Chain 3: </span>
-<span class="co">#&gt; Chain 3: Gradient evaluation took 6.2e-05 seconds</span>
-<span class="co">#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.62 seconds.</span>
+<span class="co">#&gt; Chain 3: Gradient evaluation took 6.9e-05 seconds</span>
+<span class="co">#&gt; Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.69 seconds.</span>
 <span class="co">#&gt; Chain 3: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 3: </span>
 <span class="co">#&gt; Chain 3: </span>
@@ -986,15 +982,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 3: </span>
-<span class="co">#&gt; Chain 3:  Elapsed Time: 3.70815 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 3:                2.92874 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 3:                6.63689 seconds (Total)</span>
+<span class="co">#&gt; Chain 3:  Elapsed Time: 3.51091 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 3:                2.73658 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 3:                6.24749 seconds (Total)</span>
 <span class="co">#&gt; Chain 3: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 4).</span>
 <span class="co">#&gt; Chain 4: </span>
-<span class="co">#&gt; Chain 4: Gradient evaluation took 6.7e-05 seconds</span>
-<span class="co">#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.67 seconds.</span>
+<span class="co">#&gt; Chain 4: Gradient evaluation took 6.3e-05 seconds</span>
+<span class="co">#&gt; Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.63 seconds.</span>
 <span class="co">#&gt; Chain 4: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 4: </span>
 <span class="co">#&gt; Chain 4: </span>
@@ -1011,15 +1007,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 4: </span>
-<span class="co">#&gt; Chain 4:  Elapsed Time: 0.693803 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 4:                0.509519 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 4:                1.20332 seconds (Total)</span>
+<span class="co">#&gt; Chain 4:  Elapsed Time: 0.679343 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 4:                0.488319 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 4:                1.16766 seconds (Total)</span>
 <span class="co">#&gt; Chain 4: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 1).</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1: Gradient evaluation took 4.2e-05 seconds</span>
-<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.42 seconds.</span>
+<span class="co">#&gt; Chain 1: Gradient evaluation took 4.5e-05 seconds</span>
+<span class="co">#&gt; Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.45 seconds.</span>
 <span class="co">#&gt; Chain 1: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; Chain 1: </span>
@@ -1036,15 +1032,15 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 1: </span>
-<span class="co">#&gt; Chain 1:  Elapsed Time: 0.742469 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 1:                0.263584 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 1:                1.00605 seconds (Total)</span>
+<span class="co">#&gt; Chain 1:  Elapsed Time: 0.737525 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 1:                0.254283 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 1:                0.991808 seconds (Total)</span>
 <span class="co">#&gt; Chain 1: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 2).</span>
 <span class="co">#&gt; Chain 2: </span>
-<span class="co">#&gt; Chain 2: Gradient evaluation took 3.9e-05 seconds</span>
-<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.39 seconds.</span>
+<span class="co">#&gt; Chain 2: Gradient evaluation took 4e-05 seconds</span>
+<span class="co">#&gt; Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.4 seconds.</span>
 <span class="co">#&gt; Chain 2: Adjust your expectations accordingly!</span>
 <span class="co">#&gt; Chain 2: </span>
 <span class="co">#&gt; Chain 2: </span>
@@ -1061,9 +1057,9 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 2: </span>
-<span class="co">#&gt; Chain 2:  Elapsed Time: 0.483679 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 2:                0.255517 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 2:                0.739196 seconds (Total)</span>
+<span class="co">#&gt; Chain 2:  Elapsed Time: 0.483959 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 2:                0.250961 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 2:                0.73492 seconds (Total)</span>
 <span class="co">#&gt; Chain 2: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 3).</span>
@@ -1086,9 +1082,9 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 3: </span>
-<span class="co">#&gt; Chain 3:  Elapsed Time: 0.816844 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 3:                0.257512 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 3:                1.07436 seconds (Total)</span>
+<span class="co">#&gt; Chain 3:  Elapsed Time: 0.763812 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 3:                0.246051 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 3:                1.00986 seconds (Total)</span>
 <span class="co">#&gt; Chain 3: </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; SAMPLING FOR MODEL 'Sarima' NOW (CHAIN 4).</span>
@@ -1111,13 +1107,13 @@ The Modeltime Workflow
 <span class="co">#&gt; Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)</span>
 <span class="co">#&gt; Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)</span>
 <span class="co">#&gt; Chain 4: </span>
-<span class="co">#&gt; Chain 4:  Elapsed Time: 0.744264 seconds (Warm-up)</span>
-<span class="co">#&gt; Chain 4:                0.226166 seconds (Sampling)</span>
-<span class="co">#&gt; Chain 4:                0.97043 seconds (Total)</span>
+<span class="co">#&gt; Chain 4:  Elapsed Time: 0.72156 seconds (Warm-up)</span>
+<span class="co">#&gt; Chain 4:                0.21833 seconds (Sampling)</span>
+<span class="co">#&gt; Chain 4:                0.93989 seconds (Total)</span>
 <span class="co">#&gt; Chain 4:</span>
-<span class="va">refit_tbl</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_forecast.html">modeltime_forecast</a></span><span class="op">(</span>h <span class="op">=</span> <span class="st">"3 years"</span>, actual_data <span class="op">=</span> <span class="va">m750</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/plot_modeltime_forecast.html">plot_modeltime_forecast</a></span><span class="op">(</span>
+<span class="va">refit_tbl</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/modeltime_forecast.html" class="external-link">modeltime_forecast</a></span><span class="op">(</span>h <span class="op">=</span> <span class="st">"3 years"</span>, actual_data <span class="op">=</span> <span class="va">m750</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+    <span class="fu"><a href="https://rdrr.io/pkg/modeltime/man/plot_modeltime_forecast.html" class="external-link">plot_modeltime_forecast</a></span><span class="op">(</span>
       .legend_max_width <span class="op">=</span> <span class="fl">25</span>, <span class="co"># For mobile screens</span>
       .interactive      <span class="op">=</span> <span class="va">interactive</span>
     <span class="op">)</span></code></pre></div>
@@ -1137,11 +1133,13 @@ The Modeltime Workflow
 
 
       <footer><div class="copyright">
-  <p>Developed by Alberto Almuiña.</p>
+  <p></p>
+<p>Developed by Alberto Almuiña.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -1149,6 +1147,8 @@ The Modeltime Workflow
 
   
 
+
+  
 
   </body>
 </html>
