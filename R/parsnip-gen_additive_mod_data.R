@@ -2,6 +2,7 @@
 
 make_gen_additive_reg <- function() {
     parsnip::set_new_model("gen_additive_reg")
+    parsnip::set_model_mode("gen_additive_reg", "regression")
 }
 
 make_gen_additive_reg_stan <- function() {
